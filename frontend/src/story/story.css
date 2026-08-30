@@ -9,6 +9,7 @@
   position: relative;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   isolation: isolate;
   color: var(--story-ink);
@@ -135,6 +136,14 @@
   padding: 23px 24px 22px;
 }
 
+.story-sheet-toggle {
+  display: none;
+}
+
+.story-narrative-content {
+  min-width: 0;
+}
+
 .story-state {
   right: 24px;
   width: 265px;
@@ -157,7 +166,7 @@
   letter-spacing: -0.035em;
 }
 
-.story-narrative > p {
+.story-narrative-content > p {
   color: #b1c3c7;
   margin: 0 0 17px;
   font-size: 13px;
@@ -690,4 +699,219 @@
   .story-open-engine::after { content: "ENGINE ↗"; font-size: 9px; }
   .story-open-engine.static::after { content: "RESEARCH ↗"; }
   .story-orbit-hint { display: none; }
+}
+
+@media (max-width: 600px), (max-height: 500px) and (pointer: coarse) {
+  .story-world canvas {
+    touch-action: none;
+  }
+
+  .story-header {
+    height: calc(62px + env(safe-area-inset-top));
+    padding: env(safe-area-inset-top) 10px 0;
+  }
+
+  .story-brand {
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .story-brand > span {
+    width: 34px;
+    height: 34px;
+    flex: none;
+  }
+
+  .story-brand div {
+    min-width: 0;
+  }
+
+  .story-brand b {
+    overflow: hidden;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .story-brand small {
+    display: none;
+  }
+
+  .story-open-engine {
+    min-height: 42px;
+    display: grid;
+    place-items: center;
+    padding: 8px 10px;
+  }
+
+  .story-narrative {
+    top: auto;
+    right: auto;
+    bottom: calc(74px + env(safe-area-inset-bottom));
+    left: 10px;
+    width: min(430px, calc(100vw - 20px));
+    max-height: min(56dvh, 520px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0;
+    border-radius: 16px;
+    transition: max-height 220ms ease;
+  }
+
+  .story-narrative.sheet-collapsed {
+    max-height: 58px;
+  }
+
+  .story-sheet-toggle {
+    position: relative;
+    width: 100%;
+    min-height: 54px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+    flex: none;
+    padding: 16px 14px 9px;
+    color: var(--story-ink);
+    text-align: left;
+    border: 0;
+    border-bottom: 1px solid var(--story-line);
+    background: rgba(7, 20, 27, 0.96);
+    touch-action: manipulation;
+  }
+
+  .sheet-collapsed .story-sheet-toggle {
+    border-bottom: 0;
+  }
+
+  .story-sheet-grip {
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    width: 42px;
+    height: 4px;
+    border-radius: 99px;
+    background: rgba(184, 224, 230, 0.35);
+    transform: translateX(-50%);
+  }
+
+  .story-sheet-toggle-label {
+    overflow: hidden;
+    color: var(--story-cyan);
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 0.08em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .sheet-collapsed .story-sheet-toggle-label {
+    color: var(--story-ink);
+    font-size: 12px;
+    letter-spacing: 0;
+  }
+
+  .story-sheet-chevron {
+    color: var(--story-muted);
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .story-narrative-content {
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 13px 16px 18px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .sheet-collapsed .story-narrative-content {
+    display: none;
+  }
+
+  .story-narrative h1 {
+    max-width: none;
+    margin: 7px 0 8px;
+    font-size: 22px;
+    line-height: 1.08;
+  }
+
+  .story-narrative-content > p {
+    margin-bottom: 12px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .story-action-stack small {
+    display: none;
+  }
+
+  .story-primary,
+  .story-choices button {
+    min-height: 46px;
+    touch-action: manipulation;
+  }
+
+  .story-primary {
+    padding: 12px 13px;
+    font-size: 12px;
+  }
+
+  .story-choices button {
+    padding: 10px 11px;
+  }
+
+  .story-choices b {
+    font-size: 12px;
+  }
+
+  .story-slider input {
+    min-height: 32px;
+    margin: 5px 0 0;
+  }
+
+  .story-chapters {
+    bottom: max(8px, env(safe-area-inset-bottom));
+    width: calc(100vw - 20px);
+    min-height: 54px;
+    padding: 5px 8px;
+    border-radius: 14px;
+  }
+
+  .story-progress {
+    top: 26px;
+  }
+
+  .story-chapters button {
+    min-width: 44px;
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+
+  .story-chapters button > i {
+    width: 30px;
+    height: 30px;
+    font-size: 11px;
+  }
+
+  .voxel-label {
+    min-width: 125px;
+    padding: 7px 8px;
+  }
+
+  .voxel-label b {
+    font-size: 11px;
+  }
+
+  .voxel-label span {
+    font-size: 9px;
+  }
+
+  .voxel-action {
+    min-width: 210px;
+    padding: 12px 14px;
+    font-size: 12px;
+  }
 }

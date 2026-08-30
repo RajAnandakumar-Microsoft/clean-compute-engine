@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { CoolingType } from "../types/api";
 import {
   runStoryForecast,
@@ -109,6 +109,7 @@ export function StoryApp() {
   const [result, setResult] = useState<StoryForecastOutcome | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [mobilePanelOpen, setMobilePanelOpen] = useState(true);
   const decisionVersion = useRef(0);
 
   const decisions: StoryDecisions = useMemo(
@@ -133,6 +134,10 @@ export function StoryApp() {
   const chapter = CHAPTERS[stage];
   const horizon = result?.scenario;
   const delta = result?.delta;
+
+  useEffect(() => {
+    setMobilePanelOpen(true);
+  }, [stage]);
 
   const changeForecastDecision = (change: () => void) => {
     decisionVersion.current += 1;
@@ -212,174 +217,199 @@ export function StoryApp() {
         </a>
       </header>
 
-      <aside className="story-narrative">
-        <div className="story-eyebrow">{chapter.eyebrow}</div>
-        <h1>{chapter.title}</h1>
-        <p>{chapter.body}</p>
+      <aside
+        className={`story-narrative ${
+          mobilePanelOpen ? "sheet-open" : "sheet-collapsed"
+        }`}
+      >
+        <button
+          type="button"
+          className="story-sheet-toggle"
+          aria-expanded={mobilePanelOpen}
+          aria-controls="story-narrative-content"
+          aria-label={mobilePanelOpen ? "Collapse story panel" : "Expand story panel"}
+          onClick={() => setMobilePanelOpen((open) => !open)}
+        >
+          <span className="story-sheet-grip" aria-hidden="true" />
+          <span className="story-sheet-toggle-label">
+            {mobilePanelOpen ? "VIEW THE WORLD" : chapter.title}
+          </span>
+          <span className="story-sheet-chevron" aria-hidden="true">
+            {mobilePanelOpen ? "⌄" : "⌃"}
+          </span>
+        </button>
 
-        {stage === 0 && (
-          <div className="story-action-stack">
-            <button className="story-primary" onClick={() => setStage(1)}>
-              Place Phase 1 · 20 MW
-            </button>
-            <small>Or click the illuminated build pad in the world.</small>
-          </div>
-        )}
+        <div id="story-narrative-content" className="story-narrative-content">
+          <div className="story-eyebrow">{chapter.eyebrow}</div>
+          <h1>{chapter.title}</h1>
+          <p>{chapter.body}</p>
 
-        {stage === 1 && (
-          <>
-            <div className="story-control-label">Choose the workload</div>
-            <div className="story-choices vertical">
-              {WORKLOADS.map((choice) => (
-                <button
-                  key={choice.id}
-                  className={workload === choice.id ? "selected" : ""}
-                  onClick={() => changeForecastDecision(() => setWorkload(choice.id))}
-                >
-                  <b>{choice.name}</b><span>{choice.description}</span>
-                </button>
-              ))}
+          {stage === 0 && (
+            <div className="story-action-stack">
+              <button className="story-primary" onClick={() => setStage(1)}>
+                Place Phase 1 · 20 MW
+              </button>
+              <small>Or click the illuminated build pad in the world.</small>
             </div>
-            <div className="story-control-label">Choose the cooling design</div>
-            <div className="story-choices">
-              {([
-                ["liquid", "Liquid", "Lower heat sensitivity"],
-                ["air", "Air", "Higher facility overhead"],
-              ] as const).map(([id, name, description]) => (
-                <button
-                  key={id}
-                  className={cooling === id ? "selected" : ""}
-                  onClick={() => changeForecastDecision(() => setCooling(id))}
-                >
-                  <b>{name}</b><span>{description}</span>
-                </button>
-              ))}
-            </div>
-            <button className="story-primary" onClick={() => setStage(2)}>
-              Start operating
-            </button>
-          </>
-        )}
+          )}
 
-        {stage === 2 && (
-          <>
-            <label className="story-slider">
-              <span><b>Move through the day</b><strong>{formatHour(hour)}</strong></span>
-              <input
-                type="range"
-                min={0}
-                max={23}
-                step={1}
-                value={hour}
-                onChange={(event) => setHour(Number(event.target.value))}
-              />
-              <small><i>00:00</i><i>12:00</i><i>23:00</i></small>
-            </label>
-            <label className="story-slider year">
-              <span><b>Advance the world</b><strong>{year}</strong></span>
-              <input
-                type="range"
-                min={STORY_START_YEAR}
-                max={STORY_END_YEAR}
-                step={1}
-                value={year}
-                onChange={(event) => changeForecastDecision(
-                  () => setYear(Number(event.target.value)),
-                )}
-              />
-              <small><i>Phase 1</i><i>Phase 2 · 2029</i><i>2037</i></small>
-            </label>
-            <div className="story-event">
-              <span>{signals.phaseCount === 1 ? "PHASE 1 ONLINE" : "PHASE 2 ONLINE"}</span>
-              <p>
-                {signals.refreshed
-                  ? "New hardware now performs equivalent work with a lower power assumption."
-                  : "The original hardware generation remains in service."}
-              </p>
-            </div>
-            <button className="story-primary" onClick={() => setStage(3)}>
-              Open possible futures
-            </button>
-          </>
-        )}
-
-        {stage === 3 && (
-          <>
-            {!result ? (
-              <div className="story-action-stack">
-                <div className="story-simulation-note">
-                  <b>96 coherent futures</b>
-                  <span>
-                    {storyHorizonYears(year).toLocaleString()}
-                    {" "}year horizon · hourly world states
-                  </span>
-                </div>
-                <button
-                  className="story-primary"
-                  disabled={busy}
-                  onClick={() => void runFutures()}
-                >
-                  {busy ? "Building possible worlds…" : "Simulate P10 · P50 · P90"}
-                </button>
+          {stage === 1 && (
+            <>
+              <div className="story-control-label">Choose the workload</div>
+              <div className="story-choices vertical">
+                {WORKLOADS.map((choice) => (
+                  <button
+                    key={choice.id}
+                    className={workload === choice.id ? "selected" : ""}
+                    onClick={() => changeForecastDecision(() => setWorkload(choice.id))}
+                  >
+                    <b>{choice.name}</b><span>{choice.description}</span>
+                  </button>
+                ))}
               </div>
-            ) : horizon && (
-              <>
-                <div className="story-quantiles">
-                  {([
-                    ["P10", "LOWER", horizon.cumulative_operational_carbon_t.p10],
-                    ["P50", "EXPECTED", horizon.cumulative_operational_carbon_t.p50],
-                    ["P90", "HIGHER", horizon.cumulative_operational_carbon_t.p90],
-                  ] as const).map(([quantile, label, value]) => (
-                    <div key={quantile}>
-                      <span>{quantile} · {label}</span>
-                      <b>{formatCarbon(value)}</b>
-                    </div>
-                  ))}
-                </div>
-                <p className="story-explain">
-                  These are assumption-driven outcomes, not claims of calibrated accuracy.
-                  The useful signal is the range and what moves it.
+              <div className="story-control-label">Choose the cooling design</div>
+              <div className="story-choices">
+                {([
+                  ["liquid", "Liquid", "Lower heat sensitivity"],
+                  ["air", "Air", "Higher facility overhead"],
+                ] as const).map(([id, name, description]) => (
+                  <button
+                    key={id}
+                    className={cooling === id ? "selected" : ""}
+                    onClick={() => changeForecastDecision(() => setCooling(id))}
+                  >
+                    <b>{name}</b><span>{description}</span>
+                  </button>
+                ))}
+              </div>
+              <button className="story-primary" onClick={() => setStage(2)}>
+                Start operating
+              </button>
+            </>
+          )}
+
+          {stage === 2 && (
+            <>
+              <label className="story-slider">
+                <span><b>Move through the day</b><strong>{formatHour(hour)}</strong></span>
+                <input
+                  type="range"
+                  min={0}
+                  max={23}
+                  step={1}
+                  value={hour}
+                  onChange={(event) => setHour(Number(event.target.value))}
+                />
+                <small><i>00:00</i><i>12:00</i><i>23:00</i></small>
+              </label>
+              <label className="story-slider year">
+                <span><b>Advance the world</b><strong>{year}</strong></span>
+                <input
+                  type="range"
+                  min={STORY_START_YEAR}
+                  max={STORY_END_YEAR}
+                  step={1}
+                  value={year}
+                  onChange={(event) => changeForecastDecision(
+                    () => setYear(Number(event.target.value)),
+                  )}
+                />
+                <small><i>Phase 1</i><i>Phase 2 · 2029</i><i>2037</i></small>
+              </label>
+              <div className="story-event">
+                <span>
+                  {signals.phaseCount === 1 ? "PHASE 1 ONLINE" : "PHASE 2 ONLINE"}
+                </span>
+                <p>
+                  {signals.refreshed
+                    ? "New hardware now performs equivalent work with a lower power assumption."
+                    : "The original hardware generation remains in service."}
                 </p>
-                <button className="story-primary" onClick={() => setStage(4)}>
-                  Compare the two worlds
-                </button>
-              </>
-            )}
-            {error && <div className="story-error">{error}</div>}
-          </>
-        )}
+              </div>
+              <button className="story-primary" onClick={() => setStage(3)}>
+                Open possible futures
+              </button>
+            </>
+          )}
 
-        {stage === 4 && result && horizon && delta && (
-          <>
-            <div className="story-comparison">
-              <div>
-                <span>PROPOSED</span>
-                <b>{cooling === "liquid" ? "Liquid-cooled" : "Air-cooled"}</b>
-                <small>PUE {horizon.average_pue.p50.toFixed(2)}</small>
+          {stage === 3 && (
+            <>
+              {!result ? (
+                <div className="story-action-stack">
+                  <div className="story-simulation-note">
+                    <b>96 coherent futures</b>
+                    <span>
+                      {storyHorizonYears(year).toLocaleString()}
+                      {" "}year horizon · hourly world states
+                    </span>
+                  </div>
+                  <button
+                    className="story-primary"
+                    disabled={busy}
+                    onClick={() => void runFutures()}
+                  >
+                    {busy ? "Building possible worlds…" : "Simulate P10 · P50 · P90"}
+                  </button>
+                </div>
+              ) : horizon && (
+                <>
+                  <div className="story-quantiles">
+                    {([
+                      ["P10", "LOWER", horizon.cumulative_operational_carbon_t.p10],
+                      ["P50", "EXPECTED", horizon.cumulative_operational_carbon_t.p50],
+                      ["P90", "HIGHER", horizon.cumulative_operational_carbon_t.p90],
+                    ] as const).map(([quantile, label, value]) => (
+                      <div key={quantile}>
+                        <span>{quantile} · {label}</span>
+                        <b>{formatCarbon(value)}</b>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="story-explain">
+                    These are assumption-driven outcomes, not claims of calibrated accuracy.
+                    The useful signal is the range and what moves it.
+                  </p>
+                  <button className="story-primary" onClick={() => setStage(4)}>
+                    Compare the two worlds
+                  </button>
+                </>
+              )}
+              {error && <div className="story-error">{error}</div>}
+            </>
+          )}
+
+          {stage === 4 && result && horizon && delta && (
+            <>
+              <div className="story-comparison">
+                <div>
+                  <span>PROPOSED</span>
+                  <b>{cooling === "liquid" ? "Liquid-cooled" : "Air-cooled"}</b>
+                  <small>PUE {horizon.average_pue.p50.toFixed(2)}</small>
+                </div>
+                <i>VS</i>
+                <div>
+                  <span>BASELINE</span>
+                  <b>Conventional air</b>
+                  <small>Design PUE 1.45</small>
+                </div>
               </div>
-              <i>VS</i>
-              <div>
-                <span>BASELINE</span>
-                <b>Conventional air</b>
-                <small>Design PUE 1.45</small>
+              <div className="story-outcome">
+                <span>EXPECTED DIFFERENCE</span>
+                <b>{delta.facility_energy_pct_p50.toFixed(1)}% electricity</b>
+                <b>{delta.operational_carbon_pct_p50.toFixed(1)}% operational carbon</b>
               </div>
-            </div>
-            <div className="story-outcome">
-              <span>EXPECTED DIFFERENCE</span>
-              <b>{delta.facility_energy_pct_p50.toFixed(1)}% electricity</b>
-              <b>{delta.operational_carbon_pct_p50.toFixed(1)}% operational carbon</b>
-            </div>
-            <p className="story-explain">
-              The physical world on screen is the narrative. The forecast engine beneath
-              it is what makes the comparison defensible once real data calibrates it.
-            </p>
-            <a className="story-primary link" href={PROJECT_URL}>
-              {STATIC_STORY
-                ? "Explore the research and full engine ↗"
-                : "Explore the full v0.1 engine ↗"}
-            </a>
-          </>
-        )}
+              <p className="story-explain">
+                The physical world on screen is the narrative. The forecast engine beneath
+                it is what makes the comparison defensible once real data calibrates it.
+              </p>
+              <a className="story-primary link" href={PROJECT_URL}>
+                {STATIC_STORY
+                  ? "Explore the research and full engine ↗"
+                  : "Explore the full v0.1 engine ↗"}
+              </a>
+            </>
+          )}
+        </div>
       </aside>
 
       <aside className="story-state">

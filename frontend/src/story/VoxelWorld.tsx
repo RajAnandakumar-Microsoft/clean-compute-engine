@@ -1,4 +1,4 @@
-import { useLayoutEffect, useMemo, useRef } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, Line, OrbitControls } from "@react-three/drei";
 import { Bloom, EffectComposer, Vignette } from "@react-three/postprocessing";
@@ -8,6 +8,10 @@ import type { StoryForecastOutcome } from "./forecast";
 import type { WorldSignals, WorkloadChoice } from "./model";
 
 type Position = [number, number, number];
+const REDUCED_SCENE_QUERY = [
+  "(max-width: 600px)",
+  "(max-height: 500px) and (pointer: coarse)",
+].join(", ");
 
 interface VoxelWorldProps {
   stage: number;
@@ -29,6 +33,21 @@ interface BlockProps {
   opacity?: number;
   rotation?: Position;
   onClick?: () => void;
+}
+
+function useReducedScene(): boolean {
+  const [reduced, setReduced] = useState(
+    () => window.matchMedia(REDUCED_SCENE_QUERY).matches,
+  );
+
+  useEffect(() => {
+    const media = window.matchMedia(REDUCED_SCENE_QUERY);
+    const update = () => setReduced(media.matches);
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  return reduced;
 }
 
 function Block({
@@ -657,7 +676,10 @@ function Sky({ hour }: { hour: number }) {
   );
 }
 
-function WorldScene(props: VoxelWorldProps) {
+function WorldScene({
+  reducedEffects,
+  ...props
+}: VoxelWorldProps & { reducedEffects: boolean }) {
   const built = props.stage >= 1;
   const showFutureWorlds = props.stage === 3 && props.result;
   const showComparison = props.stage === 4 && props.result;
@@ -670,8 +692,8 @@ function WorldScene(props: VoxelWorldProps) {
         position={[12, 22, 8]}
         intensity={1.7}
         color="#fff1cc"
-        castShadow
-        shadow-mapSize={[2048, 2048]}
+        castShadow={!reducedEffects}
+        shadow-mapSize={reducedEffects ? [512, 512] : [2048, 2048]}
         shadow-camera-left={-24}
         shadow-camera-right={24}
         shadow-camera-top={20}
@@ -715,37 +737,46 @@ function WorldScene(props: VoxelWorldProps) {
       <OrbitControls
         makeDefault
         enablePan={false}
-        minZoom={28}
-        maxZoom={68}
+        minZoom={reducedEffects ? 18 : 28}
+        maxZoom={reducedEffects ? 42 : 68}
         minPolarAngle={0.65}
         maxPolarAngle={1.18}
         minAzimuthAngle={-1.25}
         maxAzimuthAngle={1.25}
         target={[0, 0.4, 0]}
       />
-      <EffectComposer>
-        <Bloom
-          intensity={0.45}
-          luminanceThreshold={0.75}
-          luminanceSmoothing={0.3}
-          mipmapBlur
-        />
-        <Vignette eskil={false} offset={0.28} darkness={0.35} />
-      </EffectComposer>
+      {!reducedEffects && (
+        <EffectComposer>
+          <Bloom
+            intensity={0.45}
+            luminanceThreshold={0.75}
+            luminanceSmoothing={0.3}
+            mipmapBlur
+          />
+          <Vignette eskil={false} offset={0.28} darkness={0.35} />
+        </EffectComposer>
+      )}
     </>
   );
 }
 
 export function VoxelWorld(props: VoxelWorldProps) {
+  const reducedEffects = useReducedScene();
   return (
     <Canvas
+      key={reducedEffects ? "reduced" : "full"}
       className="voxel-canvas"
       orthographic
-      shadows
-      dpr={[1, 2]}
-      camera={{ position: [22, 18, 22], zoom: 42, near: 0.1, far: 120 }}
+      shadows={!reducedEffects}
+      dpr={reducedEffects ? 1 : [1, 2]}
+      camera={{
+        position: [22, 18, 22],
+        zoom: reducedEffects ? 24 : 42,
+        near: 0.1,
+        far: 120,
+      }}
       gl={{
-        antialias: true,
+        antialias: !reducedEffects,
         toneMapping: THREE.ACESFilmicToneMapping,
         toneMappingExposure: 1.05,
       }}
@@ -753,7 +784,7 @@ export function VoxelWorld(props: VoxelWorldProps) {
         camera.lookAt(0, 0.4, 0);
       }}
     >
-      <WorldScene {...props} />
+      <WorldScene {...props} reducedEffects={reducedEffects} />
     </Canvas>
   );
 }
