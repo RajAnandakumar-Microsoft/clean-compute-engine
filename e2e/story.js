@@ -6,6 +6,10 @@ const appUrl = process.env.APP_URL || "http://127.0.0.1:5173/";
 const storyUrl = process.env.STORY_URL || new URL("/story", appUrl).toString();
 const staticStory = process.env.STATIC_STORY === "true";
 const outputDir = process.env.SCREENSHOT_DIR || __dirname;
+const mobileViewport = process.env.MOBILE_VIEWPORT === "true";
+const viewportWidth = Number(process.env.VIEWPORT_WIDTH || 1600);
+const viewportHeight = Number(process.env.VIEWPORT_HEIGHT || 900);
+const deviceScaleFactor = Number(process.env.DEVICE_SCALE_FACTOR || 1);
 
 async function screenshot(page, name) {
   await new Promise((resolve) => setTimeout(resolve, 650));
@@ -39,6 +43,7 @@ async function setRangeValue(page, selector, value) {
   const errors = [];
   let staticCatalogLoaded = false;
   let forecastPostCount = 0;
+  let collapsedPanelHeight = null;
   const browser = await puppeteer.launch({
     headless: "new",
     args: [
@@ -46,12 +51,18 @@ async function setRangeValue(page, selector, value) {
       "--enable-unsafe-swiftshader",
       "--use-gl=angle",
       "--use-angle=swiftshader",
-      "--window-size=1600,900",
+      `--window-size=${viewportWidth},${viewportHeight}`,
       "--ignore-gpu-blocklist",
     ],
   });
   const page = await browser.newPage();
-  await page.setViewport({ width: 1600, height: 900 });
+  await page.setViewport({
+    width: viewportWidth,
+    height: viewportHeight,
+    deviceScaleFactor,
+    isMobile: mobileViewport,
+    hasTouch: mobileViewport,
+  });
   page.on("console", (message) => {
     if (message.type() === "error") errors.push(`console: ${message.text()}`);
   });
@@ -75,7 +86,11 @@ async function setRangeValue(page, selector, value) {
   await page.waitForSelector(".voxel-action", { timeout: 15000 });
   await screenshot(page, "01-site");
 
-  await page.click(".voxel-action");
+  if (mobileViewport) {
+    await page.click(".story-primary");
+  } else {
+    await page.click(".voxel-action");
+  }
   await page.waitForFunction(
     () => document.querySelector(".story-eyebrow")?.textContent.startsWith("02"),
   );
@@ -91,6 +106,25 @@ async function setRangeValue(page, selector, value) {
     () => document.querySelector(".story-header-state b")?.textContent === "2032",
   );
   await screenshot(page, "03-time");
+  if (mobileViewport) {
+    await page.click(".story-sheet-toggle");
+    await page.waitForFunction(
+      () => document.querySelector(".story-narrative")?.classList.contains(
+        "sheet-collapsed",
+      ),
+    );
+    collapsedPanelHeight = await page.$eval(
+      ".story-narrative",
+      (element) => element.getBoundingClientRect().height,
+    );
+    await screenshot(page, "03-world");
+    await page.click(".story-sheet-toggle");
+    await page.waitForFunction(
+      () => document.querySelector(".story-narrative")?.classList.contains(
+        "sheet-open",
+      ),
+    );
+  }
 
   await clickButtonWithText(page, "Open possible futures");
   await page.waitForFunction(
@@ -155,8 +189,32 @@ async function setRangeValue(page, selector, value) {
     outcome: document.querySelector(".story-outcome")?.textContent.trim(),
     canvas: Boolean(document.querySelector(".story-app canvas")),
     horizontalOverflow: document.documentElement.scrollWidth > window.innerWidth,
+    coarsePointer: matchMedia("(pointer: coarse)").matches,
+    canvasPixelRatio: (() => {
+      const canvas = document.querySelector(".story-app canvas");
+      if (!canvas) return null;
+      return canvas.width / canvas.getBoundingClientRect().width;
+    })(),
+    minimumTouchTarget: Math.min(
+      ...[...document.querySelectorAll(
+        ".story-chapters button, .story-sheet-toggle",
+      )]
+        .filter((element) => {
+          const rect = element.getBoundingClientRect();
+          return rect.width > 0 && rect.height > 0;
+        })
+        .map((element) => {
+          const rect = element.getBoundingClientRect();
+          return Math.min(rect.width, rect.height);
+        }),
+    ),
   }));
-  const state = { ...browserState, staticCatalogLoaded, forecastPostCount };
+  const state = {
+    ...browserState,
+    collapsedPanelHeight,
+    staticCatalogLoaded,
+    forecastPostCount,
+  };
   console.log(JSON.stringify(
     { ...state, quantiles: quantileCount, errorCount: errors.length, errors },
     null,
@@ -170,7 +228,13 @@ async function setRangeValue(page, selector, value) {
     && state.outcome
     && state.canvas
     && !state.horizontalOverflow
-    && (!staticStory || (state.staticCatalogLoaded && state.forecastPostCount === 0));
+    && (!staticStory || (state.staticCatalogLoaded && state.forecastPostCount === 0))
+    && (!mobileViewport || (
+      state.coarsePointer
+      && state.collapsedPanelHeight <= 60
+      && state.canvasPixelRatio <= 1.1
+      && state.minimumTouchTarget >= 42
+    ));
   process.exit(passed ? 0 : 1);
 })().catch((error) => {
   console.error("STORY E2E CRASH:", error);
