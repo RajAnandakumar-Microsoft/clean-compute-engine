@@ -1,0 +1,39 @@
+# Python
+backend/.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Node / Vite
+frontend/node_modules/
+frontend/dist/
+*.log
+*.tsbuildinfo
+
+# E2E / scratch
+e2e/node_modules/
+e2e/*.png
+*.png
+*.bak
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+
+# Governed research data and private experiment artifacts
+data/raw/
+data/restricted/
+data/private/
+data/processed/
+data/local/
+experiments/results-private/
+experiments/runs/
+models/checkpoints/
+*.ckpt
+*.onnx
+*.pt
+*.pth

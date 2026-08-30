@@ -1,0 +1,239 @@
+# The Clean Compute Engine
+
+> [!IMPORTANT]
+> This is an independent research project. It is not an official Microsoft
+> project, product, or research initiative, and Microsoft has not reviewed,
+> sponsored, endorsed, or approved it. No Microsoft confidential or operational
+> data is included. It was created as an independent participant project for the
+> Microsoft Global Hackathon; participation does not imply endorsement.
+
+A **public, pre-calibration research project** investigating a
+physics-informed environmental world model for data centers.
+
+The long-term aim is to help researchers and builders test how capacity,
+workload, hardware, cooling, weather, and grid choices affect electricity,
+operational carbon, and eventually water. The present repository supplies the
+research protocol, governed data contract, evaluation framework, and a working
+synthetic demonstrator needed to pursue that question responsibly.
+
+| Boundary | Current state |
+|---|---|
+| Research stage | **R0 - synthetic prototype** |
+| Forecast status | **Uncalibrated; not validated for site decisions** |
+| Operational data | **None incorporated** |
+| Repository visibility | **Public** |
+| External sponsorship | **None** |
+| Project license | **Apache-2.0** |
+
+## Hackathon objective
+
+The hackathon goal is **not** to claim that an accurate data-center world model
+already exists. It is to:
+
+1. demonstrate the calculation and interaction architecture;
+2. present a falsifiable research thesis and evaluation protocol;
+3. define the minimum safe data interface;
+4. make a credible case for a governed operational-telemetry pilot; and
+5. seek the data partnership, expertise, compute, and funding needed to test
+   whether the model can work.
+
+The successful outcome is approval for a bounded research pilot, not a product
+launch or an accuracy claim.
+
+## Research thesis
+
+> Can a hybrid model, built on engineering constraints and calibrated with
+> governed operational telemetry, predict facility electricity and operational
+> carbon more accurately and with better-calibrated uncertainty than static
+> planning assumptions on facilities and time periods not used for fitting?
+
+The intended approach combines:
+
+- an engineering spine for units, energy balance, physical bounds, and system
+  boundaries;
+- interpretable calibration of utilization, power, thermal, and PUE behavior;
+- learned residuals for structure that the mechanistic model does not explain;
+- hierarchical transfer across facilities without treating them as identical;
+  and
+- probabilistic forecasts with explicit applicability and refusal boundaries.
+
+Water is a separate research workstream. It requires withdrawal and consumption
+meters plus a distinction between the internal cooling loop and external heat
+rejection before it can become a validated target.
+
+## Research package
+
+| Start here | Purpose |
+|---|---|
+| [Research contract](research/RESEARCH-CONTRACT.md) | Question, hypotheses, success gates, and stop conditions |
+| [Data pilot proposal](research/DATA-PILOT-PROPOSAL.md) | Governed telemetry request, staffing, and 12-week plan |
+| [Evaluation protocol](research/EVALUATION-PROTOCOL.md) | Frozen splits, baselines, metrics, ablations, and promotion rules |
+| [Governance and release](research/GOVERNANCE-AND-RELEASE.md) | Public-repository boundary and responsible artifact release |
+| [Forecast model card](FORECAST-MODEL-CARD.md) | Current equations, outputs, limitations, and calibration status |
+| [Candidate source register](research/DATA-SOURCE-REGISTER.md) | Source applicability, licensing, and restrictions |
+| [Research data contract](data/README.md) | Strict schemas and synthetic examples |
+| [Experiment workflow](experiments/README.md) | Reproducible experiment and result requirements |
+
+No source in the candidate register trained or validated the current model.
+
+## What exists today
+
+The working v0.1 research demonstrator includes:
+
+- an hourly Monte Carlo simulator for phased one-to-ten-year futures;
+- transparent synthetic priors for workload, hardware, PUE, weather, and grid
+  evolution;
+- P10/P50/P90 trajectories, paired baselines, and sensitivity analysis;
+- a full 3D simulator and forecast workspace at `/`;
+- a five-chapter interactive voxel story at `/story`; and
+- strict Pydantic and JSON Schema contracts for future governed datasets and
+  experiment manifests.
+
+The demonstrator proves that the proposed architecture can be executed and
+examined. It does **not** prove predictive accuracy. All story readouts are
+marked **ILLUSTRATIVE** or **SIMULATED**, and every forecast carries its
+uncalibrated status.
+
+The original product exploration remains in [`REQUIREMENTS.md`](REQUIREMENTS.md).
+This public repository begins as a reviewed snapshot of the v0.1 demonstrator;
+the private development archive retains the earlier implementation history.
+
+## Target research architecture
+
+```text
+Governed telemetry + public context
+                 |
+       data quality and provenance
+                 |
+   engineering model + learned residual
+                 |
+ hierarchical probabilistic world model
+                 |
+ frozen cross-site and forward-time evaluation
+                 |
+ reviewed findings and safe release candidates
+```
+
+Restricted telemetry, row-level derivatives, site-specific parameters, and
+unreviewed model artifacts must remain in an approved controlled environment.
+This public Git repository contains only code, schemas, synthetic examples,
+methodology, and release-approved artifacts.
+
+## Run the demonstrator
+
+Two terminals.
+
+**1. Backend** (http://127.0.0.1:8000)
+```powershell
+cd backend
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\.venv\Scripts\python.exe -m uvicorn app.main:app --reload
+```
+
+**2. Frontend** (http://localhost:5173)
+```powershell
+cd frontend
+npm install
+npm run dev
+```
+
+Open http://localhost:5173 for the full engine or
+http://localhost:5173/story for the interactive story. The Vite dev server
+proxies REST + WebSocket to the backend.
+
+### Forecast API
+
+- `GET /forecast/metadata` - supported profiles and model status
+- `GET /forecast/example` - complete scenario and baseline request
+- `POST /forecast` - run a reproducible forecast
+
+The default paired 10-year run uses 250 paths and usually completes in several
+seconds on a development laptop.
+
+### Tests
+
+Install each package once:
+
+```powershell
+cd backend
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\.venv\Scripts\python.exe -m pytest --cov --cov-config=.coveragerc
+
+cd ..\e2e
+npm ci
+```
+
+With the backend and frontend development servers running, execute:
+
+```powershell
+cd e2e
+$env:APP_URL="http://127.0.0.1:5173/"
+npm test
+```
+
+This runs both the full forecast workflow and the five-chapter story workflow.
+
+### Quick backend check (no browser)
+```powershell
+cd backend
+.\.venv\Scripts\python.exe verify.py
+```
+Prints the model, finance report, a scrub across the day, drill-down detail,
+smart-scheduling delta, and a scenario compare.
+
+## Repository layout
+
+```
+dc-simulator/
+  .github/            research-aware pull-request checklist
+  LICENSE              Apache License 2.0
+  DISCLAIMER.md        independence and non-endorsement statement
+  SECURITY.md          private vulnerability-reporting policy
+  backend/app/
+    main.py         REST + WebSocket
+    config.py       GPU/source specs + location profiles
+    curves.py       24h grid-carbon / capacity-factor / price curves + scenarios
+    generator.py    parametric DC builder (facility→hall→rack→server→GPU)
+    models.py       Pydantic schemas (mirrored to frontend/src/types/api.ts)
+    sim/
+      physics.py    workload, power, PUE, thermal, water
+      jobs.py       per-hour GPU activity (pack/spread placement)
+      generation.py on-site source output profiles
+      dispatch.py   merit-order dispatch (renewables→storage→dispatchable→grid)
+      finance.py    capex/opex/revenue/payback/NPV + grid-only baseline
+      aggregate.py  GPU→rack→hall→facility roll-ups
+      engine.py     24h timeline + control state + frame assembly
+    forecast/       uncalibrated multi-year probabilistic engine
+    research/       governed Pydantic data and experiment contracts
+  data/
+    schemas/        generated JSON Schemas
+    synthetic/      hand-authored contract examples only
+  experiments/      frozen experiment manifests and workflow
+  frontend/src/
+    data/           REST + WS clients, Zustand store
+    three/          scene, instanced racks, drill-down, overlays, palette
+    story/          guided voxel world, decisions, forecast bridge, story UI
+    ui/             top bar, tree, inspector, time controls, design/finance/compare
+    types/          TS mirror of the Pydantic schemas
+  research/         protocol, pilot, governance, evidence, and provenance
+```
+
+## Contributing
+
+Contributions to the simulator, model, research protocol, data contracts, and
+evaluation framework are welcome. Start with
+[`CONTRIBUTING.md`](CONTRIBUTING.md), preserve the evidence boundaries in the
+model card, and never submit restricted operational data.
+
+Use GitHub issues for reproducible software defects and research proposals,
+Discussions for open-ended design questions, and the private process in
+[`SECURITY.md`](SECURITY.md) for vulnerabilities or sensitive-data incidents.
+
+## Current limitations
+
+The repository does not yet contain calibrated parameters, empirical accuracy
+results, cross-site validation, water prediction, an optimizer, live facility
+connectors, restricted-data infrastructure, or trained model weights.
+See [`BACKLOG.md`](BACKLOG.md) for the research-first roadmap and
+[`CONTRIBUTING.md`](CONTRIBUTING.md) before making changes.

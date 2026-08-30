@@ -1,0 +1,111 @@
+{
+  "additionalProperties": false,
+  "description": "Deidentified facility context safe for the governed research interface.",
+  "properties": {
+    "capacity_bucket_mw": {
+      "enum": [
+        "<10",
+        "10-49",
+        "50-99",
+        "100-249",
+        "250+"
+      ],
+      "title": "Capacity Bucket Mw",
+      "type": "string"
+    },
+    "climate_zone": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Climate Zone",
+      "type": "string"
+    },
+    "cooling_loop": {
+      "enum": [
+        "air",
+        "direct-to-chip",
+        "immersion",
+        "hybrid",
+        "unknown"
+      ],
+      "title": "Cooling Loop",
+      "type": "string"
+    },
+    "country_code": {
+      "default": "US",
+      "pattern": "^[A-Z]{2}$",
+      "title": "Country Code",
+      "type": "string"
+    },
+    "grid_region": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Grid Region",
+      "type": "string"
+    },
+    "hardware_generation_bucket": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Hardware Generation Bucket",
+      "type": "string"
+    },
+    "heat_rejection": {
+      "enum": [
+        "air-cooled",
+        "dry-cooler",
+        "evaporative-tower",
+        "hybrid",
+        "unknown"
+      ],
+      "title": "Heat Rejection",
+      "type": "string"
+    },
+    "record_type": {
+      "const": "site-metadata",
+      "default": "site-metadata",
+      "title": "Record Type",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "0.1.0",
+      "default": "0.1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "site_id": {
+      "pattern": "^site-[a-z0-9][a-z0-9-]{2,58}$",
+      "title": "Site Id",
+      "type": "string"
+    },
+    "valid_from": {
+      "format": "date",
+      "title": "Valid From",
+      "type": "string"
+    },
+    "water_source_class": {
+      "default": "unknown",
+      "enum": [
+        "potable",
+        "reclaimed",
+        "surface",
+        "groundwater",
+        "mixed",
+        "none",
+        "unknown"
+      ],
+      "title": "Water Source Class",
+      "type": "string"
+    }
+  },
+  "required": [
+    "site_id",
+    "climate_zone",
+    "grid_region",
+    "capacity_bucket_mw",
+    "cooling_loop",
+    "heat_rejection",
+    "hardware_generation_bucket",
+    "valid_from"
+  ],
+  "title": "SiteMetadata",
+  "type": "object"
+}

@@ -1,0 +1,27 @@
+{
+  "baselines": [
+    "v0.1 deterministic software expectations"
+  ],
+  "candidate_models": [
+    "v0.1 synthetic scenario simulator"
+  ],
+  "claim_boundary": "Software and data-contract reproducibility only. This experiment contains no observed data and provides no evidence of predictive accuracy.",
+  "code_revision": "v0.1-research-prototype",
+  "dataset_manifest_ids": [
+    "cce-synthetic-example@0.1.0"
+  ],
+  "experiment_id": "exp-v0-1-synthetic-smoke",
+  "hypothesis_ids": [],
+  "metrics": [
+    "schema validation",
+    "essential energy relationship validation"
+  ],
+  "output_location": "pytest output only; no research result artifact",
+  "purpose": "Confirm that safe synthetic examples, strict contracts, and generated schemas remain synchronized.",
+  "random_seed": 42,
+  "record_type": "experiment-manifest",
+  "schema_version": "0.1.0",
+  "split_strategy": "not-applicable",
+  "status": "completed",
+  "title": "v0.1 synthetic contract smoke test"
+}

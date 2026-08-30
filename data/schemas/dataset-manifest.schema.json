@@ -1,0 +1,289 @@
+{
+  "additionalProperties": false,
+  "description": "Provenance, permission, and claim boundary for one dataset version.",
+  "properties": {
+    "claim_boundary": {
+      "maxLength": 1000,
+      "minLength": 1,
+      "title": "Claim Boundary",
+      "type": "string"
+    },
+    "classification": {
+      "enum": [
+        "synthetic",
+        "public",
+        "restricted-internal",
+        "confidential-third-party"
+      ],
+      "title": "Classification",
+      "type": "string"
+    },
+    "contains_customer_content": {
+      "const": false,
+      "default": false,
+      "title": "Contains Customer Content",
+      "type": "boolean"
+    },
+    "contains_employee_identifiers": {
+      "const": false,
+      "default": false,
+      "title": "Contains Employee Identifiers",
+      "type": "boolean"
+    },
+    "contains_free_text": {
+      "const": false,
+      "default": false,
+      "title": "Contains Free Text",
+      "type": "boolean"
+    },
+    "contains_network_identifiers": {
+      "const": false,
+      "default": false,
+      "title": "Contains Network Identifiers",
+      "type": "boolean"
+    },
+    "contains_precise_facility_location": {
+      "const": false,
+      "default": false,
+      "title": "Contains Precise Facility Location",
+      "type": "boolean"
+    },
+    "content_hash_scope": {
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Content Hash Scope",
+      "type": "string"
+    },
+    "content_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Content Sha256",
+      "type": "string"
+    },
+    "coverage_end": {
+      "format": "date",
+      "title": "Coverage End",
+      "type": "string"
+    },
+    "coverage_start": {
+      "format": "date",
+      "title": "Coverage Start",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "dataset_id": {
+      "pattern": "^[a-z0-9][a-z0-9._-]{2,79}$",
+      "title": "Dataset Id",
+      "type": "string"
+    },
+    "governance_approval_reference": {
+      "anyOf": [
+        {
+          "maxLength": 160,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Governance Approval Reference"
+    },
+    "interval_minutes": {
+      "enum": [
+        5,
+        10,
+        15,
+        30,
+        60
+      ],
+      "title": "Interval Minutes",
+      "type": "integer"
+    },
+    "known_limitations": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 50,
+      "minItems": 1,
+      "title": "Known Limitations",
+      "type": "array"
+    },
+    "license_or_data_use_agreement": {
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "License Or Data Use Agreement",
+      "type": "string"
+    },
+    "location_resolution": {
+      "enum": [
+        "none",
+        "country",
+        "region",
+        "climate-and-grid"
+      ],
+      "title": "Location Resolution",
+      "type": "string"
+    },
+    "owner": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Owner",
+      "type": "string"
+    },
+    "permitted_uses": {
+      "items": {
+        "enum": [
+          "software-testing",
+          "demonstration",
+          "method-development",
+          "calibration",
+          "training",
+          "validation",
+          "publication"
+        ],
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Permitted Uses",
+      "type": "array"
+    },
+    "prohibited_uses": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Prohibited Uses",
+      "type": "array"
+    },
+    "record_count": {
+      "minimum": 1,
+      "title": "Record Count",
+      "type": "integer"
+    },
+    "record_type": {
+      "const": "dataset-manifest",
+      "default": "dataset-manifest",
+      "title": "Record Type",
+      "type": "string"
+    },
+    "research_roles": {
+      "items": {
+        "enum": [
+          "method-development",
+          "calibration",
+          "validation",
+          "test",
+          "context-only",
+          "not-applicable"
+        ],
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Research Roles",
+      "type": "array"
+    },
+    "retention_end": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Retention End"
+    },
+    "schema_version": {
+      "const": "0.1.0",
+      "default": "0.1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "schema_versions": {
+      "items": {
+        "const": "0.1.0",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Schema Versions",
+      "type": "array"
+    },
+    "site_count": {
+      "minimum": 1,
+      "title": "Site Count",
+      "type": "integer"
+    },
+    "source_systems": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 20,
+      "minItems": 1,
+      "title": "Source Systems",
+      "type": "array"
+    },
+    "system_boundaries": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 30,
+      "minItems": 1,
+      "title": "System Boundaries",
+      "type": "array"
+    },
+    "title": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "transformations": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 50,
+      "title": "Transformations",
+      "type": "array"
+    },
+    "version": {
+      "maxLength": 40,
+      "minLength": 1,
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "dataset_id",
+    "version",
+    "title",
+    "classification",
+    "owner",
+    "created_at",
+    "coverage_start",
+    "coverage_end",
+    "interval_minutes",
+    "site_count",
+    "record_count",
+    "source_systems",
+    "schema_versions",
+    "permitted_uses",
+    "research_roles",
+    "prohibited_uses",
+    "location_resolution",
+    "license_or_data_use_agreement",
+    "system_boundaries",
+    "content_sha256",
+    "content_hash_scope",
+    "known_limitations",
+    "claim_boundary"
+  ],
+  "title": "DatasetManifest",
+  "type": "object"
+}

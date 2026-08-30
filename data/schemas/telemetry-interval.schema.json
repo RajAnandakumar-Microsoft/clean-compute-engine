@@ -1,0 +1,323 @@
+{
+  "additionalProperties": false,
+  "description": "One normalized, deidentified telemetry interval.",
+  "properties": {
+    "active_accelerator_hours": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Active Accelerator Hours"
+    },
+    "allocated_accelerator_hours": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Allocated Accelerator Hours"
+    },
+    "available_accelerator_hours": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Available Accelerator Hours"
+    },
+    "available_it_capacity_kw": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Available It Capacity Kw"
+    },
+    "cooling_energy_kwh": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cooling Energy Kwh"
+    },
+    "dataset_id": {
+      "pattern": "^[a-z0-9][a-z0-9._-]{2,79}$",
+      "title": "Dataset Id",
+      "type": "string"
+    },
+    "dry_bulb_c": {
+      "anyOf": [
+        {
+          "maximum": 70.0,
+          "minimum": -80.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dry Bulb C"
+    },
+    "grid_carbon_gco2e_per_kwh": {
+      "anyOf": [
+        {
+          "maximum": 2000.0,
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Grid Carbon Gco2E Per Kwh"
+    },
+    "grid_emissions_basis": {
+      "default": "unknown",
+      "enum": [
+        "location-average",
+        "location-marginal",
+        "market-based",
+        "unknown"
+      ],
+      "title": "Grid Emissions Basis",
+      "type": "string"
+    },
+    "installed_accelerator_hours": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Installed Accelerator Hours"
+    },
+    "installed_it_capacity_kw": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Installed It Capacity Kw"
+    },
+    "interval_minutes": {
+      "enum": [
+        5,
+        10,
+        15,
+        30,
+        60
+      ],
+      "title": "Interval Minutes",
+      "type": "integer"
+    },
+    "interval_start": {
+      "format": "date-time",
+      "title": "Interval Start",
+      "type": "string"
+    },
+    "it_energy_kwh": {
+      "minimum": 0.0,
+      "title": "It Energy Kwh",
+      "type": "number"
+    },
+    "operating_state": {
+      "default": "normal",
+      "enum": [
+        "normal",
+        "maintenance",
+        "outage",
+        "curtailed",
+        "unknown"
+      ],
+      "title": "Operating State",
+      "type": "string"
+    },
+    "peak_facility_power_kw": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Peak Facility Power Kw"
+    },
+    "quality_flags": {
+      "items": {
+        "enum": [
+          "synthetic-example",
+          "missing-source",
+          "imputed",
+          "sensor-reset",
+          "sensor-clipped",
+          "sensor-drift",
+          "time-gap",
+          "unit-converted",
+          "boundary-unresolved",
+          "weather-join-missing",
+          "grid-join-missing",
+          "maintenance-affected",
+          "outage-affected",
+          "manual-review"
+        ],
+        "type": "string"
+      },
+      "maxItems": 20,
+      "title": "Quality Flags",
+      "type": "array"
+    },
+    "record_type": {
+      "const": "telemetry-interval",
+      "default": "telemetry-interval",
+      "title": "Record Type",
+      "type": "string"
+    },
+    "relative_humidity_pct": {
+      "anyOf": [
+        {
+          "maximum": 100.0,
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Relative Humidity Pct"
+    },
+    "schema_version": {
+      "const": "0.1.0",
+      "default": "0.1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "site_id": {
+      "pattern": "^site-[a-z0-9][a-z0-9-]{2,58}$",
+      "title": "Site Id",
+      "type": "string"
+    },
+    "total_facility_energy_kwh": {
+      "minimum": 0.0,
+      "title": "Total Facility Energy Kwh",
+      "type": "number"
+    },
+    "ups_distribution_energy_kwh": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Ups Distribution Energy Kwh"
+    },
+    "water_consumption_l": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Water Consumption L"
+    },
+    "water_withdrawal_l": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Water Withdrawal L"
+    },
+    "wet_bulb_c": {
+      "anyOf": [
+        {
+          "maximum": 50.0,
+          "minimum": -80.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Wet Bulb C"
+    },
+    "workload_class": {
+      "default": "unknown",
+      "enum": [
+        "training",
+        "real-time-inference",
+        "batch-inference",
+        "development",
+        "mixed",
+        "unknown"
+      ],
+      "title": "Workload Class",
+      "type": "string"
+    }
+  },
+  "required": [
+    "dataset_id",
+    "site_id",
+    "interval_start",
+    "interval_minutes",
+    "total_facility_energy_kwh",
+    "it_energy_kwh"
+  ],
+  "title": "TelemetryInterval",
+  "type": "object"
+}

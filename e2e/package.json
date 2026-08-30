@@ -1,0 +1,19 @@
+{
+  "name": "e2e",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node forecast.js && node story.js",
+    "test:forecast": "node forecast.js",
+    "test:story": "node story.js",
+    "test:legacy": "node test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "commonjs",
+  "dependencies": {
+    "puppeteer": "^25.3.0"
+  }
+}

@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this research software, cite it using this metadata."
+title: "The Clean Compute Engine"
+type: software
+version: 0.1.0
+date-released: 2026-08-30
+license: Apache-2.0
+authors:
+  - family-names: "Anandakumar"
+    given-names: "Raj"
+repository-code: "https://github.com/RajAnandakumar-Microsoft/clean-compute-engine"
+abstract: >-
+  An independent, pre-calibration research prototype for investigating a
+  physics-informed environmental world model of data-center electricity,
+  operational carbon, and future water impacts. The project has no
+  organizational sponsor.

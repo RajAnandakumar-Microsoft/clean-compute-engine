@@ -1,0 +1,40 @@
+name: Research proposal
+description: Propose a hypothesis, dataset, experiment, or evaluation change
+title: "[Research]: "
+labels: ["research"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Research question
+      description: State a falsifiable question or hypothesis.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and data
+      description: Identify safe data sources, permissions, and system boundaries.
+    validations:
+      required: true
+  - type: textarea
+    id: evaluation
+    attributes:
+      label: Evaluation
+      description: Describe baselines, held-out splits, metrics, and failure criteria.
+    validations:
+      required: true
+  - type: textarea
+    id: claim
+    attributes:
+      label: Claim boundary
+      description: What could this establish, and what would remain unsupported?
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Data safety
+      options:
+        - label: This proposal contains no restricted or sensitive information.
+          required: true

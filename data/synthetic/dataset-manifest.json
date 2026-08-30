@@ -1,0 +1,57 @@
+{
+  "claim_boundary": "Hand-authored records for schema and software testing only. They do not support model accuracy, facility performance, or sustainability claims.",
+  "classification": "synthetic",
+  "contains_customer_content": false,
+  "contains_employee_identifiers": false,
+  "contains_free_text": false,
+  "contains_network_identifiers": false,
+  "contains_precise_facility_location": false,
+  "content_hash_scope": "SHA-256 of data/synthetic/telemetry-intervals.jsonl encoded as UTF-8 with line endings normalized to LF",
+  "content_sha256": "cee00d8539c87efff2d9e9e480987823ba61c777e33b7beaeed34f2794519302",
+  "coverage_end": "2027-01-01",
+  "coverage_start": "2027-01-01",
+  "created_at": "2026-08-29T21:00:00Z",
+  "dataset_id": "cce-synthetic-example",
+  "governance_approval_reference": null,
+  "interval_minutes": 60,
+  "known_limitations": [
+    "Only two hand-authored intervals",
+    "Not sampled from or fitted to an observed facility"
+  ],
+  "license_or_data_use_agreement": "Apache License 2.0 project-authored synthetic fixture.",
+  "location_resolution": "climate-and-grid",
+  "owner": "Clean Compute Engine research project",
+  "permitted_uses": [
+    "software-testing",
+    "demonstration"
+  ],
+  "prohibited_uses": [
+    "Model fitting",
+    "Accuracy validation",
+    "Claims about real facilities"
+  ],
+  "research_roles": [
+    "not-applicable"
+  ],
+  "record_count": 2,
+  "record_type": "dataset-manifest",
+  "retention_end": null,
+  "schema_version": "0.1.0",
+  "schema_versions": [
+    "0.1.0"
+  ],
+  "site_count": 1,
+  "source_systems": [
+    "hand-authored synthetic fixture"
+  ],
+  "system_boundaries": [
+    "Facility energy is a synthetic whole-facility interval total",
+    "IT energy is a synthetic downstream IT interval total",
+    "Water values are synthetic withdrawal and consumption at the facility boundary"
+  ],
+  "title": "Clean Compute Engine synthetic contract example",
+  "transformations": [
+    "None"
+  ],
+  "version": "0.1.0"
+}

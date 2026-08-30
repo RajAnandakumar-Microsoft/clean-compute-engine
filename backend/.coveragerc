@@ -1,0 +1,8 @@
+[run]
+branch = True
+source = app/forecast
+
+[report]
+fail_under = 75
+show_missing = True
+skip_covered = True

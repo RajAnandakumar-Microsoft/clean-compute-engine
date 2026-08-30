@@ -1,0 +1,142 @@
+{
+  "additionalProperties": false,
+  "description": "Frozen plan and claim boundary for one reproducible experiment.",
+  "properties": {
+    "baselines": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 20,
+      "minItems": 1,
+      "title": "Baselines",
+      "type": "array"
+    },
+    "candidate_models": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 20,
+      "minItems": 1,
+      "title": "Candidate Models",
+      "type": "array"
+    },
+    "claim_boundary": {
+      "maxLength": 1000,
+      "minLength": 1,
+      "title": "Claim Boundary",
+      "type": "string"
+    },
+    "code_revision": {
+      "maxLength": 80,
+      "minLength": 7,
+      "title": "Code Revision",
+      "type": "string"
+    },
+    "dataset_manifest_ids": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 20,
+      "minItems": 1,
+      "title": "Dataset Manifest Ids",
+      "type": "array"
+    },
+    "experiment_id": {
+      "pattern": "^exp-[a-z0-9][a-z0-9-]{2,75}$",
+      "title": "Experiment Id",
+      "type": "string"
+    },
+    "hypothesis_ids": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 20,
+      "title": "Hypothesis Ids",
+      "type": "array"
+    },
+    "metrics": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 40,
+      "minItems": 1,
+      "title": "Metrics",
+      "type": "array"
+    },
+    "output_location": {
+      "maxLength": 240,
+      "minLength": 1,
+      "title": "Output Location",
+      "type": "string"
+    },
+    "purpose": {
+      "maxLength": 1000,
+      "minLength": 1,
+      "title": "Purpose",
+      "type": "string"
+    },
+    "random_seed": {
+      "maximum": 2147483647,
+      "minimum": 0,
+      "title": "Random Seed",
+      "type": "integer"
+    },
+    "record_type": {
+      "const": "experiment-manifest",
+      "default": "experiment-manifest",
+      "title": "Record Type",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "0.1.0",
+      "default": "0.1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "split_strategy": {
+      "enum": [
+        "rolling-origin",
+        "leave-one-site-out",
+        "site-and-time-holdout",
+        "regime-holdout",
+        "not-applicable"
+      ],
+      "title": "Split Strategy",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "planned",
+        "running",
+        "completed",
+        "failed",
+        "stopped"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "title": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    }
+  },
+  "required": [
+    "experiment_id",
+    "title",
+    "status",
+    "purpose",
+    "code_revision",
+    "dataset_manifest_ids",
+    "split_strategy",
+    "random_seed",
+    "candidate_models",
+    "baselines",
+    "metrics",
+    "claim_boundary",
+    "output_location"
+  ],
+  "title": "ExperimentManifest",
+  "type": "object"
+}

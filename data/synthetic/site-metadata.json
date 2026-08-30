@@ -1,0 +1,14 @@
+{
+  "capacity_bucket_mw": "10-49",
+  "climate_zone": "temperate-humid-demo",
+  "cooling_loop": "direct-to-chip",
+  "country_code": "US",
+  "grid_region": "demo-grid-region",
+  "hardware_generation_bucket": "demo-generation-a",
+  "heat_rejection": "dry-cooler",
+  "record_type": "site-metadata",
+  "schema_version": "0.1.0",
+  "site_id": "site-demo-001",
+  "valid_from": "2027-01-01",
+  "water_source_class": "none"
+}
