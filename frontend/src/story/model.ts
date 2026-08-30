@@ -29,7 +29,12 @@ export interface WorldSignals {
 export const STORY_START_YEAR = 2027;
 export const STORY_END_YEAR = 2037;
 
+export function storyHorizonYears(year: number): number {
+  return Math.max(1, Math.min(10, year - STORY_START_YEAR));
+}
+
 const WORKLOAD_MIXES: Record<WorkloadChoice, ForecastWorkloadMix> = {
+  // Keep these choices aligned with export_story_outcomes.py.
   balanced: {
     training: 0.30,
     real_time_inference: 0.45,
@@ -104,10 +109,7 @@ export function buildStoryForecastRequest(
   decisions: StoryDecisions,
 ): ForecastRunRequest {
   const request = structuredClone(example);
-  const horizonYears = Math.max(
-    1,
-    Math.min(10, decisions.year - STORY_START_YEAR),
-  );
+  const horizonYears = storyHorizonYears(decisions.year);
   request.seed = 73;
   request.sample_count = 96;
   request.scenario.name = "Virginia AI campus";

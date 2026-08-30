@@ -44,7 +44,12 @@ export function TopBar() {
         <div>
           <div className="title">
             The Clean Compute Engine
-            <a className="story-entry" href="/story">Interactive story</a>
+            <a
+              className="story-entry"
+              href={`${import.meta.env.BASE_URL}story`}
+            >
+              Interactive story
+            </a>
           </div>
           <div className="project-status">
             Independent hackathon research · Not an official product

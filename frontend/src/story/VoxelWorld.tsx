@@ -3,7 +3,8 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, Line, OrbitControls } from "@react-three/drei";
 import { Bloom, EffectComposer, Vignette } from "@react-three/postprocessing";
 import * as THREE from "three";
-import type { CoolingType, ForecastResult } from "../types/api";
+import type { CoolingType } from "../types/api";
+import type { StoryForecastOutcome } from "./forecast";
 import type { WorldSignals, WorkloadChoice } from "./model";
 
 type Position = [number, number, number];
@@ -15,7 +16,7 @@ interface VoxelWorldProps {
   workload: WorkloadChoice;
   cooling: CoolingType;
   signals: WorldSignals;
-  result: ForecastResult | null;
+  result: StoryForecastOutcome | null;
   onBuild: () => void;
 }
 
@@ -532,11 +533,11 @@ function FutureWorlds({
   signals,
   cooling,
 }: {
-  result: ForecastResult;
+  result: StoryForecastOutcome;
   signals: WorldSignals;
   cooling: CoolingType;
 }) {
-  const horizon = result.scenario.horizons[result.scenario.horizons.length - 1];
+  const horizon = result.scenario;
   const carbon = horizon.cumulative_operational_carbon_t;
   const maximum = Math.max(carbon.p90, 1);
   const futures = [
@@ -577,13 +578,12 @@ function ComparisonWorlds({
   signals,
   cooling,
 }: {
-  result: ForecastResult;
+  result: StoryForecastOutcome;
   signals: WorldSignals;
   cooling: CoolingType;
 }) {
-  const scenario = result.scenario.horizons[result.scenario.horizons.length - 1];
-  const baseline = result.baseline?.horizons[result.baseline.horizons.length - 1];
-  if (!baseline) return null;
+  const scenario = result.scenario;
+  const baseline = result.baseline;
   const maximum = Math.max(
     scenario.cumulative_operational_carbon_t.p50,
     baseline.cumulative_operational_carbon_t.p50,

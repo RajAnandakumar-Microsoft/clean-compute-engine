@@ -1,11 +1,14 @@
 import { useMemo, useRef, useState } from "react";
-import { api } from "../data/api";
-import type { CoolingType, ForecastResult } from "../types/api";
+import type { CoolingType } from "../types/api";
 import {
-  buildStoryForecastRequest,
+  runStoryForecast,
+  type StoryForecastOutcome,
+} from "./forecast";
+import {
   calculateWorldSignals,
   STORY_END_YEAR,
   STORY_START_YEAR,
+  storyHorizonYears,
   type StoryDecisions,
   type WorkloadChoice,
 } from "./model";
@@ -49,6 +52,12 @@ const CHAPTERS = [
     body: "It is how much the outcome changes when a better design is chosen before concrete is poured.",
   },
 ] as const;
+
+const STATIC_STORY = import.meta.env.VITE_STATIC_STORY === "true";
+const STORY_HOME = STATIC_STORY
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}story`;
+const PROJECT_URL = import.meta.env.VITE_PROJECT_URL || import.meta.env.BASE_URL;
 
 const WORKLOADS: {
   id: WorkloadChoice;
@@ -97,7 +106,7 @@ export function StoryApp() {
   const [cooling, setCooling] = useState<CoolingType>("liquid");
   const [hour, setHour] = useState(14);
   const [year, setYear] = useState(STORY_START_YEAR);
-  const [result, setResult] = useState<ForecastResult | null>(null);
+  const [result, setResult] = useState<StoryForecastOutcome | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const decisionVersion = useRef(0);
@@ -122,8 +131,8 @@ export function StoryApp() {
       : activeSignals;
   }, [decisions, stage]);
   const chapter = CHAPTERS[stage];
-  const horizon = result?.scenario.horizons[result.scenario.horizons.length - 1];
-  const delta = result?.deltas[result.deltas.length - 1];
+  const horizon = result?.scenario;
+  const delta = result?.delta;
 
   const changeForecastDecision = (change: () => void) => {
     decisionVersion.current += 1;
@@ -146,9 +155,7 @@ export function StoryApp() {
     setBusy(true);
     setError(null);
     try {
-      const example = await api.forecastExample();
-      const request = buildStoryForecastRequest(example, decisions);
-      const forecastResult = await api.forecast(request);
+      const forecastResult = await runStoryForecast(decisions);
       if (requestedVersion === decisionVersion.current) {
         setResult(forecastResult);
       }
@@ -181,7 +188,11 @@ export function StoryApp() {
       </div>
 
       <header className="story-header">
-        <a className="story-brand" href="/story" aria-label="Clean Compute World home">
+        <a
+          className="story-brand"
+          href={STORY_HOME}
+          aria-label="Clean Compute World home"
+        >
           <span>◆</span>
           <div>
             <b>THE CLEAN COMPUTE WORLD</b>
@@ -193,7 +204,12 @@ export function StoryApp() {
           <b>{year}</b>
           <span>{formatHour(hour)}</span>
         </div>
-        <a className="story-open-engine" href="/">OPEN THE ENGINE ↗</a>
+        <a
+          className={`story-open-engine${STATIC_STORY ? " static" : ""}`}
+          href={PROJECT_URL}
+        >
+          {STATIC_STORY ? "VIEW THE RESEARCH ↗" : "OPEN THE ENGINE ↗"}
+        </a>
       </header>
 
       <aside className="story-narrative">
@@ -294,7 +310,7 @@ export function StoryApp() {
                 <div className="story-simulation-note">
                   <b>96 coherent futures</b>
                   <span>
-                    {Math.max(1, Math.min(10, year - STORY_START_YEAR)).toLocaleString()}
+                    {storyHorizonYears(year).toLocaleString()}
                     {" "}year horizon · hourly world states
                   </span>
                 </div>
@@ -357,7 +373,11 @@ export function StoryApp() {
               The physical world on screen is the narrative. The forecast engine beneath
               it is what makes the comparison defensible once real data calibrates it.
             </p>
-            <a className="story-primary link" href="/">Explore the full v0.1 engine ↗</a>
+            <a className="story-primary link" href={PROJECT_URL}>
+              {STATIC_STORY
+                ? "Explore the research and full engine ↗"
+                : "Explore the full v0.1 engine ↗"}
+            </a>
           </>
         )}
       </aside>
