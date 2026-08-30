@@ -27,6 +27,7 @@ jobs:
       - run: python -m app.research.export_schemas
       - run: git diff --exit-code -- data/schemas
         working-directory: .
+      - run: python -m app.research.export_story_outcomes --check
       - run: python -m pytest --cov --cov-config=.coveragerc
 
   frontend:
@@ -43,3 +44,9 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
       - run: npm ci
       - run: npm run build
+      - run: npm run build
+        env:
+          VITE_BASE_PATH: /clean-compute-engine/
+          VITE_PROJECT_URL: https://github.com/RajAnandakumar-Microsoft/clean-compute-engine
+          VITE_STATIC_STORY: "true"
+          VITE_STORY_ONLY: "true"

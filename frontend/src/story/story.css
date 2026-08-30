@@ -688,5 +688,6 @@
   .story-chapters button span { display: none; }
   .story-open-engine { font-size: 0; }
   .story-open-engine::after { content: "ENGINE ↗"; font-size: 9px; }
+  .story-open-engine.static::after { content: "RESEARCH ↗"; }
   .story-orbit-hint { display: none; }
 }

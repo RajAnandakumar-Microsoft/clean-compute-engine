@@ -1,0 +1,2531 @@
+{
+  "schema_version": "1.0",
+  "model_version": "0.1.0",
+  "assumption_set_version": "synthetic-priors-2026.1",
+  "calibration_status": "uncalibrated",
+  "seed": 73,
+  "sample_count": 96,
+  "disclaimer": "Uncalibrated scenario forecast. Values describe outcomes under the supplied assumptions and synthetic priors; they are not validated site predictions.",
+  "outcomes": {
+    "balanced:liquid:1": {
+      "scenario": {
+        "years": 1,
+        "cumulative_facility_energy_mwh": {
+          "p10": 103363.0693,
+          "p50": 122064.7814,
+          "p90": 131747.373
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 32673.4329,
+          "p50": 41756.9517,
+          "p90": 49279.4108
+        },
+        "average_pue": {
+          "p10": 1.1894,
+          "p50": 1.2262,
+          "p90": 1.2658
+        }
+      },
+      "baseline": {
+        "years": 1,
+        "cumulative_facility_energy_mwh": {
+          "p10": 125322.09,
+          "p50": 147167.0494,
+          "p90": 157981.702
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 39649.0452,
+          "p50": 50112.4044,
+          "p90": 59425.3406
+        },
+        "average_pue": {
+          "p10": 1.4363,
+          "p50": 1.4802,
+          "p90": 1.5277
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -17.03,
+        "operational_carbon_pct_p50": -17.11
+      }
+    },
+    "balanced:liquid:2": {
+      "scenario": {
+        "years": 2,
+        "cumulative_facility_energy_mwh": {
+          "p10": 256811.0755,
+          "p50": 283711.5198,
+          "p90": 310657.2856
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 81349.3186,
+          "p50": 95727.684,
+          "p90": 115972.1977
+        },
+        "average_pue": {
+          "p10": 1.1674,
+          "p50": 1.2033,
+          "p90": 1.2422
+        }
+      },
+      "baseline": {
+        "years": 2,
+        "cumulative_facility_energy_mwh": {
+          "p10": 310440.8198,
+          "p50": 340068.1695,
+          "p90": 370566.782
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 98103.3435,
+          "p50": 114661.7341,
+          "p90": 138396.1781
+        },
+        "average_pue": {
+          "p10": 1.4038,
+          "p50": 1.4412,
+          "p90": 1.4822
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -16.53,
+        "operational_carbon_pct_p50": -16.4
+      }
+    },
+    "balanced:liquid:3": {
+      "scenario": {
+        "years": 3,
+        "cumulative_facility_energy_mwh": {
+          "p10": 560852.9349,
+          "p50": 616386.624,
+          "p90": 672193.08
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 173715.7374,
+          "p50": 205118.6696,
+          "p90": 246938.6934
+        },
+        "average_pue": {
+          "p10": 1.1713,
+          "p50": 1.2085,
+          "p90": 1.2502
+        }
+      },
+      "baseline": {
+        "years": 3,
+        "cumulative_facility_energy_mwh": {
+          "p10": 676609.403,
+          "p50": 739146.7063,
+          "p90": 803828.2067
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 209865.9689,
+          "p50": 245309.377,
+          "p90": 295313.3491
+        },
+        "average_pue": {
+          "p10": 1.4122,
+          "p50": 1.4528,
+          "p90": 1.4936
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -16.77,
+        "operational_carbon_pct_p50": -16.55
+      }
+    },
+    "balanced:liquid:4": {
+      "scenario": {
+        "years": 4,
+        "cumulative_facility_energy_mwh": {
+          "p10": 926127.0519,
+          "p50": 1010837.2881,
+          "p90": 1095684.9651
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 277707.0917,
+          "p50": 331941.747,
+          "p90": 394566.3797
+        },
+        "average_pue": {
+          "p10": 1.1638,
+          "p50": 1.2014,
+          "p90": 1.2443
+        }
+      },
+      "baseline": {
+        "years": 4,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1113393.3251,
+          "p50": 1209963.0424,
+          "p90": 1304263.4938
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 333926.5892,
+          "p50": 396133.639,
+          "p90": 472850.6183
+        },
+        "average_pue": {
+          "p10": 1.401,
+          "p50": 1.4422,
+          "p90": 1.4847
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -16.57,
+        "operational_carbon_pct_p50": -16.3
+      }
+    },
+    "balanced:liquid:5": {
+      "scenario": {
+        "years": 5,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1286494.0853,
+          "p50": 1404175.9383,
+          "p90": 1525261.6136
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 377655.9924,
+          "p50": 451259.6227,
+          "p90": 536975.3319
+        },
+        "average_pue": {
+          "p10": 1.1594,
+          "p50": 1.1966,
+          "p90": 1.2392
+        }
+      },
+      "baseline": {
+        "years": 5,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1552907.2774,
+          "p50": 1691260.0741,
+          "p90": 1830465.8888
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 457042.6632,
+          "p50": 542400.019,
+          "p90": 645086.5518
+        },
+        "average_pue": {
+          "p10": 1.3923,
+          "p50": 1.4346,
+          "p90": 1.4764
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -16.97,
+        "operational_carbon_pct_p50": -16.85
+      }
+    },
+    "balanced:liquid:6": {
+      "scenario": {
+        "years": 6,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1653968.9199,
+          "p50": 1791721.7848,
+          "p90": 1950273.9427
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 477209.2924,
+          "p50": 567087.2044,
+          "p90": 673690.9953
+        },
+        "average_pue": {
+          "p10": 1.157,
+          "p50": 1.1935,
+          "p90": 1.2365
+        }
+      },
+      "baseline": {
+        "years": 6,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2007031.0838,
+          "p50": 2171166.5826,
+          "p90": 2347131.4692
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 576718.5533,
+          "p50": 680670.5726,
+          "p90": 812735.9592
+        },
+        "average_pue": {
+          "p10": 1.3885,
+          "p50": 1.4302,
+          "p90": 1.4722
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -17.27,
+        "operational_carbon_pct_p50": -17.3
+      }
+    },
+    "balanced:liquid:7": {
+      "scenario": {
+        "years": 7,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1998012.6843,
+          "p50": 2158021.7109,
+          "p90": 2347693.9171
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 568176.5854,
+          "p50": 674903.761,
+          "p90": 799519.816
+        },
+        "average_pue": {
+          "p10": 1.1554,
+          "p50": 1.1921,
+          "p90": 1.2348
+        }
+      },
+      "baseline": {
+        "years": 7,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2446225.3798,
+          "p50": 2634867.5547,
+          "p90": 2850509.4393
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 689122.5418,
+          "p50": 818770.2305,
+          "p90": 972214.108
+        },
+        "average_pue": {
+          "p10": 1.3856,
+          "p50": 1.4274,
+          "p90": 1.4695
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -17.99,
+        "operational_carbon_pct_p50": -17.84
+      }
+    },
+    "balanced:liquid:8": {
+      "scenario": {
+        "years": 8,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2341619.2436,
+          "p50": 2526096.6274,
+          "p90": 2744716.4689
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 652905.9831,
+          "p50": 780716.8045,
+          "p90": 922488.4791
+        },
+        "average_pue": {
+          "p10": 1.1544,
+          "p50": 1.1909,
+          "p90": 1.2337
+        }
+      },
+      "baseline": {
+        "years": 8,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2885208.8779,
+          "p50": 3094201.4839,
+          "p90": 3352876.0126
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 796299.3769,
+          "p50": 952878.4888,
+          "p90": 1129285.3283
+        },
+        "average_pue": {
+          "p10": 1.3837,
+          "p50": 1.4257,
+          "p90": 1.4676
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -18.54,
+        "operational_carbon_pct_p50": -18.2
+      }
+    },
+    "balanced:liquid:9": {
+      "scenario": {
+        "years": 9,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2669836.1247,
+          "p50": 2881216.299,
+          "p90": 3126702.427
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 732188.5394,
+          "p50": 878425.5913,
+          "p90": 1040037.8553
+        },
+        "average_pue": {
+          "p10": 1.1535,
+          "p50": 1.19,
+          "p90": 1.2329
+        }
+      },
+      "baseline": {
+        "years": 9,
+        "cumulative_facility_energy_mwh": {
+          "p10": 3316646.1688,
+          "p50": 3553303.5726,
+          "p90": 3848999.8824
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 900554.8641,
+          "p50": 1077339.8509,
+          "p90": 1286666.6801
+        },
+        "average_pue": {
+          "p10": 1.3824,
+          "p50": 1.4244,
+          "p90": 1.466
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -19.12,
+        "operational_carbon_pct_p50": -18.72
+      }
+    },
+    "balanced:liquid:10": {
+      "scenario": {
+        "years": 10,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2998456.5654,
+          "p50": 3232747.6486,
+          "p90": 3508138.2254
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 807161.3086,
+          "p50": 969350.577,
+          "p90": 1156283.2416
+        },
+        "average_pue": {
+          "p10": 1.153,
+          "p50": 1.1894,
+          "p90": 1.2321
+        }
+      },
+      "baseline": {
+        "years": 10,
+        "cumulative_facility_energy_mwh": {
+          "p10": 3748311.2381,
+          "p50": 4005396.3884,
+          "p90": 4344228.8031
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 1002197.8228,
+          "p50": 1200581.0398,
+          "p90": 1435515.9192
+        },
+        "average_pue": {
+          "p10": 1.3813,
+          "p50": 1.4233,
+          "p90": 1.4648
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -19.62,
+        "operational_carbon_pct_p50": -19.16
+      }
+    },
+    "balanced:air:1": {
+      "scenario": {
+        "years": 1,
+        "cumulative_facility_energy_mwh": {
+          "p10": 116619.0203,
+          "p50": 137208.4073,
+          "p90": 147940.5229
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 36994.7658,
+          "p50": 46775.8878,
+          "p90": 55558.483
+        },
+        "average_pue": {
+          "p10": 1.3401,
+          "p50": 1.3828,
+          "p90": 1.4305
+        }
+      },
+      "baseline": {
+        "years": 1,
+        "cumulative_facility_energy_mwh": {
+          "p10": 125322.09,
+          "p50": 147167.0494,
+          "p90": 157981.702
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 39649.0452,
+          "p50": 50112.4044,
+          "p90": 59425.3406
+        },
+        "average_pue": {
+          "p10": 1.4363,
+          "p50": 1.4802,
+          "p90": 1.5277
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -6.72,
+        "operational_carbon_pct_p50": -6.7
+      }
+    },
+    "balanced:air:2": {
+      "scenario": {
+        "years": 2,
+        "cumulative_facility_energy_mwh": {
+          "p10": 291120.2415,
+          "p50": 319816.6443,
+          "p90": 349307.1978
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 91774.1739,
+          "p50": 107863.82,
+          "p90": 130384.6676
+        },
+        "average_pue": {
+          "p10": 1.32,
+          "p50": 1.3554,
+          "p90": 1.3946
+        }
+      },
+      "baseline": {
+        "years": 2,
+        "cumulative_facility_energy_mwh": {
+          "p10": 310440.8198,
+          "p50": 340068.1695,
+          "p90": 370566.782
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 98103.3435,
+          "p50": 114661.7341,
+          "p90": 138396.1781
+        },
+        "average_pue": {
+          "p10": 1.4038,
+          "p50": 1.4412,
+          "p90": 1.4822
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -5.97,
+        "operational_carbon_pct_p50": -6.01
+      }
+    },
+    "balanced:air:3": {
+      "scenario": {
+        "years": 3,
+        "cumulative_facility_energy_mwh": {
+          "p10": 633735.0491,
+          "p50": 693520.5767,
+          "p90": 757424.6521
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 196533.6923,
+          "p50": 230464.584,
+          "p90": 277392.5289
+        },
+        "average_pue": {
+          "p10": 1.3238,
+          "p50": 1.3619,
+          "p90": 1.4014
+        }
+      },
+      "baseline": {
+        "years": 3,
+        "cumulative_facility_energy_mwh": {
+          "p10": 676609.403,
+          "p50": 739146.7063,
+          "p90": 803828.2067
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 209865.9689,
+          "p50": 245309.377,
+          "p90": 295313.3491
+        },
+        "average_pue": {
+          "p10": 1.4122,
+          "p50": 1.4528,
+          "p90": 1.4936
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -6.21,
+        "operational_carbon_pct_p50": -6.18
+      }
+    },
+    "balanced:air:4": {
+      "scenario": {
+        "years": 4,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1040467.2898,
+          "p50": 1137899.2932,
+          "p90": 1229393.1532
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 313534.0126,
+          "p50": 372352.7312,
+          "p90": 444536.1443
+        },
+        "average_pue": {
+          "p10": 1.3164,
+          "p50": 1.3559,
+          "p90": 1.3944
+        }
+      },
+      "baseline": {
+        "years": 4,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1113393.3251,
+          "p50": 1209963.0424,
+          "p90": 1304263.4938
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 333926.5892,
+          "p50": 396133.639,
+          "p90": 472850.6183
+        },
+        "average_pue": {
+          "p10": 1.401,
+          "p50": 1.4422,
+          "p90": 1.4847
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -5.98,
+        "operational_carbon_pct_p50": -6.03
+      }
+    },
+    "balanced:air:5": {
+      "scenario": {
+        "years": 5,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1450768.0936,
+          "p50": 1582596.1767,
+          "p90": 1720121.9379
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 427067.7962,
+          "p50": 507386.6067,
+          "p90": 604211.9463
+        },
+        "average_pue": {
+          "p10": 1.3109,
+          "p50": 1.351,
+          "p90": 1.3894
+        }
+      },
+      "baseline": {
+        "years": 5,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1552907.2774,
+          "p50": 1691260.0741,
+          "p90": 1830465.8888
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 457042.6632,
+          "p50": 542400.019,
+          "p90": 645086.5518
+        },
+        "average_pue": {
+          "p10": 1.3923,
+          "p50": 1.4346,
+          "p90": 1.4764
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -6.4,
+        "operational_carbon_pct_p50": -6.52
+      }
+    },
+    "balanced:air:6": {
+      "scenario": {
+        "years": 6,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1867187.656,
+          "p50": 2025590.5937,
+          "p90": 2198954.7715
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 539639.8114,
+          "p50": 636228.1188,
+          "p90": 757923.6695
+        },
+        "average_pue": {
+          "p10": 1.3081,
+          "p50": 1.3485,
+          "p90": 1.3866
+        }
+      },
+      "baseline": {
+        "years": 6,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2007031.0838,
+          "p50": 2171166.5826,
+          "p90": 2347131.4692
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 576718.5533,
+          "p50": 680670.5726,
+          "p90": 812735.9592
+        },
+        "average_pue": {
+          "p10": 1.3885,
+          "p50": 1.4302,
+          "p90": 1.4722
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -6.7,
+        "operational_carbon_pct_p50": -6.89
+      }
+    },
+    "balanced:air:7": {
+      "scenario": {
+        "years": 7,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2257249.9235,
+          "p50": 2433681.6043,
+          "p90": 2647402.1391
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 640191.7595,
+          "p50": 758378.4627,
+          "p90": 899475.2532
+        },
+        "average_pue": {
+          "p10": 1.306,
+          "p50": 1.3467,
+          "p90": 1.3843
+        }
+      },
+      "baseline": {
+        "years": 7,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2446225.3798,
+          "p50": 2634867.5547,
+          "p90": 2850509.4393
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 689122.5418,
+          "p50": 818770.2305,
+          "p90": 972214.108
+        },
+        "average_pue": {
+          "p10": 1.3856,
+          "p50": 1.4274,
+          "p90": 1.4695
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -7.49,
+        "operational_carbon_pct_p50": -7.48
+      }
+    },
+    "balanced:air:8": {
+      "scenario": {
+        "years": 8,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2645488.092,
+          "p50": 2845096.7512,
+          "p90": 3094718.2476
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 734874.1596,
+          "p50": 878711.2451,
+          "p90": 1038635.9301
+        },
+        "average_pue": {
+          "p10": 1.3047,
+          "p50": 1.3454,
+          "p90": 1.3831
+        }
+      },
+      "baseline": {
+        "years": 8,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2885208.8779,
+          "p50": 3094201.4839,
+          "p90": 3352876.0126
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 796299.3769,
+          "p50": 952878.4888,
+          "p90": 1129285.3283
+        },
+        "average_pue": {
+          "p10": 1.3837,
+          "p50": 1.4257,
+          "p90": 1.4676
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -8.09,
+        "operational_carbon_pct_p50": -8.0
+      }
+    },
+    "balanced:air:9": {
+      "scenario": {
+        "years": 9,
+        "cumulative_facility_energy_mwh": {
+          "p10": 3017472.9809,
+          "p50": 3239717.4417,
+          "p90": 3526881.5726
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 822712.4953,
+          "p50": 987575.4339,
+          "p90": 1174147.9924
+        },
+        "average_pue": {
+          "p10": 1.3037,
+          "p50": 1.3446,
+          "p90": 1.3821
+        }
+      },
+      "baseline": {
+        "years": 9,
+        "cumulative_facility_energy_mwh": {
+          "p10": 3316646.1688,
+          "p50": 3553303.5726,
+          "p90": 3848999.8824
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 900554.8641,
+          "p50": 1077339.8509,
+          "p90": 1286666.6801
+        },
+        "average_pue": {
+          "p10": 1.3824,
+          "p50": 1.4244,
+          "p90": 1.466
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -8.77,
+        "operational_carbon_pct_p50": -8.67
+      }
+    },
+    "balanced:air:10": {
+      "scenario": {
+        "years": 10,
+        "cumulative_facility_energy_mwh": {
+          "p10": 3389207.0321,
+          "p50": 3628628.121,
+          "p90": 3956257.331
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 906916.5534,
+          "p50": 1093139.415,
+          "p90": 1303820.412
+        },
+        "average_pue": {
+          "p10": 1.3031,
+          "p50": 1.3436,
+          "p90": 1.3813
+        }
+      },
+      "baseline": {
+        "years": 10,
+        "cumulative_facility_energy_mwh": {
+          "p10": 3748311.2381,
+          "p50": 4005396.3884,
+          "p90": 4344228.8031
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 1002197.8228,
+          "p50": 1200581.0398,
+          "p90": 1435515.9192
+        },
+        "average_pue": {
+          "p10": 1.3813,
+          "p50": 1.4233,
+          "p90": 1.4648
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -9.33,
+        "operational_carbon_pct_p50": -9.17
+      }
+    },
+    "inference:liquid:1": {
+      "scenario": {
+        "years": 1,
+        "cumulative_facility_energy_mwh": {
+          "p10": 103334.9819,
+          "p50": 122033.1007,
+          "p90": 131713.0927
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 32705.5699,
+          "p50": 41802.028,
+          "p90": 49330.613
+        },
+        "average_pue": {
+          "p10": 1.1896,
+          "p50": 1.2262,
+          "p90": 1.2658
+        }
+      },
+      "baseline": {
+        "years": 1,
+        "cumulative_facility_energy_mwh": {
+          "p10": 125302.0707,
+          "p50": 147138.3787,
+          "p90": 157972.9254
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 39690.0553,
+          "p50": 50166.4201,
+          "p90": 59496.9603
+        },
+        "average_pue": {
+          "p10": 1.4365,
+          "p50": 1.4804,
+          "p90": 1.5279
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -17.03,
+        "operational_carbon_pct_p50": -17.12
+      }
+    },
+    "inference:liquid:2": {
+      "scenario": {
+        "years": 2,
+        "cumulative_facility_energy_mwh": {
+          "p10": 256812.8778,
+          "p50": 283717.5221,
+          "p90": 310661.4783
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 81442.2507,
+          "p50": 95875.9137,
+          "p90": 116122.5764
+        },
+        "average_pue": {
+          "p10": 1.1677,
+          "p50": 1.2035,
+          "p90": 1.2428
+        }
+      },
+      "baseline": {
+        "years": 2,
+        "cumulative_facility_energy_mwh": {
+          "p10": 310500.5697,
+          "p50": 340180.0107,
+          "p90": 370673.5279
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 98281.033,
+          "p50": 114875.7762,
+          "p90": 138641.9691
+        },
+        "average_pue": {
+          "p10": 1.4049,
+          "p50": 1.4422,
+          "p90": 1.4828
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -16.56,
+        "operational_carbon_pct_p50": -16.42
+      }
+    },
+    "inference:liquid:3": {
+      "scenario": {
+        "years": 3,
+        "cumulative_facility_energy_mwh": {
+          "p10": 560746.3093,
+          "p50": 616245.4429,
+          "p90": 671831.4678
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 173917.9215,
+          "p50": 205354.4525,
+          "p90": 247131.2585
+        },
+        "average_pue": {
+          "p10": 1.1717,
+          "p50": 1.2088,
+          "p90": 1.2506
+        }
+      },
+      "baseline": {
+        "years": 3,
+        "cumulative_facility_energy_mwh": {
+          "p10": 676636.6339,
+          "p50": 739165.3564,
+          "p90": 803594.1009
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 210140.1624,
+          "p50": 245639.7522,
+          "p90": 295646.7664
+        },
+        "average_pue": {
+          "p10": 1.4129,
+          "p50": 1.4533,
+          "p90": 1.494
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -16.79,
+        "operational_carbon_pct_p50": -16.57
+      }
+    },
+    "inference:liquid:4": {
+      "scenario": {
+        "years": 4,
+        "cumulative_facility_energy_mwh": {
+          "p10": 925870.3581,
+          "p50": 1010658.6135,
+          "p90": 1095536.3475
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 278028.7993,
+          "p50": 332384.9462,
+          "p90": 395042.6978
+        },
+        "average_pue": {
+          "p10": 1.1645,
+          "p50": 1.2018,
+          "p90": 1.2447
+        }
+      },
+      "baseline": {
+        "years": 4,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1113187.9432,
+          "p50": 1210142.3151,
+          "p90": 1304478.9124
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 334464.0398,
+          "p50": 396744.5581,
+          "p90": 473556.1877
+        },
+        "average_pue": {
+          "p10": 1.4017,
+          "p50": 1.4431,
+          "p90": 1.4851
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -16.6,
+        "operational_carbon_pct_p50": -16.32
+      }
+    },
+    "inference:liquid:5": {
+      "scenario": {
+        "years": 5,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1286248.3829,
+          "p50": 1403977.458,
+          "p90": 1524643.9251
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 378168.8221,
+          "p50": 451970.1711,
+          "p90": 537681.886
+        },
+        "average_pue": {
+          "p10": 1.1603,
+          "p50": 1.1969,
+          "p90": 1.2398
+        }
+      },
+      "baseline": {
+        "years": 5,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1553097.6131,
+          "p50": 1691882.3127,
+          "p90": 1830375.2496
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 457495.9935,
+          "p50": 543304.0133,
+          "p90": 646191.2747
+        },
+        "average_pue": {
+          "p10": 1.394,
+          "p50": 1.4357,
+          "p90": 1.477
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -17.0,
+        "operational_carbon_pct_p50": -16.88
+      }
+    },
+    "inference:liquid:6": {
+      "scenario": {
+        "years": 6,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1653736.5656,
+          "p50": 1791767.1557,
+          "p90": 1948881.3989
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 477892.9884,
+          "p50": 567857.5321,
+          "p90": 674679.2103
+        },
+        "average_pue": {
+          "p10": 1.158,
+          "p50": 1.1941,
+          "p90": 1.2372
+        }
+      },
+      "baseline": {
+        "years": 6,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2007294.2158,
+          "p50": 2172246.0419,
+          "p90": 2347873.902
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 577301.5531,
+          "p50": 681648.7698,
+          "p90": 814205.2598
+        },
+        "average_pue": {
+          "p10": 1.3904,
+          "p50": 1.4317,
+          "p90": 1.4732
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -17.29,
+        "operational_carbon_pct_p50": -17.34
+      }
+    },
+    "inference:liquid:7": {
+      "scenario": {
+        "years": 7,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1997919.8483,
+          "p50": 2158354.661,
+          "p90": 2345975.5473
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 569152.5185,
+          "p50": 675968.8409,
+          "p90": 800741.9288
+        },
+        "average_pue": {
+          "p10": 1.1565,
+          "p50": 1.1927,
+          "p90": 1.2356
+        }
+      },
+      "baseline": {
+        "years": 7,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2446670.2694,
+          "p50": 2636139.7536,
+          "p90": 2851555.6407
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 689814.0566,
+          "p50": 820436.1051,
+          "p90": 974057.3221
+        },
+        "average_pue": {
+          "p10": 1.3876,
+          "p50": 1.4291,
+          "p90": 1.4704
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -18.03,
+        "operational_carbon_pct_p50": -17.86
+      }
+    },
+    "inference:liquid:8": {
+      "scenario": {
+        "years": 8,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2341574.1025,
+          "p50": 2526578.6423,
+          "p90": 2742670.2818
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 654058.7998,
+          "p50": 781962.0205,
+          "p90": 923983.375
+        },
+        "average_pue": {
+          "p10": 1.1555,
+          "p50": 1.1916,
+          "p90": 1.2345
+        }
+      },
+      "baseline": {
+        "years": 8,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2885846.9699,
+          "p50": 3096216.2549,
+          "p90": 3354306.3016
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 797543.9248,
+          "p50": 954803.1609,
+          "p90": 1131499.2263
+        },
+        "average_pue": {
+          "p10": 1.3858,
+          "p50": 1.4274,
+          "p90": 1.4685
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -18.58,
+        "operational_carbon_pct_p50": -18.22
+      }
+    },
+    "inference:liquid:9": {
+      "scenario": {
+        "years": 9,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2669845.716,
+          "p50": 2881838.4254,
+          "p90": 3124354.101
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 732634.2898,
+          "p50": 879793.0542,
+          "p90": 1041503.2246
+        },
+        "average_pue": {
+          "p10": 1.1547,
+          "p50": 1.1908,
+          "p90": 1.2337
+        }
+      },
+      "baseline": {
+        "years": 9,
+        "cumulative_facility_energy_mwh": {
+          "p10": 3317447.3211,
+          "p50": 3555801.1082,
+          "p90": 3850805.0099
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 901987.4662,
+          "p50": 1079521.2348,
+          "p90": 1288807.1739
+        },
+        "average_pue": {
+          "p10": 1.3846,
+          "p50": 1.4261,
+          "p90": 1.467
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -19.16,
+        "operational_carbon_pct_p50": -18.75
+      }
+    },
+    "inference:liquid:10": {
+      "scenario": {
+        "years": 10,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2998500.1344,
+          "p50": 3233387.7471,
+          "p90": 3505472.2829
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 807639.6978,
+          "p50": 970999.812,
+          "p90": 1157991.1526
+        },
+        "average_pue": {
+          "p10": 1.1541,
+          "p50": 1.1901,
+          "p90": 1.233
+        }
+      },
+      "baseline": {
+        "years": 10,
+        "cumulative_facility_energy_mwh": {
+          "p10": 3748937.125,
+          "p50": 4007818.542,
+          "p90": 4346400.9895
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 1003811.9428,
+          "p50": 1203172.0615,
+          "p90": 1438152.4725
+        },
+        "average_pue": {
+          "p10": 1.3835,
+          "p50": 1.4248,
+          "p90": 1.4657
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -19.67,
+        "operational_carbon_pct_p50": -19.19
+      }
+    },
+    "inference:air:1": {
+      "scenario": {
+        "years": 1,
+        "cumulative_facility_energy_mwh": {
+          "p10": 116611.7121,
+          "p50": 137196.2371,
+          "p90": 147940.5022
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 37039.4752,
+          "p50": 46834.0803,
+          "p90": 55634.2604
+        },
+        "average_pue": {
+          "p10": 1.3405,
+          "p50": 1.3831,
+          "p90": 1.4309
+        }
+      },
+      "baseline": {
+        "years": 1,
+        "cumulative_facility_energy_mwh": {
+          "p10": 125302.0707,
+          "p50": 147138.3787,
+          "p90": 157972.9254
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 39690.0553,
+          "p50": 50166.4201,
+          "p90": 59496.9603
+        },
+        "average_pue": {
+          "p10": 1.4365,
+          "p50": 1.4804,
+          "p90": 1.5279
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -6.71,
+        "operational_carbon_pct_p50": -6.68
+      }
+    },
+    "inference:air:2": {
+      "scenario": {
+        "years": 2,
+        "cumulative_facility_energy_mwh": {
+          "p10": 291180.6028,
+          "p50": 319892.6944,
+          "p90": 349375.7578
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 91906.1725,
+          "p50": 108056.8821,
+          "p90": 130577.1009
+        },
+        "average_pue": {
+          "p10": 1.3211,
+          "p50": 1.3564,
+          "p90": 1.3957
+        }
+      },
+      "baseline": {
+        "years": 2,
+        "cumulative_facility_energy_mwh": {
+          "p10": 310500.5697,
+          "p50": 340180.0107,
+          "p90": 370673.5279
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 98281.033,
+          "p50": 114875.7762,
+          "p90": 138641.9691
+        },
+        "average_pue": {
+          "p10": 1.4049,
+          "p50": 1.4422,
+          "p90": 1.4828
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -5.99,
+        "operational_carbon_pct_p50": -6.01
+      }
+    },
+    "inference:air:3": {
+      "scenario": {
+        "years": 3,
+        "cumulative_facility_energy_mwh": {
+          "p10": 633743.0837,
+          "p50": 693503.3601,
+          "p90": 757153.4469
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 196806.668,
+          "p50": 230793.2861,
+          "p90": 277713.0507
+        },
+        "average_pue": {
+          "p10": 1.3244,
+          "p50": 1.3626,
+          "p90": 1.4021
+        }
+      },
+      "baseline": {
+        "years": 3,
+        "cumulative_facility_energy_mwh": {
+          "p10": 676636.6339,
+          "p50": 739165.3564,
+          "p90": 803594.1009
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 210140.1624,
+          "p50": 245639.7522,
+          "p90": 295646.7664
+        },
+        "average_pue": {
+          "p10": 1.4129,
+          "p50": 1.4533,
+          "p90": 1.494
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -6.21,
+        "operational_carbon_pct_p50": -6.17
+      }
+    },
+    "inference:air:4": {
+      "scenario": {
+        "years": 4,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1040370.3311,
+          "p50": 1137958.5491,
+          "p90": 1229443.5809
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 313743.3439,
+          "p50": 372927.5587,
+          "p90": 445163.5686
+        },
+        "average_pue": {
+          "p10": 1.3172,
+          "p50": 1.3567,
+          "p90": 1.3951
+        }
+      },
+      "baseline": {
+        "years": 4,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1113187.9432,
+          "p50": 1210142.3151,
+          "p90": 1304478.9124
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 334464.0398,
+          "p50": 396744.5581,
+          "p90": 473556.1877
+        },
+        "average_pue": {
+          "p10": 1.4017,
+          "p50": 1.4431,
+          "p90": 1.4851
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -5.99,
+        "operational_carbon_pct_p50": -6.03
+      }
+    },
+    "inference:air:5": {
+      "scenario": {
+        "years": 5,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1450925.8332,
+          "p50": 1582878.1418,
+          "p90": 1719665.8583
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 427725.2303,
+          "p50": 508289.5363,
+          "p90": 605175.7238
+        },
+        "average_pue": {
+          "p10": 1.312,
+          "p50": 1.3519,
+          "p90": 1.3903
+        }
+      },
+      "baseline": {
+        "years": 5,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1553097.6131,
+          "p50": 1691882.3127,
+          "p90": 1830375.2496
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 457495.9935,
+          "p50": 543304.0133,
+          "p90": 646191.2747
+        },
+        "average_pue": {
+          "p10": 1.394,
+          "p50": 1.4357,
+          "p90": 1.477
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -6.41,
+        "operational_carbon_pct_p50": -6.53
+      }
+    },
+    "inference:air:6": {
+      "scenario": {
+        "years": 6,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1867410.7509,
+          "p50": 2026225.4252,
+          "p90": 2197946.992
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 540205.6107,
+          "p50": 637210.7148,
+          "p90": 759170.5011
+        },
+        "average_pue": {
+          "p10": 1.3092,
+          "p50": 1.3496,
+          "p90": 1.3875
+        }
+      },
+      "baseline": {
+        "years": 6,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2007294.2158,
+          "p50": 2172246.0419,
+          "p90": 2347873.902
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 577301.5531,
+          "p50": 681648.7698,
+          "p90": 814205.2598
+        },
+        "average_pue": {
+          "p10": 1.3904,
+          "p50": 1.4317,
+          "p90": 1.4732
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -6.72,
+        "operational_carbon_pct_p50": -6.9
+      }
+    },
+    "inference:air:7": {
+      "scenario": {
+        "years": 7,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2257597.5186,
+          "p50": 2434450.1891,
+          "p90": 2646134.5325
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 640701.4002,
+          "p50": 759662.4742,
+          "p90": 901006.3406
+        },
+        "average_pue": {
+          "p10": 1.3072,
+          "p50": 1.3476,
+          "p90": 1.3853
+        }
+      },
+      "baseline": {
+        "years": 7,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2446670.2694,
+          "p50": 2636139.7536,
+          "p90": 2851555.6407
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 689814.0566,
+          "p50": 820436.1051,
+          "p90": 974057.3221
+        },
+        "average_pue": {
+          "p10": 1.3876,
+          "p50": 1.4291,
+          "p90": 1.4704
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -7.52,
+        "operational_carbon_pct_p50": -7.49
+      }
+    },
+    "inference:air:8": {
+      "scenario": {
+        "years": 8,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2645841.694,
+          "p50": 2846083.0847,
+          "p90": 3093869.1705
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 735450.7716,
+          "p50": 880051.876,
+          "p90": 1040447.1821
+        },
+        "average_pue": {
+          "p10": 1.3059,
+          "p50": 1.3463,
+          "p90": 1.384
+        }
+      },
+      "baseline": {
+        "years": 8,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2885846.9699,
+          "p50": 3096216.2549,
+          "p90": 3354306.3016
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 797543.9248,
+          "p50": 954803.1609,
+          "p90": 1131499.2263
+        },
+        "average_pue": {
+          "p10": 1.3858,
+          "p50": 1.4274,
+          "p90": 1.4685
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -8.11,
+        "operational_carbon_pct_p50": -8.01
+      }
+    },
+    "inference:air:9": {
+      "scenario": {
+        "years": 9,
+        "cumulative_facility_energy_mwh": {
+          "p10": 3017879.5849,
+          "p50": 3240920.5963,
+          "p90": 3524648.9787
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 823351.5187,
+          "p50": 989250.2107,
+          "p90": 1176065.7479
+        },
+        "average_pue": {
+          "p10": 1.3051,
+          "p50": 1.3455,
+          "p90": 1.383
+        }
+      },
+      "baseline": {
+        "years": 9,
+        "cumulative_facility_energy_mwh": {
+          "p10": 3317447.3211,
+          "p50": 3555801.1082,
+          "p90": 3850805.0099
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 901987.4662,
+          "p50": 1079521.2348,
+          "p90": 1288807.1739
+        },
+        "average_pue": {
+          "p10": 1.3846,
+          "p50": 1.4261,
+          "p90": 1.467
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -8.8,
+        "operational_carbon_pct_p50": -8.7
+      }
+    },
+    "inference:air:10": {
+      "scenario": {
+        "years": 10,
+        "cumulative_facility_energy_mwh": {
+          "p10": 3389925.0778,
+          "p50": 3630055.0868,
+          "p90": 3954603.3134
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 907905.3258,
+          "p50": 1095171.0309,
+          "p90": 1305975.46
+        },
+        "average_pue": {
+          "p10": 1.3045,
+          "p50": 1.3447,
+          "p90": 1.3823
+        }
+      },
+      "baseline": {
+        "years": 10,
+        "cumulative_facility_energy_mwh": {
+          "p10": 3748937.125,
+          "p50": 4007818.542,
+          "p90": 4346400.9895
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 1003811.9428,
+          "p50": 1203172.0615,
+          "p90": 1438152.4725
+        },
+        "average_pue": {
+          "p10": 1.3835,
+          "p50": 1.4248,
+          "p90": 1.4657
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -9.35,
+        "operational_carbon_pct_p50": -9.18
+      }
+    },
+    "training:liquid:1": {
+      "scenario": {
+        "years": 1,
+        "cumulative_facility_energy_mwh": {
+          "p10": 105314.9198,
+          "p50": 125284.2466,
+          "p90": 135692.8296
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 33304.6329,
+          "p50": 42752.5247,
+          "p90": 50421.378
+        },
+        "average_pue": {
+          "p10": 1.1838,
+          "p50": 1.2212,
+          "p90": 1.2624
+        }
+      },
+      "baseline": {
+        "years": 1,
+        "cumulative_facility_energy_mwh": {
+          "p10": 127481.7561,
+          "p50": 150690.7126,
+          "p90": 162181.034
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 40363.3624,
+          "p50": 51230.8264,
+          "p90": 60881.2539
+        },
+        "average_pue": {
+          "p10": 1.427,
+          "p50": 1.4735,
+          "p90": 1.5213
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -16.91,
+        "operational_carbon_pct_p50": -16.95
+      }
+    },
+    "training:liquid:2": {
+      "scenario": {
+        "years": 2,
+        "cumulative_facility_energy_mwh": {
+          "p10": 266781.7152,
+          "p50": 295896.7055,
+          "p90": 324117.8651
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 84109.3629,
+          "p50": 99565.2951,
+          "p90": 120342.913
+        },
+        "average_pue": {
+          "p10": 1.1596,
+          "p50": 1.1959,
+          "p90": 1.2354
+        }
+      },
+      "baseline": {
+        "years": 2,
+        "cumulative_facility_energy_mwh": {
+          "p10": 321225.663,
+          "p50": 353276.4321,
+          "p90": 385672.2608
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 101398.2977,
+          "p50": 118858.4389,
+          "p90": 143707.8312
+        },
+        "average_pue": {
+          "p10": 1.3927,
+          "p50": 1.4303,
+          "p90": 1.4694
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -16.42,
+        "operational_carbon_pct_p50": -16.22
+      }
+    },
+    "training:liquid:3": {
+      "scenario": {
+        "years": 3,
+        "cumulative_facility_energy_mwh": {
+          "p10": 580563.7651,
+          "p50": 639221.3457,
+          "p90": 699234.0408
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 179923.4349,
+          "p50": 212038.292,
+          "p90": 256412.4999
+        },
+        "average_pue": {
+          "p10": 1.1647,
+          "p50": 1.2019,
+          "p90": 1.2436
+        }
+      },
+      "baseline": {
+        "years": 3,
+        "cumulative_facility_energy_mwh": {
+          "p10": 699233.7698,
+          "p50": 765171.5328,
+          "p90": 834173.1218
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 216827.4822,
+          "p50": 253484.0939,
+          "p90": 305616.6212
+        },
+        "average_pue": {
+          "p10": 1.4013,
+          "p50": 1.4411,
+          "p90": 1.4817
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -16.58,
+        "operational_carbon_pct_p50": -16.39
+      }
+    },
+    "training:liquid:4": {
+      "scenario": {
+        "years": 4,
+        "cumulative_facility_energy_mwh": {
+          "p10": 959935.1691,
+          "p50": 1054521.0038,
+          "p90": 1144773.0846
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 288002.834,
+          "p50": 345245.9366,
+          "p90": 410325.1583
+        },
+        "average_pue": {
+          "p10": 1.1568,
+          "p50": 1.1936,
+          "p90": 1.2367
+        }
+      },
+      "baseline": {
+        "years": 4,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1151583.2339,
+          "p50": 1258087.7026,
+          "p90": 1357584.4503
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 346337.442,
+          "p50": 411020.4238,
+          "p90": 490519.8055
+        },
+        "average_pue": {
+          "p10": 1.3882,
+          "p50": 1.4291,
+          "p90": 1.4718
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -16.36,
+        "operational_carbon_pct_p50": -16.13
+      }
+    },
+    "training:liquid:5": {
+      "scenario": {
+        "years": 5,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1338024.5729,
+          "p50": 1467447.3633,
+          "p90": 1600089.3905
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 394203.7112,
+          "p50": 470049.4306,
+          "p90": 559969.6408
+        },
+        "average_pue": {
+          "p10": 1.1524,
+          "p50": 1.1882,
+          "p90": 1.2313
+        }
+      },
+      "baseline": {
+        "years": 5,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1611571.1499,
+          "p50": 1762444.7429,
+          "p90": 1913486.2225
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 475008.8881,
+          "p50": 564045.5137,
+          "p90": 671715.1297
+        },
+        "average_pue": {
+          "p10": 1.3806,
+          "p50": 1.4204,
+          "p90": 1.4625
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -16.8,
+        "operational_carbon_pct_p50": -16.68
+      }
+    },
+    "training:liquid:6": {
+      "scenario": {
+        "years": 6,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1721729.96,
+          "p50": 1873797.4168,
+          "p90": 2049513.7512
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 498966.8702,
+          "p50": 591715.7107,
+          "p90": 702293.3036
+        },
+        "average_pue": {
+          "p10": 1.1501,
+          "p50": 1.1851,
+          "p90": 1.2284
+        }
+      },
+      "baseline": {
+        "years": 6,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2084332.0374,
+          "p50": 2262963.1226,
+          "p90": 2456371.2263
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 602933.5291,
+          "p50": 710496.5029,
+          "p90": 847607.8879
+        },
+        "average_pue": {
+          "p10": 1.3758,
+          "p50": 1.4161,
+          "p90": 1.4571
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -17.04,
+        "operational_carbon_pct_p50": -17.1
+      }
+    },
+    "training:liquid:7": {
+      "scenario": {
+        "years": 7,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2082534.947,
+          "p50": 2261707.882,
+          "p90": 2470013.7141
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 593263.5209,
+          "p50": 706346.9571,
+          "p90": 833608.9216
+        },
+        "average_pue": {
+          "p10": 1.1483,
+          "p50": 1.1835,
+          "p90": 1.2267
+        }
+      },
+      "baseline": {
+        "years": 7,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2542516.466,
+          "p50": 2748468.2396,
+          "p90": 2986756.8906
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 721367.5754,
+          "p50": 854299.725,
+          "p90": 1014072.6253
+        },
+        "average_pue": {
+          "p10": 1.3725,
+          "p50": 1.4135,
+          "p90": 1.454
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -17.79,
+        "operational_carbon_pct_p50": -17.65
+      }
+    },
+    "training:liquid:8": {
+      "scenario": {
+        "years": 8,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2442231.8303,
+          "p50": 2649415.1679,
+          "p90": 2889569.3902
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 682126.3572,
+          "p50": 818556.0463,
+          "p90": 962212.1869
+        },
+        "average_pue": {
+          "p10": 1.1473,
+          "p50": 1.1824,
+          "p90": 1.2255
+        }
+      },
+      "baseline": {
+        "years": 8,
+        "cumulative_facility_energy_mwh": {
+          "p10": 3000520.2577,
+          "p50": 3235439.3542,
+          "p90": 3516024.8969
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 833698.1286,
+          "p50": 995682.358,
+          "p90": 1177733.9698
+        },
+        "average_pue": {
+          "p10": 1.3703,
+          "p50": 1.4113,
+          "p90": 1.4518
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -18.31,
+        "operational_carbon_pct_p50": -17.96
+      }
+    },
+    "training:liquid:9": {
+      "scenario": {
+        "years": 9,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2785888.3352,
+          "p50": 3017534.1516,
+          "p90": 3295352.1407
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 765438.8509,
+          "p50": 919741.6891,
+          "p90": 1083896.5994
+        },
+        "average_pue": {
+          "p10": 1.1465,
+          "p50": 1.1816,
+          "p90": 1.2247
+        }
+      },
+      "baseline": {
+        "years": 9,
+        "cumulative_facility_energy_mwh": {
+          "p10": 3450488.1721,
+          "p50": 3709376.3762,
+          "p90": 4038772.0443
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 940077.3602,
+          "p50": 1129069.208,
+          "p90": 1339284.6829
+        },
+        "average_pue": {
+          "p10": 1.3688,
+          "p50": 1.4098,
+          "p90": 1.45
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -18.94,
+        "operational_carbon_pct_p50": -18.51
+      }
+    },
+    "training:liquid:10": {
+      "scenario": {
+        "years": 10,
+        "cumulative_facility_energy_mwh": {
+          "p10": 3129798.7428,
+          "p50": 3384559.9928,
+          "p90": 3697705.9118
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 844533.6798,
+          "p50": 1016693.8019,
+          "p90": 1209303.8357
+        },
+        "average_pue": {
+          "p10": 1.1459,
+          "p50": 1.181,
+          "p90": 1.2239
+        }
+      },
+      "baseline": {
+        "years": 10,
+        "cumulative_facility_energy_mwh": {
+          "p10": 3900074.9635,
+          "p50": 4186167.3077,
+          "p90": 4560473.1776
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 1042300.8771,
+          "p50": 1256396.4996,
+          "p90": 1499609.4233
+        },
+        "average_pue": {
+          "p10": 1.3677,
+          "p50": 1.4086,
+          "p90": 1.4486
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -19.47,
+        "operational_carbon_pct_p50": -19.04
+      }
+    },
+    "training:air:1": {
+      "scenario": {
+        "years": 1,
+        "cumulative_facility_energy_mwh": {
+          "p10": 118723.9125,
+          "p50": 140683.1462,
+          "p90": 152120.6815
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 37700.9341,
+          "p50": 47898.5351,
+          "p90": 56895.2098
+        },
+        "average_pue": {
+          "p10": 1.3346,
+          "p50": 1.3775,
+          "p90": 1.4256
+        }
+      },
+      "baseline": {
+        "years": 1,
+        "cumulative_facility_energy_mwh": {
+          "p10": 127481.7561,
+          "p50": 150690.7126,
+          "p90": 162181.034
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 40363.3624,
+          "p50": 51230.8264,
+          "p90": 60881.2539
+        },
+        "average_pue": {
+          "p10": 1.427,
+          "p50": 1.4735,
+          "p90": 1.5213
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -6.61,
+        "operational_carbon_pct_p50": -6.56
+      }
+    },
+    "training:air:2": {
+      "scenario": {
+        "years": 2,
+        "cumulative_facility_energy_mwh": {
+          "p10": 302249.3484,
+          "p50": 333229.371,
+          "p90": 363815.8357
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 94933.4241,
+          "p50": 112157.632,
+          "p90": 135576.0431
+        },
+        "average_pue": {
+          "p10": 1.3123,
+          "p50": 1.3477,
+          "p90": 1.388
+        }
+      },
+      "baseline": {
+        "years": 2,
+        "cumulative_facility_energy_mwh": {
+          "p10": 321225.663,
+          "p50": 353276.4321,
+          "p90": 385672.2608
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 101398.2977,
+          "p50": 118858.4389,
+          "p90": 143707.8312
+        },
+        "average_pue": {
+          "p10": 1.3927,
+          "p50": 1.4303,
+          "p90": 1.4694
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -5.74,
+        "operational_carbon_pct_p50": -5.81
+      }
+    },
+    "training:air:3": {
+      "scenario": {
+        "years": 3,
+        "cumulative_facility_energy_mwh": {
+          "p10": 655977.3017,
+          "p50": 719627.3954,
+          "p90": 787583.7811
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 203117.6483,
+          "p50": 238633.2136,
+          "p90": 287930.1362
+        },
+        "average_pue": {
+          "p10": 1.3163,
+          "p50": 1.3541,
+          "p90": 1.3933
+        }
+      },
+      "baseline": {
+        "years": 3,
+        "cumulative_facility_energy_mwh": {
+          "p10": 699233.7698,
+          "p50": 765171.5328,
+          "p90": 834173.1218
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 216827.4822,
+          "p50": 253484.0939,
+          "p90": 305616.6212
+        },
+        "average_pue": {
+          "p10": 1.4013,
+          "p50": 1.4411,
+          "p90": 1.4817
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -6.0,
+        "operational_carbon_pct_p50": -5.98
+      }
+    },
+    "training:air:4": {
+      "scenario": {
+        "years": 4,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1079161.9227,
+          "p50": 1186202.0939,
+          "p90": 1285937.511
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 325819.143,
+          "p50": 387295.2701,
+          "p90": 462320.5489
+        },
+        "average_pue": {
+          "p10": 1.3076,
+          "p50": 1.3472,
+          "p90": 1.3858
+        }
+      },
+      "baseline": {
+        "years": 4,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1151583.2339,
+          "p50": 1258087.7026,
+          "p90": 1357584.4503
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 346337.442,
+          "p50": 411020.4238,
+          "p90": 490519.8055
+        },
+        "average_pue": {
+          "p10": 1.3882,
+          "p50": 1.4291,
+          "p90": 1.4718
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -5.75,
+        "operational_carbon_pct_p50": -5.82
+      }
+    },
+    "training:air:5": {
+      "scenario": {
+        "years": 5,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1509690.5847,
+          "p50": 1652570.6114,
+          "p90": 1803479.0564
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 445779.586,
+          "p50": 528570.1388,
+          "p90": 630634.1137
+        },
+        "average_pue": {
+          "p10": 1.3017,
+          "p50": 1.3415,
+          "p90": 1.3802
+        }
+      },
+      "baseline": {
+        "years": 5,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1611571.1499,
+          "p50": 1762444.7429,
+          "p90": 1913486.2225
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 475008.8881,
+          "p50": 564045.5137,
+          "p90": 671715.1297
+        },
+        "average_pue": {
+          "p10": 1.3806,
+          "p50": 1.4204,
+          "p90": 1.4625
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -6.15,
+        "operational_carbon_pct_p50": -6.26
+      }
+    },
+    "training:air:6": {
+      "scenario": {
+        "years": 6,
+        "cumulative_facility_energy_mwh": {
+          "p10": 1944782.3992,
+          "p50": 2116892.3492,
+          "p90": 2306333.2594
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 564234.7589,
+          "p50": 665369.3007,
+          "p90": 791067.4911
+        },
+        "average_pue": {
+          "p10": 1.2987,
+          "p50": 1.3387,
+          "p90": 1.3771
+        }
+      },
+      "baseline": {
+        "years": 6,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2084332.0374,
+          "p50": 2262963.1226,
+          "p90": 2456371.2263
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 602933.5291,
+          "p50": 710496.5029,
+          "p90": 847607.8879
+        },
+        "average_pue": {
+          "p10": 1.3758,
+          "p50": 1.4161,
+          "p90": 1.4571
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -6.48,
+        "operational_carbon_pct_p50": -6.62
+      }
+    },
+    "training:air:7": {
+      "scenario": {
+        "years": 7,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2353198.0325,
+          "p50": 2549405.0402,
+          "p90": 2779851.0251
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 669536.1343,
+          "p50": 794070.7646,
+          "p90": 938991.254
+        },
+        "average_pue": {
+          "p10": 1.2964,
+          "p50": 1.3368,
+          "p90": 1.3749
+        }
+      },
+      "baseline": {
+        "years": 7,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2542516.466,
+          "p50": 2748468.2396,
+          "p90": 2986756.8906
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 721367.5754,
+          "p50": 854299.725,
+          "p90": 1014072.6253
+        },
+        "average_pue": {
+          "p10": 1.3725,
+          "p50": 1.4135,
+          "p90": 1.454
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -7.26,
+        "operational_carbon_pct_p50": -7.25
+      }
+    },
+    "training:air:8": {
+      "scenario": {
+        "years": 8,
+        "cumulative_facility_energy_mwh": {
+          "p10": 2759248.4292,
+          "p50": 2979336.0343,
+          "p90": 3252148.4528
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 769835.2421,
+          "p50": 919560.7588,
+          "p90": 1084027.353
+        },
+        "average_pue": {
+          "p10": 1.2952,
+          "p50": 1.3354,
+          "p90": 1.3738
+        }
+      },
+      "baseline": {
+        "years": 8,
+        "cumulative_facility_energy_mwh": {
+          "p10": 3000520.2577,
+          "p50": 3235439.3542,
+          "p90": 3516024.8969
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 833698.1286,
+          "p50": 995682.358,
+          "p90": 1177733.9698
+        },
+        "average_pue": {
+          "p10": 1.3703,
+          "p50": 1.4113,
+          "p90": 1.4518
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -7.85,
+        "operational_carbon_pct_p50": -7.78
+      }
+    },
+    "training:air:9": {
+      "scenario": {
+        "years": 9,
+        "cumulative_facility_energy_mwh": {
+          "p10": 3148412.8614,
+          "p50": 3392221.7841,
+          "p90": 3708644.781
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 863817.8026,
+          "p50": 1033937.7608,
+          "p90": 1223312.8631
+        },
+        "average_pue": {
+          "p10": 1.2944,
+          "p50": 1.3344,
+          "p90": 1.3732
+        }
+      },
+      "baseline": {
+        "years": 9,
+        "cumulative_facility_energy_mwh": {
+          "p10": 3450488.1721,
+          "p50": 3709376.3762,
+          "p90": 4038772.0443
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 940077.3602,
+          "p50": 1129069.208,
+          "p90": 1339284.6829
+        },
+        "average_pue": {
+          "p10": 1.3688,
+          "p50": 1.4098,
+          "p90": 1.45
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -8.55,
+        "operational_carbon_pct_p50": -8.44
+      }
+    },
+    "training:air:10": {
+      "scenario": {
+        "years": 10,
+        "cumulative_facility_energy_mwh": {
+          "p10": 3537608.4843,
+          "p50": 3805740.1925,
+          "p90": 4161695.8541
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 952924.7787,
+          "p50": 1146445.0196,
+          "p90": 1365264.1587
+        },
+        "average_pue": {
+          "p10": 1.2937,
+          "p50": 1.3336,
+          "p90": 1.3727
+        }
+      },
+      "baseline": {
+        "years": 10,
+        "cumulative_facility_energy_mwh": {
+          "p10": 3900074.9635,
+          "p50": 4186167.3077,
+          "p90": 4560473.1776
+        },
+        "cumulative_operational_carbon_t": {
+          "p10": 1042300.8771,
+          "p50": 1256396.4996,
+          "p90": 1499609.4233
+        },
+        "average_pue": {
+          "p10": 1.3677,
+          "p50": 1.4086,
+          "p90": 1.4486
+        }
+      },
+      "delta": {
+        "facility_energy_pct_p50": -9.1,
+        "operational_carbon_pct_p50": -8.88
+      }
+    }
+  }
+}
