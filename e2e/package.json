@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node forecast.js && node story.js",
+    "test": "node forecast.js && node story.js && node world.js",
     "test:forecast": "node forecast.js",
     "test:story": "node story.js",
+    "test:energy": "node world.js",
+    "test:world": "node world.js",
     "test:legacy": "node test.js"
   },
   "keywords": [],

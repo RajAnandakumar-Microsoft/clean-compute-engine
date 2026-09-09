@@ -1,5 +1,8 @@
 // Headless visual check + screenshots for the Clean Compute Engine UI.
 const puppeteer = require("puppeteer");
+const path = require("node:path");
+const legacyUrl = process.env.LEGACY_URL || new URL("legacy", process.env.APP_URL || "http://127.0.0.1:5173/").toString();
+const outputDir = process.env.SCREENSHOT_DIR || __dirname;
 
 (async () => {
   const errors = [];
@@ -13,7 +16,7 @@ const puppeteer = require("puppeteer");
   page.on("console", (m) => { if (m.type() === "error") errors.push("console: " + m.text()); });
   page.on("pageerror", (e) => errors.push("pageerror: " + e.message));
 
-  await page.goto("http://localhost:5173/", { waitUntil: "networkidle2", timeout: 30000 });
+  await page.goto(legacyUrl, { waitUntil: "networkidle2", timeout: 30000 });
   await page.waitForSelector(".center canvas", { timeout: 15000 });
   await new Promise((r) => setTimeout(r, 3000));
 
@@ -22,12 +25,12 @@ const puppeteer = require("puppeteer");
   await new Promise((r) => setTimeout(r, 1500));
 
   const facility = await page.$eval(".kpis .kpi:first-child .kpi-val", (el) => el.textContent.trim());
-  await page.screenshot({ path: "shot-1-ecosystem.png" });
+  await page.screenshot({ path: path.join(outputDir, "shot-1-ecosystem.png") });
 
   // hall view
   const hall = await page.$(".tree-row.d1");
   if (hall) { await hall.click(); await new Promise((r) => setTimeout(r, 2500)); }
-  await page.screenshot({ path: "shot-2-hall.png" });
+  await page.screenshot({ path: path.join(outputDir, "shot-2-hall.png") });
 
   // drill into a rack
   const racks = await page.$$(".tree-row.d2");
@@ -37,7 +40,7 @@ const puppeteer = require("puppeteer");
     await new Promise((r) => setTimeout(r, 3000));
     inspectorRack = await page.$eval(".inspector h3", (el) => el.textContent.trim());
   }
-  await page.screenshot({ path: "shot-3-drill.png" });
+  await page.screenshot({ path: path.join(outputDir, "shot-3-drill.png") });
 
   // lifetime view
   await page.evaluate(() => (window).useStore?.getState().setView("ecosystem"));
@@ -49,7 +52,7 @@ const puppeteer = require("puppeteer");
     const lt = (window).useStore?.getState().lifetime; const i = 9;
     return lt ? lt.avoided_carbon_t[i] : null;
   });
-  await page.screenshot({ path: "shot-4-lifetime.png" });
+  await page.screenshot({ path: path.join(outputDir, "shot-4-lifetime.png") });
 
   console.log(JSON.stringify({
     facility, inspectorRack, avoided, errorCount: errors.length, errors: errors.slice(0, 6),

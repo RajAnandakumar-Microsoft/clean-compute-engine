@@ -42,6 +42,28 @@ marked **SIMULATED**.
 Story-only calculations live in `frontend/src/story/model.ts` and must not be
 treated as a separate validated model.
 
+## Coupled energy-system evaluator
+
+The `/energy` workspace uses the same uncalibrated demand model and adds:
+
+| Component | Current provenance | Code |
+|---|---|---|
+| Solar, wind, and seasonal hydro availability | Hand-authored archetypes plus seeded daily variation | `backend/app/energy/resources.py` |
+| Common heat/drought and low-renewables cases | Explicit synthetic stress assumptions, not event probabilities | `backend/app/energy/resources.py` |
+| Battery limits, efficiency, and commissioning | User assumptions with synthetic defaults | `backend/app/energy/models.py` |
+| Dispatch and reservoir allocation | Chronological heuristic with physical limits, not optimized operation | `backend/app/energy/dispatch.py` |
+| Work deferral | Perfect-foresight, bounded same-day aggregate-work heuristic | `backend/app/energy/flexibility.py` |
+| Hydro and gas operational carbon | Explicit user assumptions, not source-certified factors | `backend/app/energy/models.py` |
+| Variable source costs and battery throughput cost | Illustrative defaults excluding capital/project economics | `backend/app/energy/dispatch.py` |
+| Cooling-water intensity and heat response | User-specified synthetic requirement, independent of chip-cooling loop | `backend/app/energy/engine.py` |
+| Hydro net water consumption | Unknown unless a user supplies an explicit scenario intensity | `backend/app/energy/models.py` |
+
+No data-center telemetry, measured generation profile, trained clustering
+model, or private parameter set is loaded. The comparison preserves requested
+work, uses paired exogenous conditions, and reports physical shortages.
+Neither percentage changes nor successful energy-balance checks establish
+empirical benefits or optimality.
+
 ## Preserved v0.0.1 simulator
 
 The legacy simulator contains order-of-magnitude assumptions for:

@@ -3,15 +3,21 @@
 > **Independent proposal:** No organization has reviewed, sponsored, endorsed,
 > approved, or committed data or funding to this pilot.
 
+**Last aligned:** 2026-09-08
+
 ## Purpose
 
-The proposed pilot would determine whether governed data-center
-telemetry can calibrate and validate a transferable environmental world model
-without exposing customer content, employee data, precise facility locations,
-or sensitive operational details.
+The pilot would investigate a connected data-center and energy-system model:
+what computing service requires, and how generation, storage, grid access,
+cooling, and permitted scheduling can meet it. It separates facility-demand
+evidence from energy-supply and operating-constraint evidence before testing
+their interaction.
 
 The request is for controlled research access, not a copy of unrestricted raw
-telemetry.
+telemetry or permission to operate a facility. The
+[research contract](RESEARCH-CONTRACT.md) owns the formal questions and gates;
+the [evaluation protocol](EVALUATION-PROTOCOL.md) owns experiment design.
+This document owns the proposed evidence collection and delivery plan.
 
 ## Research ask
 
@@ -19,13 +25,58 @@ The project seeks:
 
 - an executive or research sponsor;
 - a data-center operations data owner;
-- sustainability and cooling-domain reviewers;
+- generation, storage, grid, and scheduling data owners where applicable;
+- sustainability, cooling, energy-system, and computing-service reviewers;
 - privacy, security, legal, and responsible-AI review;
 - access to approved deidentified telemetry in a data-partner-controlled
   environment;
 - bounded compute for calibration and evaluation; and
 - permission to publish reviewed methodology, aggregate findings, and safe
   reusable artifacts.
+
+## Two evidence workstreams, one joined experiment
+
+### Workstream 1 - facility demand and cooling
+
+Use approved deidentified observations to reconcile computing capacity,
+requested work, IT energy, facility energy, and cooling behavior. Calibrate
+and evaluate the demand components behind hypotheses H1-H5.
+
+Facility cohorts may be defined by buildout, hardware, workload, cooling,
+climate, and coarse location. Clustering is not itself a consumption forecast
+or evidence of transferability. Cohort definitions and fitted transformations
+must not use held-out targets or information unavailable at prediction time.
+Hourly patterns, peaks, and seasonal behavior matter, not only annual totals.
+
+### Workstream 2 - supply, storage, grid, and scheduling
+
+Qualify generation availability, hydro constraints, battery performance,
+physical grid access, tariffs, and permission to defer work. This workstream
+can begin with appropriately licensed public resource/model inputs in
+parallel with facility-data approval. Plant-specific operating records and
+service constraints require their own owner approval.
+
+The [candidate-source register](DATA-SOURCE-REGISTER.md) distinguishes
+observations, externally modeled profiles, and references. No single public
+source supplies the entire energy system. A generic training/batch label
+does not prove that an actual workload may be delayed.
+
+### Join only after both boundaries are understood
+
+The joined experiment examines H6-H7 using the same requested computing
+service, aligned timestamps and geography, explicit grid limits, and
+documented storage/dispatch conditions. Assess fixed and flexible demand
+against declared energy-strategy baselines.
+
+Different years, unrelated sites, or typical-year weather can support an
+explicit conditional scenario, but must not be presented as a coincident
+observed facility-and-supply history. Keep observed-operation backcasts,
+operational forecasts, and long-horizon scenarios separate. A demand-model
+improvement does not validate an energy strategy, and physical energy
+balance does not establish demand accuracy.
+
+The pilot does not require a full optimizer or live control. Any later solver
+experiment needs a separately frozen formulation and evidence boundary.
 
 ## Staged scope
 
@@ -35,24 +86,37 @@ The project seeks:
 - at least 90 continuous days;
 - hourly or finer intervals;
 - enough fields to reconcile IT and total facility energy;
-- one documented cooling and heat-rejection configuration; and
+- one documented cooling and heat-rejection configuration;
+- one bounded supply case with qualified resource profiles and declared
+  connection/storage assumptions;
+- an inventory of which operating and scheduling constraints are observed,
+  permitted, modeled, or missing; and
 - no model-release commitment.
 
-This phase tests data quality, meter boundaries, joins, and whether the proposed
-questions are answerable.
+Phase A reports answerability for each workstream separately. It can approve
+a narrower demand-only or supply-method experiment if the joined question is
+not yet supportable; it must not fill the gap with unlabeled assumptions.
+Ninety days can support feasibility work, not a claim of annual resource
+adequacy or ten-year forecast accuracy.
 
-### Phase B - transfer evaluation
+### Phase B - qualified demand and strategy evaluation
 
 - at least four facilities across more than one climate or cooling design;
 - at least 12 continuous months per represented cohort where possible;
 - multiple workload or hardware regimes;
+- aligned resource years covering seasonal variability where available;
+- documented hydro budgets, storage boundaries, connection limits, and
+  eligible-work completion constraints for the coupled cases;
 - frozen leave-one-site-out and forward-time evaluation; and
 - formal review of what, if anything, can be generalized.
 
 These are preferred research conditions, not a demand that all data be
-available before feasibility work begins.
+available before feasibility work begins. Missing seasonal coverage,
+operating constraints, or counterfactual evidence narrows the claim.
 
 ## Minimum data domains
+
+### Facility-demand and cooling evidence
 
 | Domain | Minimum fields | Research purpose |
 |---|---|---|
@@ -64,11 +128,32 @@ available before feasibility work begins.
 | Cooling | Cooling energy, loop type, heat-rejection type, operating mode | Explain dynamic facility overhead |
 | Weather | Dry bulb, wet bulb or humidity, quality flags | Model environmental response |
 | Water | Withdrawal, consumption, meter boundary, source class | Optional water workstream |
-| Grid | Region and approved emissions-factor series or join key | Operational-carbon calculation |
+| Grid context | Coarse region and approved emissions-factor series or join key | Align demand with a declared emissions basis |
 | Events | Maintenance, outage, curtailment, sensor-quality state | Avoid treating abnormal data as ordinary demand |
 
-The canonical machine-readable fields are defined by the contracts under
-`backend/app/research/` and exported to `data/schemas/`.
+### Energy-supply and operating-constraint evidence
+
+| Domain | Minimum fields or approved evidence | Research purpose |
+|---|---|---|
+| Solar and wind | Resource/profile vintage, interval and timezone, equipment/capacity basis, commissioning, available versus metered generation, curtailment and outage flags | Separate weather-limited availability from actual dispatch |
+| Hydro | Run-of-river/reservoir/pumped-storage classification, inflow or energy budget, head/efficiency basis where used, release/power limits and documented operating constraints | Avoid assuming unlimited firm generation or confusing storage with a primary source |
+| Battery | Rated and usable MW/MWh, charge/discharge meter boundary, state of charge, efficiency/losses, charging origin, degradation/availability, initial and terminal conditions | Reconcile stored energy and avoid double counting renewable delivery |
+| Grid connection | Approved import/export caps, effective dates, connection availability and relevant operating limits | Distinguish regional supply context from what the site can physically exchange |
+| Prices and tariffs | Applicable tariff and revision, effective dates, energy/demand/export components, eligibility and any contractual limits | Keep variable-energy calculations separate from full costs |
+| Work scheduling | Aggregate arrivals, original completion windows, eligibility, capacity, service constraints, checkpoint/transfer overhead and evidence of permission | Test flexibility without dropping work or inventing service tolerance |
+| Environmental accounting | Declared operational/lifecycle and average/marginal basis, factor vintage, ownership boundary and export treatment | Prevent incompatible carbon claims or automatic export offsets |
+| Water | Separate cooling withdrawal/consumption and hydro net-consumption allocation, meter/storage boundaries, source and geographic scope | Avoid summing turbine flow, withdrawal, and consumption as one footprint |
+
+These are minimum qualification requirements, not a request to export
+security-sensitive operating details. Owners may provide approved derived
+constraints instead of raw records; any remaining uncertainty must be explicit.
+
+Existing machine-readable contracts under `backend/app/research/`, exported
+to `data/schemas/`, cover facility intervals, site metadata, and manifests.
+They do **not** yet define a full generation, storage, grid-constraint, or job
+evidence schema. New versioned contracts and owner review are prerequisites
+to ingesting those feeds. The `/coupling/evaluate` scenario-input contract is
+not a private-telemetry ingestion interface.
 
 ## Explicit exclusions
 
@@ -104,28 +189,36 @@ inference, batch inference, development, mixed, or unknown.
 8. Any open-source or publication candidate receives data-owner, privacy,
    security, legal, and scientific review.
 
+These are proposed controls, not a claim that a controlled research environment
+or approvals already exist. The historical private code archive is not an
+approved telemetry store by default. Cohort parameters and aggregate outputs
+still require review; aggregation alone does not establish release safety.
+
 ## Twelve-week pilot plan
 
-| Weeks | Work |
-|---|---|
-| 1-2 | Confirm sponsor, research protocol, approvals, schema, and success gates |
-| 3-4 | Ingest approved extracts; audit quality, units, joins, and meter boundaries |
-| 5-6 | Implement and freeze simple baselines and evaluation partitions |
-| 7-8 | Calibrate interpretable utilization, power, and PUE components |
-| 9-10 | Evaluate the hybrid residual and hierarchical transfer hypotheses |
-| 11 | Run subgroup, uncertainty, leakage, and failure analyses |
-| 12 | Produce a reviewed findings report and continuation recommendation |
+| Weeks | Facility-demand workstream | Supply/constraint workstream and joined decisions |
+|---|---|---|
+| 1-2 | Confirm owner, approved fields, questions, and scope | Confirm source rights, domain reviewers, accounting boundaries, and which questions can be joined |
+| 3-4 | Audit approved intervals, capacity denominators, meters, and cooling | Qualify resource vintages, storage/hydro limits, tariffs, scheduling permission, and temporal/geographic joins |
+| 5-6 | Freeze baselines, partitions, metrics, and thresholds before fitting | Freeze comparison portfolios, shared computing service, information boundaries, and physical constraints |
+| 7-8 | Calibrate selected demand/PUE components | Reproduce qualified resource/storage behavior and reconcile energy and water boundaries |
+| 9-10 | Evaluate held-out demand and any preregistered hybrid/transfer models | Evaluate supported fixed/flexible portfolio cases, including unmet load and declared counterfactual limitations |
+| 11 | Report subgroup errors and uncertainty | Report seasonal/stress cases, infeasibility, leakage checks, and sensitivity to missing evidence |
+| 12 | Document findings and applicability bounds | Joint review and separate continuation decisions for demand, coupling, water, and optimization readiness |
 
-Water becomes part of the twelve-week evaluation only if its meter and cooling
-boundaries pass the data-quality gate.
+This is a proposed sequence, not a commitment that every question will be
+answered in twelve weeks. Water and flexibility enter the evaluation only
+after their meter/system and service-permission gates pass. The current
+synthetic deferral heuristic is not evidence of real job schedulability.
 
 ## Pilot outputs
 
 - approved dataset and field manifests;
-- a data-quality and answerability report;
-- reproducible baseline results;
-- calibrated component models;
-- frozen held-out evaluation;
+- a data-quality and answerability report for each workstream and its joins;
+- reproducible demand and energy-strategy baseline results where supported;
+- calibrated component models only where fitting is justified;
+- frozen held-out evaluation and conditional-scenario results clearly separated;
+- an energy/service reconciliation report, including shortfalls and infeasible cases;
 - a model card with failures and applicability bounds;
 - a privacy and release-risk assessment;
 - a recommendation to stop, narrow, repeat, or expand the research; and
@@ -139,7 +232,10 @@ The pilot needs protected time from:
 - one data engineer;
 - one applied scientist;
 - a data-center energy/cooling subject-matter expert;
-- the telemetry data owner; and
+- an energy-systems reviewer covering renewable generation, hydro, storage,
+  grid constraints, and tariffs;
+- a computing-service/scheduling reviewer;
+- the relevant data owners; and
 - fractional privacy, security, legal, responsible-AI, and open-source review.
 
 Funding should cover the controlled data environment, experiment compute,
@@ -151,9 +247,10 @@ available environment, personnel, data volume, and willingness to participate.
 
 The continuation decision is evidence-based:
 
-- **Expand** if the model beats frozen baselines and transfers within useful
-  bounds.
-- **Narrow** if only specific components or facility classes are predictable.
+- **Expand** a workstream if it meets its frozen gates; expand joined research
+  only when both component evidence and the comparison boundary are adequate.
+- **Narrow** if only specific demand components, energy cases, or facility
+  classes are supported.
 - **Repeat** if data quality, rather than the hypothesis, blocked evaluation.
 - **Stop** if the approach does not add value or creates unacceptable risk.
 

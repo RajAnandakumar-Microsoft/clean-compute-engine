@@ -1,27 +1,16 @@
 # Model foundations
 
-## Current calculation chain
+This document explains conceptual references. The
+[forecast model card](../FORECAST-MODEL-CARD.md) and
+[coupling specification](RENEWABLE-COUPLING.md) define implemented behavior;
+the [research contract](RESEARCH-CONTRACT.md) defines the scientific scope.
+Referencing a standard or another model does not certify this implementation.
 
-For each simulated hour and Monte Carlo path, v0.1 computes:
-
-```text
-IT power =
-    installed IT capacity
-    x refresh efficiency
-    x power response(effective utilization)
-
-facility power =
-    IT power
-    x PUE(temperature, load, cooling design)
-
-operational carbon =
-    facility energy
-    x grid emissions intensity
-```
-
-The implementation is documented in
-[`FORECAST-MODEL-CARD.md`](../FORECAST-MODEL-CARD.md). The formulas are
-transparent; the present parameter values are synthetic.
+The demand model uses engineering relationships for hardware power and
+facility overhead; the coupled evaluator adds chronological electricity
+supply and explicit constraints. Their current parameter values are
+synthetic. The references below explain the concepts, not fitted parameters
+or observed performance.
 
 ## Power Usage Effectiveness
 
@@ -64,6 +53,26 @@ Reference:
 Future releases should explicitly label average versus marginal emissions and
 location-based versus market-based accounting.
 
+## Physical renewable coupling
+
+The `/coupling/evaluate` extension connects the same demand model to explicit
+physical generation, storage, and grid constraints. It evaluates a specified
+portfolio rather than multiplying all consumption by a grid factor.
+
+The physical ledger preserves hourly electricity balance, storage losses,
+power limits, and a finite hydro energy budget. It reports unmet load rather
+than reducing apparent carbon by silently dropping computing service.
+Generation, delivered renewable energy, exports, and curtailed availability
+are different quantities. Storage preserves the origin of charging energy;
+nuclear and unspecified grid renewables are excluded from the dedicated
+renewable-match metric.
+
+Operational source factors, cooling-water requirements, hydro net consumption,
+and variable cost have separate declared boundaries. Renewable procurement
+instruments and lifecycle carbon are not folded into that ledger. See
+[renewable coupling and optimization](RENEWABLE-COUPLING.md) for the complete
+method and remaining constraints.
+
 ## Weather and grid evolution
 
 v0.1 generates weather and grid-carbon shapes from synthetic location
@@ -95,3 +104,8 @@ does not yet forecast:
 The preserved v0.0.1 simulator displays illustrative water and embodied-carbon
 values. Those are synthetic prototype outputs, not validated lifecycle or
 water-accounting results.
+
+The coupled workspace adds synthetic cooling-water requirements and optional
+hydro-consumption scenarios, not a validated or complete water footprint.
+The overall product objective includes renewable co-optimization, but the
+current implementation is a physical scenario evaluator with heuristics.

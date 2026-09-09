@@ -1,28 +1,54 @@
 # Research contract
 
-**Protocol version:** 0.1
+**Protocol version:** 0.2
 
 **Status:** Pre-calibration research prototype
 
-**Last updated:** 2026-08-29
+**Last updated:** 2026-09-08
 
 ## Objective
 
-The Clean Compute Engine investigates whether a physics-informed environmental
-world model can make useful, calibrated predictions about data-center
-electricity use and operational carbon under changing capacity, workload,
-hardware, cooling, weather, and grid conditions.
+Determine whether a physics-informed model of data centers and their energy
+supply can support lower-impact design decisions while preserving computing
+service and respecting explicit physical, environmental, and cost constraints.
+This requires both credible facility-demand estimates and qualified
+generation, storage, grid, cooling, and scheduling models.
 
-Water use is a planned secondary outcome. It will not be promoted to a
-prediction target until the research has data that distinguishes the internal
-cooling loop from the external heat-rejection system.
+This charter owns the formal questions, hypotheses, scope, evidence gates,
+and permissible claims. The [project overview](../README.md) introduces the
+vision. The [forecast model card](../FORECAST-MODEL-CARD.md) and
+[coupling specification](RENEWABLE-COUPLING.md) own current implementation
+behavior. The [pilot](DATA-PILOT-PROPOSAL.md) owns evidence collection, and the
+[evaluation protocol](EVALUATION-PROTOCOL.md) owns experimental methods.
 
-## Primary research question
+The current stage remains R0. A working evaluator is not evidence of
+predictive accuracy, optimality, or actual environmental benefit.
+
+## Connected research questions
+
+### Demand and facility behavior
 
 > Can a hybrid model, built on engineering constraints and calibrated with
 > governed operational telemetry, predict facility electricity and operational
 > carbon more accurately and with better-calibrated uncertainty than static
 > planning assumptions on facilities and time periods not used for fitting?
+
+### Renewable energy and system design
+
+> For equivalent computing service and explicit physical constraints, how do
+> generation, storage, cooling, and workload scheduling change hourly renewable
+> matching, grid dependence, operational carbon, water requirements, and cost?
+
+### Decision and optimization research
+
+> Which feasible portfolio and computing schedule best satisfies a declared
+> objective under energy, environmental, cost, and service constraints, and
+> how robust is that choice to uncertain demand and resource availability?
+
+The current evaluator compares specified portfolios. Solver-based search and
+real-world recommendations remain future work. Comparing learned demand
+models with engineering arithmetic is one part of the evaluation program,
+not a substitute for the coupled-system question.
 
 ## Unit of analysis
 
@@ -34,6 +60,13 @@ hourly or finer resolution. Evaluation occurs at several grains:
 - interval and monthly PUE;
 - monthly operational carbon under an explicitly stated emissions basis; and
 - water withdrawal and consumption only when the system boundary is complete.
+
+Coupled studies also require source, storage, and connection intervals on a
+compatible clock, plus a declared computing-service boundary. The unit of
+comparison is equivalent requested computing service under specified physical
+constraints, not merely two portfolios with different electricity totals.
+Observed records, derived quantities, external model outputs, and assumed
+future pathways must be identified separately.
 
 Long-horizon outputs are conditional scenarios, not unconditional forecasts.
 Capacity plans, hardware refreshes, climate pathways, and grid pathways must be
@@ -48,9 +81,12 @@ identified as assumptions or external scenarios.
 | H3 | Workload, weather, cooling, and hardware features add predictive information beyond capacity and calendar variables. | Pre-registered feature ablations |
 | H4 | Predictive intervals can be calibrated to their stated coverage without becoming too broad to support decisions. | Empirical coverage and interval score |
 | H5 | A hierarchical model transfers better to unseen facilities than either one global model or independently fitted site models. | Leave-one-site-out evaluation |
+| H6 | Chronological supply coupling provides materially different feasible design rankings from annual energy matching. | Same-work, time-aligned portfolio comparisons with qualified generation and demand data |
+| H7 | Bounded workload flexibility improves the feasible supply/storage trade-off without losing computing service. | Fixed-demand versus flexible-demand ablation with capacity, completion, and delay constraints |
 
-These hypotheses are untested. The current v0.1 software demonstrates the
-calculation and uncertainty architecture only.
+These hypotheses are untested. The current software demonstrates calculation,
+uncertainty, and physical-coupling architecture, not empirical evidence for
+H1-H7. Promotion requires the declared experiment and its held-out evidence.
 
 ## Model strategy
 
@@ -66,6 +102,9 @@ The intended model is hybrid rather than end-to-end black box:
    retaining site-, climate-, hardware-, and cooling-specific effects.
 5. **Probabilistic prediction:** quantify aleatoric, parameter, and scenario
    uncertainty separately where the data permits.
+6. **Physical coupling:** align demand, generation, storage, and constraints on
+   one hourly clock, explicitly expose unmet demand, and keep electricity,
+   contractual procurement, carbon, and water accounting distinct.
 
 The model must remain inspectable. A lower-error model is not automatically
 preferred if its leakage, instability, or opacity prevents responsible use.
@@ -87,6 +126,18 @@ preferred if its leakage, instability, or opacity prevents responsible use.
 - Water withdrawal and consumption
 - Cooling subsystem energy
 - Workload flexibility and grid coincidence
+
+### Coupled-system research measures
+
+Evaluate dedicated renewable delivery, grid imports/exports and peak draw,
+storage losses, curtailment, unserved energy, computing-service preservation,
+and energy-strategy differences under a declared accounting basis.
+
+Water requires distinct cooling-loop, heat-rejection, withdrawal, consumption,
+and hydro allocation boundaries. Cost requires explicit coverage of included
+and excluded components. The prototype's synthetic water requirements and
+variable-energy costs do not establish a complete water footprint or full
+project economics.
 
 ### Out of scope until separately validated
 
@@ -112,7 +163,10 @@ Final criteria must be frozen before each phase begins.
 - missingness and sensor-quality failure modes can be quantified without
   exposing sensitive identifiers;
 - cooling, heat rejection, weather, grid, and optional water joins are
-  answerable for the represented facilities; and
+  answerable for the represented facilities;
+- for coupled studies, resource profiles, storage and hydro boundaries,
+  physical grid access, and scheduling permission can be qualified and
+  aligned, or their absence explicitly limits the scope; and
 - an independent held-out experiment can be frozen without using customer
   content or precise facility locations.
 
@@ -120,7 +174,7 @@ Phase A does not carry a predictive-accuracy target. Its result is a decision
 that the data can support Phase B, that the scope must narrow, or that the
 research question is not answerable with the available evidence.
 
-### Phase B - predictive gates
+### Phase B - demand-prediction gates
 
 Thresholds must be frozen after the Phase A data-quality audit and before model
 fitting. The initial targets are:
@@ -137,6 +191,25 @@ fitting. The initial targets are:
 
 These are research gates, not service-level commitments.
 
+### Phase B - coupled-system gates
+
+Before a coupled experiment begins, freeze its strategy-comparison metrics
+and thresholds independently of the demand-error targets above. At minimum:
+
+- portfolios preserve the declared computing service and accounting boundary;
+- energy, storage origin/losses, hydro budgets, and connection limits reconcile;
+- shortfalls and infeasible cases are reported rather than counted as savings;
+- scheduling respects approved service constraints and information available
+  at the decision timestamp;
+- effects of resource year, weather, missing constraints, and demand error
+  are reported separately; and
+- conclusions distinguish observed evidence, conditional model comparisons,
+  causal avoided-impact claims, and any future solver optimality claims.
+
+Passing demand gates alone does not establish H6-H7. A synthetic strategy
+comparison can support method development without qualifying as empirical
+decision evidence.
+
 ## Falsification and stop conditions
 
 The project must report a negative or limited result if:
@@ -146,6 +219,8 @@ The project must report a negative or limited result if:
 - required meter boundaries cannot be reconciled;
 - predictive intervals remain materially miscalibrated;
 - performance depends on fields unavailable during real planning;
+- apparent energy-strategy gains depend on dropping work, ignoring source or
+  connection constraints, or mixing incompatible accounting boundaries;
 - released artifacts create unacceptable privacy or facility-security risk; or
 - the available data supports only site-specific fitting rather than a
   transferable world model.

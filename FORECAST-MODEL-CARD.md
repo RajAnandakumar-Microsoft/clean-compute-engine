@@ -13,6 +13,13 @@ required for promotion are defined in
 [`research/RESEARCH-CONTRACT.md`](research/RESEARCH-CONTRACT.md) and
 [`research/EVALUATION-PROTOCOL.md`](research/EVALUATION-PROTOCOL.md).
 
+This card describes the original `/forecast` engine. The separate
+`/coupling/evaluate` component reuses its hourly demand paths and adds physical
+generation, storage, grid constraints, and optional work deferral. Its scope
+and accounting are documented in
+[Renewable coupling and optimization](research/RENEWABLE-COUPLING.md).
+Neither component is calibrated, and the energy workspace is not an optimizer.
+
 ## Intended use
 
 Use v0.1 to:
@@ -116,15 +123,23 @@ Automated tests verify:
 
 These are correctness tests, not accuracy validation.
 
-## Calibration path
+## Evidence required for a calibrated revision
 
-1. Fit workload-shape and volatility parameters from licensed utilization
-   traces.
-2. Calibrate utilization-to-power curves using measured hardware power data.
-3. Fit dynamic PUE against facility load and weather observations.
-4. Replace climate and grid priors with versioned NOAA/ERA5 and Cambium inputs.
-5. Backtest one, five, and ten-year forecast components where historical
-   horizons permit.
-6. Measure forecast error, bias, and empirical P10/P50/P90 coverage.
-7. Publish applicability bounds and keep the synthetic prior set as a fallback
-   only when no calibrated profile applies.
+Calibration needs qualified workload, measured power, facility-overhead, and
+exogenous-driver evidence. The [research agenda](research/RESEARCH-AGENDA.md)
+owns the field requirements, the [pilot](research/DATA-PILOT-PROPOSAL.md) owns
+the evidence workstreams, and the
+[evaluation protocol](research/EVALUATION-PROTOCOL.md) owns the tests and
+information boundaries. Do not infer ten-year accuracy from short historical
+coverage or treat future observed weather as a forecast input.
+
+A later model card must identify fitted-parameter lineage, held-out results,
+uncertainty coverage, failures, and applicability limits. The
+[research contract](research/RESEARCH-CONTRACT.md) controls any promotion
+from the current uncalibrated state.
+
+The supply extension has its own version and provenance. Its physical and
+water accounting belong in the
+[coupling specification](research/RENEWABLE-COUPLING.md), not in a second copy
+of those rules here. The existing `/forecast` contract remains a grid-based
+demand scenario calculation; source-specific results use `/coupling/evaluate`.

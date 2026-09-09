@@ -10,7 +10,9 @@ authors:
     given-names: "Raj"
 repository-code: "https://github.com/RajAnandakumar-Microsoft/clean-compute-engine"
 abstract: >-
-  An independent, pre-calibration research prototype for investigating a
-  physics-informed environmental world model of data-center electricity,
-  operational carbon, and future water impacts. The project has no
-  organizational sponsor.
+  An independent, pre-calibration research prototype investigating data centers
+  and their energy supply as a connected system. The intended world model links
+  computing demand, cooling, renewable generation, storage, grid access, and
+  permitted workload scheduling to environmental and service trade-offs.
+  Current outputs are synthetic scenarios, not validated predictions or
+  optimized plans. The project has no organizational sponsor.

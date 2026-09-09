@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from collections.abc import Iterator
 from dataclasses import dataclass
 from datetime import datetime, timezone
 
@@ -25,6 +26,7 @@ from .models import (
     ForecastRunRequest,
     ForecastScenario,
     ForecastSeries,
+    HardwareProfileName,
     HorizonDelta,
     HorizonSummary,
     QuantileValues,
@@ -298,31 +300,106 @@ def _grid_carbon_intensity(
     return np.clip(intensity, 20.0, 1_200.0)
 
 
-def _simulate_scenario(
+@dataclass
+class PhaseHours:
+    """Hourly installed capacity, requested work, and hardware efficiency."""
+
+    capacity: FloatArray
+    utilization: FloatArray
+    efficiency: FloatArray
+    hardware_profile: HardwareProfileName
+
+
+@dataclass
+class HourlyDemand:
+    """One shared monthly demand/weather batch for forecasting and energy coupling."""
+
+    period: str
+    hours: NDArray[np.datetime64]
+    phases: list[PhaseHours]
+    capacity: FloatArray
+    work: FloatArray
+    it_power: FloatArray
+    facility_power: FloatArray
+    ambient: FloatArray
+    grid_carbon: FloatArray
+    pue_offset: FloatArray
+    drivers: dict[str, FloatArray]
+
+
+def calculate_it_power(
+    phases: list[PhaseHours],
+) -> tuple[FloatArray, FloatArray, FloatArray]:
+    """Translate requested work to power using the versioned hardware curves."""
+    capacity = np.zeros_like(phases[0].capacity)
+    work = np.zeros_like(capacity)
+    it_power = np.zeros_like(capacity)
+    for phase in phases:
+        prior = HARDWARE_PRIORS[phase.hardware_profile]
+        power_fraction = prior.idle_power_fraction + (
+            1.0 - prior.idle_power_fraction
+        ) * np.power(phase.utilization, prior.power_curve_exponent)
+        it_power += phase.capacity * phase.efficiency * power_fraction
+        capacity += phase.capacity
+        work += phase.capacity * phase.utilization
+    return capacity, work, it_power
+
+
+def calculate_facility_power(
+    scenario: ForecastScenario,
+    it_power: FloatArray,
+    work: FloatArray,
+    capacity: FloatArray,
+    ambient: FloatArray,
+    pue_offset: FloatArray,
+) -> FloatArray:
+    """Apply the same load- and weather-sensitive PUE in both evaluators."""
+    effective_utilization = np.divide(
+        work, capacity, out=np.zeros_like(capacity), where=capacity > 0.0
+    )
+    facility = scenario.facility
+    sensitivity = facility.temperature_sensitivity_per_c
+    if sensitivity is None:
+        sensitivity = 0.004 if facility.cooling == "liquid" else 0.009
+    load_gap = np.clip(
+        (facility.reference_utilization - effective_utilization)
+        / facility.reference_utilization,
+        0.0,
+        1.0,
+    )
+    pue = np.clip(
+        facility.design_pue
+        + pue_offset[:, None]
+        + sensitivity * (ambient - 20.0)
+        + facility.low_load_pue_penalty * load_gap,
+        1.02,
+        2.50,
+    )
+    return it_power * pue
+
+
+def iter_hourly_demand(
     scenario: ForecastScenario,
     sample_count: int,
     seed: int,
-) -> _SimulationArrays:
+) -> Iterator[HourlyDemand]:
+    """Yield original hourly demand paths without retaining a decade in memory."""
     start_month = np.datetime64(scenario.start_date.isoformat(), "M")
     months = np.arange(
         start_month,
         start_month + np.timedelta64(scenario.horizon_years * 12, "M"),
         dtype="datetime64[M]",
     )
-    labels = [str(month) for month in months]
-    month_count = len(months)
-    shape = (sample_count, month_count)
-    installed_capacity = np.zeros(shape, dtype=np.float64)
-    utilization_numerator = np.zeros(shape, dtype=np.float64)
-    capacity_hours = np.zeros(shape, dtype=np.float64)
-    it_energy = np.zeros(shape, dtype=np.float64)
-    facility_energy = np.zeros(shape, dtype=np.float64)
-    carbon = np.zeros(shape, dtype=np.float64)
-    peak_facility_power = np.zeros(shape, dtype=np.float64)
-
     start_hour = np.datetime64(scenario.start_date.isoformat(), "h")
     parameters = _path_parameters(scenario, sample_count, seed)
     phase_delays = _phase_delays(scenario, sample_count, seed)
+    drivers = {
+        "utilization_level": parameters["utilization_level"],
+        "facility_pue": scenario.facility.design_pue + parameters["pue_offset"],
+        "grid_carbon_level": parameters["grid_carbon_level"],
+        "grid_decarbonization": parameters["grid_decarbonization"],
+        "build_timing": np.mean(np.stack(phase_delays, axis=1), axis=1),
+    }
 
     for month_index, month in enumerate(months):
         month_start = month.astype("datetime64[h]")
@@ -345,10 +422,7 @@ def _simulate_scenario(
             month_index,
         )
 
-        total_capacity = np.zeros((sample_count, hour_count), dtype=np.float64)
-        total_utilization_numerator = np.zeros_like(total_capacity)
-        total_it_power = np.zeros_like(total_capacity)
-
+        phases: list[PhaseHours] = []
         for phase_index, phase in enumerate(scenario.phases):
             phase_hour = np.datetime64(phase.start_date.isoformat(), "h")
             phase_offset_months = (phase_hour - start_hour).astype(
@@ -378,7 +452,6 @@ def _simulate_scenario(
             )
             utilization *= active
 
-            prior = HARDWARE_PRIORS[phase.hardware_profile]
             refresh_count = np.floor(
                 np.clip(age_months, 0.0, None) / (phase.refresh_interval_years * 12.0)
             )
@@ -387,21 +460,11 @@ def _simulate_scenario(
                 0.50,
                 1.0,
             )
-            power_fraction = prior.idle_power_fraction + (
-                1.0 - prior.idle_power_fraction
-            ) * np.power(utilization, prior.power_curve_exponent)
-            phase_power = capacity * efficiency * power_fraction
+            phases.append(
+                PhaseHours(capacity, utilization, efficiency, phase.hardware_profile)
+            )
 
-            total_capacity += capacity
-            total_utilization_numerator += capacity * utilization
-            total_it_power += phase_power
-
-        effective_utilization = np.divide(
-            total_utilization_numerator,
-            total_capacity,
-            out=np.zeros_like(total_capacity),
-            where=total_capacity > 0.0,
-        )
+        total_capacity, total_work, total_it_power = calculate_it_power(phases)
         ambient = _ambient_temperature(
             scenario,
             parameters,
@@ -413,25 +476,14 @@ def _simulate_scenario(
             seed,
             month_index,
         )
-        facility = scenario.facility
-        temperature_sensitivity = facility.temperature_sensitivity_per_c
-        if temperature_sensitivity is None:
-            temperature_sensitivity = 0.004 if facility.cooling == "liquid" else 0.009
-        load_gap = np.clip(
-            (facility.reference_utilization - effective_utilization)
-            / facility.reference_utilization,
-            0.0,
-            1.0,
+        total_facility_power = calculate_facility_power(
+            scenario,
+            total_it_power,
+            total_work,
+            total_capacity,
+            ambient,
+            parameters["pue_offset"],
         )
-        pue = np.clip(
-            facility.design_pue
-            + parameters["pue_offset"][:, None]
-            + temperature_sensitivity * (ambient - 20.0)
-            + facility.low_load_pue_penalty * load_gap,
-            1.02,
-            2.50,
-        )
-        total_facility_power = total_it_power * pue
         grid_carbon = _grid_carbon_intensity(
             scenario,
             parameters,
@@ -446,24 +498,48 @@ def _simulate_scenario(
             month_index,
         )
 
-        installed_capacity[:, month_index] = total_capacity[:, -1]
-        utilization_numerator[:, month_index] = total_utilization_numerator.sum(axis=1)
-        capacity_hours[:, month_index] = total_capacity.sum(axis=1)
-        it_energy[:, month_index] = total_it_power.sum(axis=1)
-        facility_energy[:, month_index] = total_facility_power.sum(axis=1)
-        carbon[:, month_index] = (total_facility_power * grid_carbon / 1_000.0).sum(
+        yield HourlyDemand(
+            period=str(month),
+            hours=hours,
+            phases=phases,
+            capacity=total_capacity,
+            work=total_work,
+            it_power=total_it_power,
+            facility_power=total_facility_power,
+            ambient=ambient,
+            grid_carbon=grid_carbon,
+            pue_offset=parameters["pue_offset"],
+            drivers=drivers,
+        )
+
+
+def _simulate_scenario(
+    scenario: ForecastScenario,
+    sample_count: int,
+    seed: int,
+) -> _SimulationArrays:
+    shape = (sample_count, scenario.horizon_years * 12)
+    installed_capacity = np.zeros(shape, dtype=np.float64)
+    utilization_numerator = np.zeros(shape, dtype=np.float64)
+    capacity_hours = np.zeros(shape, dtype=np.float64)
+    it_energy = np.zeros(shape, dtype=np.float64)
+    facility_energy = np.zeros(shape, dtype=np.float64)
+    carbon = np.zeros(shape, dtype=np.float64)
+    peak_facility_power = np.zeros(shape, dtype=np.float64)
+    labels: list[str] = []
+    drivers: dict[str, FloatArray] = {}
+    for index, batch in enumerate(iter_hourly_demand(scenario, sample_count, seed)):
+        labels.append(batch.period)
+        installed_capacity[:, index] = batch.capacity[:, -1]
+        utilization_numerator[:, index] = batch.work.sum(axis=1)
+        capacity_hours[:, index] = batch.capacity.sum(axis=1)
+        it_energy[:, index] = batch.it_power.sum(axis=1)
+        facility_energy[:, index] = batch.facility_power.sum(axis=1)
+        carbon[:, index] = (batch.facility_power * batch.grid_carbon / 1_000.0).sum(
             axis=1
         )
-        peak_facility_power[:, month_index] = total_facility_power.max(axis=1)
-
-    average_delay = np.mean(np.stack(phase_delays, axis=1), axis=1)
-    drivers = {
-        "utilization_level": parameters["utilization_level"],
-        "facility_pue": scenario.facility.design_pue + parameters["pue_offset"],
-        "grid_carbon_level": parameters["grid_carbon_level"],
-        "grid_decarbonization": parameters["grid_decarbonization"],
-        "build_timing": average_delay,
-    }
+        peak_facility_power[:, index] = batch.facility_power.max(axis=1)
+        drivers = batch.drivers
     return _SimulationArrays(
         labels=labels,
         installed_capacity=installed_capacity,

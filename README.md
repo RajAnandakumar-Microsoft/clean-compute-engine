@@ -7,136 +7,124 @@
 > data is included. It was created as an independent participant project for the
 > Microsoft Global Hackathon; participation does not imply endorsement.
 
-A **public, pre-calibration research project** investigating a
-physics-informed environmental world model for data centers.
+A **public research project** about how data centers can grow with less
+environmental harm.
 
-The long-term aim is to help researchers and builders test how capacity,
-workload, hardware, cooling, weather, and grid choices affect electricity,
-operational carbon, and eventually water. The present repository supplies the
-research protocol, governed data contract, evaluation framework, and a working
-synthetic demonstrator needed to pursue that question responsibly.
+## Research thesis
+
+> We can grow AI infrastructure with less environmental harm by designing
+> data centers and their energy supply as one connected system.
+
+This is the thesis to investigate, not an established result. The goal is to
+create a **world prediction model** that helps us understand how location,
+computing, cooling, and energy choices shape a data center's impact over
+time, so we can explore better decisions before we build.
+
+## The world model we want to create
+
+Here, a world model means a connected model of how computing demand, facility
+behavior, and energy supply evolve together. The 3D world makes those
+relationships understandable; the prediction and physical-accounting models
+underneath must eventually be calibrated and evaluated against evidence.
+
+Forecasting consumption is one part of the problem. The other is how
+renewable generation, storage, grid access, and permitted workload scheduling
+can meet that demand while exposing carbon, water, cost, and service
+trade-offs.
+
+| Layer | Purpose | Current boundary |
+|---|---|---|
+| Predict | Explore a specified buildout and energy-system plan | Working synthetic scenario evaluator |
+| Optimize | Find feasible portfolios and schedules under explicit objectives and constraints | Research direction; no optimizer or optimality claim |
+| Operate | Compare actual operation with an approved plan | Future work; no live facility integration |
+
+The [research contract](research/RESEARCH-CONTRACT.md) turns this vision into
+formal questions, hypotheses, and evidence gates.
+
+## Where the project stands
 
 | Boundary | Current state |
 |---|---|
 | Research stage | **R0 - synthetic prototype** |
 | Forecast status | **Uncalibrated; not validated for site decisions** |
 | Operational data | **None incorporated** |
+| Renewable coupling | **Synthetic physical-portfolio comparison; not an optimizer** |
 | Repository visibility | **Public** |
 | External sponsorship | **None** |
 | Project license | **Apache-2.0** |
 
-## Hackathon objective
+The repository contains the demonstrator, research protocol, data contracts,
+synthetic examples, and contribution workflow. It contains no empirical
+accuracy result or trained model. The independent hackathon project is a way
+to demonstrate the architecture and seek a bounded research pilot, not to
+claim a validated product.
 
-The hackathon goal is **not** to claim that an accurate data-center world model
-already exists. It is to:
+## Explore the prototype
 
-1. demonstrate the calculation and interaction architecture;
-2. present a falsifiable research thesis and evaluation protocol;
-3. define the minimum safe data interface;
-4. make a credible case for a governed operational-telemetry pilot; and
-5. seek the data partnership, expertise, compute, and funding needed to test
-   whether the model can work.
+### Integrated 3D Engine - local, API-backed
 
-The successful outcome is approval for a bounded research pilot, not a product
-launch or an accuracy claim.
+Run the local app at `/`. The **Overview, Design, Energy, Water, Compute, and
+Compare** tabs share one scenario and clock. Select assets, edit assumptions,
+inspect hourly flows, and compare the proposed portfolio with a grid-only
+baseline. `/energy` is a deep link into this same Engine.
 
-## Research thesis
+The evaluator connects phased demand with solar, wind, hydro, optional
+nuclear/gas, storage, and bounded work deferral. It exposes shortages rather
+than counting unserved computing as carbon savings. Cooling-water
+requirements and hydro net consumption are separate synthetic quantities,
+not a complete or validated water footprint.
 
-> Can a hybrid model, built on engineering constraints and calibrated with
-> governed operational telemetry, predict facility electricity and operational
-> carbon more accurately and with better-calibrated uncertainty than static
-> planning assumptions on facilities and time periods not used for fitting?
+Compute geometry is schematic: the coupled model produces facility-level
+values, not per-GPU telemetry. The original 24-hour equipment sandbox remains
+available at `/legacy` as a separately labeled experience.
 
-The intended approach combines:
+Implementation, dispatch, accounting, and UI details live in the
+[coupling specification](research/RENEWABLE-COUPLING.md), rather than in this
+overview.
 
-- an engineering spine for units, energy balance, physical bounds, and system
-  boundaries;
-- interpretable calibration of utilization, power, thermal, and PUE behavior;
-- learned residuals for structure that the mechanistic model does not explain;
-- hierarchical transfer across facilities without treating them as identical;
-  and
-- probabilistic forecasts with explicit applicability and refusal boundaries.
+This workspace is **not hosted by GitHub Pages**.
 
-Water is a separate research workstream. It requires withdrawal and consumption
-meters plus a distinction between the internal cooling loop and external heat
-rejection before it can become a validated target.
-
-## Research package
-
-| Start here | Purpose |
-|---|---|
-| [Research contract](research/RESEARCH-CONTRACT.md) | Question, hypotheses, success gates, and stop conditions |
-| [Data pilot proposal](research/DATA-PILOT-PROPOSAL.md) | Governed telemetry request, staffing, and 12-week plan |
-| [Evaluation protocol](research/EVALUATION-PROTOCOL.md) | Frozen splits, baselines, metrics, ablations, and promotion rules |
-| [Governance and release](research/GOVERNANCE-AND-RELEASE.md) | Public-repository boundary and responsible artifact release |
-| [Forecast model card](FORECAST-MODEL-CARD.md) | Current equations, outputs, limitations, and calibration status |
-| [Candidate source register](research/DATA-SOURCE-REGISTER.md) | Source applicability, licensing, and restrictions |
-| [Research data contract](data/README.md) | Strict schemas and synthetic examples |
-| [Experiment workflow](experiments/README.md) | Reproducible experiment and result requirements |
-
-No source in the candidate register trained or validated the current model.
-
-## Public voxel story
+### Public voxel story - browser-only
 
 The five-chapter synthetic story is published through GitHub Pages:
 
 <https://rajanandakumar-microsoft.github.io/clean-compute-engine/>
 
-The Pages experience runs entirely in the browser. Chapters four and five load
-a 60-outcome catalog generated by the same v0.1 forecast engine for every
-workload, cooling, and one-to-ten-year combination available in the story. It
-does not call a hosted API or include operational data. On phones, the narrative
-becomes a collapsible bottom sheet and the 3D scene uses a lighter rendering mode.
+The story illustrates buildout, workload, cooling, time, uncertainty, and
+baseline comparison. It does not expose the full renewable-portfolio
+evaluator. Its later chapters use 60 precomputed synthetic outcomes, not a
+hosted forecast API. It supports phones and includes no operational data.
 
-Regenerate the catalog after changing forecast or story assumptions:
+## Research still required
 
-```powershell
-cd backend
-.\.venv\Scripts\python.exe -m app.research.export_story_outcomes
-```
+Two evidence workstreams need to meet: **facility demand and cooling**, and
+**generation, storage, grid constraints, and permitted scheduling**.
+Demand calibration and physical coupling can progress in parallel, but
+joining unrelated datasets does not establish a real facility's performance.
 
-## What exists today
-
-The working v0.1 research demonstrator includes:
-
-- an hourly Monte Carlo simulator for phased one-to-ten-year futures;
-- transparent synthetic priors for workload, hardware, PUE, weather, and grid
-  evolution;
-- P10/P50/P90 trajectories, paired baselines, and sensitivity analysis;
-- a full 3D simulator and forecast workspace at `/`;
-- a five-chapter interactive voxel story at `/story`; and
-- strict Pydantic and JSON Schema contracts for future governed datasets and
-  experiment manifests.
-
-The demonstrator proves that the proposed architecture can be executed and
-examined. It does **not** prove predictive accuracy. All story readouts are
-marked **ILLUSTRATIVE** or **SIMULATED**, and every forecast carries its
-uncalibrated status.
-
-The original product exploration remains in [`REQUIREMENTS.md`](REQUIREMENTS.md).
-This public repository begins as a reviewed snapshot of the v0.1 demonstrator;
-the private development archive retains the earlier implementation history.
-
-## Target research architecture
-
-```text
-Governed telemetry + public context
-                 |
-       data quality and provenance
-                 |
-   engineering model + learned residual
-                 |
- hierarchical probabilistic world model
-                 |
- frozen cross-site and forward-time evaluation
-                 |
- reviewed findings and safe release candidates
-```
+The next steps are to qualify data and system boundaries, freeze independent
+experiments, calibrate components, and evaluate both demand accuracy and
+energy-strategy usefulness. Water and optimization claims require their own
+evidence. The [pilot proposal](research/DATA-PILOT-PROPOSAL.md) describes the
+two workstreams; the [roadmap](BACKLOG.md) tracks the remaining work.
 
 Restricted telemetry, row-level derivatives, site-specific parameters, and
 unreviewed model artifacts must remain in an approved controlled environment.
 This public Git repository contains only code, schemas, synthetic examples,
 methodology, and release-approved artifacts.
+
+## Research reading guide
+
+| Your question | Start here |
+|---|---|
+| How does the research fit together? | [Research index and document map](research/README.md) |
+| What are the hypotheses and evidence gates? | [Research contract](research/RESEARCH-CONTRACT.md) |
+| What does the current demand model do? | [Forecast model card](FORECAST-MODEL-CARD.md) |
+| How does the energy-system evaluator work? | [Coupling specification](research/RENEWABLE-COUPLING.md) |
+| What can I contribute safely? | [Contribution guide](CONTRIBUTING.md) |
+
+The [original product exploration](REQUIREMENTS.md) is historical context,
+not current requirements, research evidence, or a source of approved claims.
 
 ## Run the demonstrator
 
@@ -157,7 +145,8 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:5173 for the full engine or
+Open http://localhost:5173 for the integrated Engine,
+http://localhost:5173/legacy for the earlier equipment sandbox, or
 http://localhost:5173/story for the interactive story. The Vite dev server
 proxies REST + WebSocket to the backend.
 
@@ -169,6 +158,14 @@ proxies REST + WebSocket to the backend.
 
 The default paired 10-year run uses 250 paths and usually completes in several
 seconds on a development laptop.
+
+### Energy coupling API
+
+- `GET /coupling/example` - synthetic demand, supply, grid, flexibility, and water assumptions
+- `POST /coupling/evaluate` - paired physical portfolio versus grid-only comparison
+
+The default is one year and 48 paths. Coupling and forecast calls share a
+single CPU-run limit. This remains a local, single-user research prototype.
 
 ### Tests
 
@@ -191,7 +188,17 @@ $env:APP_URL="http://127.0.0.1:5173/"
 npm test
 ```
 
-This runs both the full forecast workflow and the five-chapter story workflow.
+This runs the legacy forecast, five-chapter story, and integrated world
+workflows, including linked asset selection, tabs, time, drafts, and comparisons.
+
+### Regenerate the public story catalog
+
+After changing forecast or story assumptions:
+
+```powershell
+cd backend
+.\.venv\Scripts\python.exe -m app.research.export_story_outcomes
+```
 
 ### Quick backend check (no browser)
 ```powershell
@@ -204,7 +211,7 @@ smart-scheduling delta, and a scenario compare.
 ## Repository layout
 
 ```
-dc-simulator/
+clean-compute-engine/
   .github/            research-aware pull-request checklist
   LICENSE              Apache License 2.0
   DISCLAIMER.md        independence and non-endorsement statement
@@ -214,8 +221,7 @@ dc-simulator/
     config.py       GPU/source specs + location profiles
     curves.py       24h grid-carbon / capacity-factor / price curves + scenarios
     generator.py    parametric DC builder (facility→hall→rack→server→GPU)
-    models.py       Pydantic schemas (mirrored to     frontend/
-      public/story-data/ generated synthetic outcomes for the static voxel storysrc/types/api.ts)
+    models.py       legacy Pydantic schemas mirrored in frontend types
     sim/
       physics.py    workload, power, PUE, thermal, water
       jobs.py       per-hour GPU activity (pack/spread placement)
@@ -225,17 +231,22 @@ dc-simulator/
       aggregate.py  GPU→rack→hall→facility roll-ups
       engine.py     24h timeline + control state + frame assembly
     forecast/       uncalibrated multi-year probabilistic engine
+    energy/         chronological physical supply, storage, flexibility, and water
     research/       governed Pydantic data and experiment contracts
   data/
     schemas/        generated JSON Schemas
     synthetic/      hand-authored contract examples only
   experiments/      frozen experiment manifests and workflow
-  frontend/src/
-    data/           REST + WS clients, Zustand store
-    three/          scene, instanced racks, drill-down, overlays, palette
-    story/          guided voxel world, decisions, forecast bridge, story UI
-    ui/             top bar, tree, inspector, time controls, design/finance/compare
-    types/          TS mirror of the Pydantic schemas
+  frontend/
+    public/story-data/ generated synthetic outcomes for the static story
+    src/
+      data/         REST + WS clients, Zustand store
+      energy/       shared scenario controls, results, and hourly supply charts
+      world/        integrated campus, shared hourly state, tabs, and asset context
+      three/        scene, instanced racks, drill-down, overlays, palette
+      story/        guided voxel world, decisions, forecast bridge, story UI
+      ui/           top bar, tree, inspector, time controls, design/finance/compare
+      types/        TS mirror of the Pydantic schemas
   research/         protocol, pilot, governance, evidence, and provenance
 ```
 
@@ -253,7 +264,7 @@ Discussions for open-ended design questions, and the private process in
 ## Current limitations
 
 The repository does not yet contain calibrated parameters, empirical accuracy
-results, cross-site validation, water prediction, an optimizer, live facility
-connectors, restricted-data infrastructure, or trained model weights.
+results, cross-site validation, validated water prediction, an optimizer,
+live facility connectors, restricted-data infrastructure, or trained model weights.
 See [`BACKLOG.md`](BACKLOG.md) for the research-first roadmap and
 [`CONTRIBUTING.md`](CONTRIBUTING.md) before making changes.

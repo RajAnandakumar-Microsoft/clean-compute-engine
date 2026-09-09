@@ -3,16 +3,18 @@ import type {
   ForecastMetadata, ForecastResult, ForecastRunRequest, LifetimeReport, LocationOpt,
   Scenario, ScheduleResult,
 } from "../types/api";
+import type { CouplingRequest, CouplingResult } from "../types/energy";
 
-async function jget<T>(url: string): Promise<T> {
-  const r = await fetch(url);
+async function jget<T>(url: string, signal?: AbortSignal): Promise<T> {
+  const r = await fetch(url, { signal });
   if (!r.ok) throw new Error(`${url} -> ${r.status}`);
   return r.json();
 }
-async function jpost<T>(url: string, body: unknown): Promise<T> {
+async function jpost<T>(url: string, body: unknown, signal?: AbortSignal): Promise<T> {
   const r = await fetch(url, {
     method: "POST", headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
+    signal,
   });
   if (!r.ok) {
     const detail = await r.text();
@@ -33,8 +35,13 @@ export const api = {
   schedule: (enabled: boolean) => jpost<ScheduleResult>("/schedule", { enabled }),
   compare: (a: DesignConfig, b: DesignConfig) =>
     jpost<CompareResult>("/compare", { a, b }),
-  forecastMetadata: () => jget<ForecastMetadata>("/forecast/metadata"),
+  forecastMetadata: (signal?: AbortSignal) =>
+    jget<ForecastMetadata>("/forecast/metadata", signal),
   forecastExample: () => jget<ForecastRunRequest>("/forecast/example"),
   forecast: (request: ForecastRunRequest) =>
     jpost<ForecastResult>("/forecast", request),
+  couplingExample: (signal?: AbortSignal) =>
+    jget<CouplingRequest>("/coupling/example", signal),
+  couplingEvaluate: (request: CouplingRequest, signal?: AbortSignal) =>
+    jpost<CouplingResult>("/coupling/evaluate", request, signal),
 };

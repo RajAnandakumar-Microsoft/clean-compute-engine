@@ -1,10 +1,25 @@
-# The Clean Compute Engine — Product Spec & POC Requirements
+# Archived product exploration — July 2026
 
-> **Archived product exploration:** This document is preserved with the v0.0.1
-> simulator and is not the active research protocol. References to "v1" below
-> mean the original Layer 1 concept, not the repository's current semantic
-> version. The active charter is `research/RESEARCH-CONTRACT.md`; current model
-> behavior is documented in `FORECAST-MODEL-CARD.md`.
+> [!IMPORTANT]
+> **Historical context, not active requirements.** This document preserves the
+> original v0.0.1 product exploration. Statements below such as "locked,"
+> "ready to build," "predict," and "net-positive" describe that earlier
+> proposal, not current implementation, validated results, or approved claims.
+> References to "v1" mean the original Layer 1 concept, not a current release.
+>
+> The [research contract](research/RESEARCH-CONTRACT.md) owns current questions
+> and scope. The [forecast model card](FORECAST-MODEL-CARD.md) and
+> [coupling specification](research/RENEWABLE-COUPLING.md) own model behavior.
+> The [roadmap](BACKLOG.md) owns remaining work. This archive overrides none
+> of them and grants no permission to access data or operate facilities.
+
+Use this file to understand how the idea evolved, not to copy old capabilities,
+market figures, or product promises into a current pitch or implementation
+plan. The project remains an R0 synthetic prototype. The old no-mobile scope,
+GPU-level view, lifecycle claims, and future control ambitions must not be
+mistaken for the current integrated Engine's scope.
+
+## Original product proposal
 
 > **The product:** a whole-lifecycle data-center intelligence toolkit, built in **three layers**.
 > A web-based **3D twin** is the shared core; each layer adds what the user can do with it.
@@ -14,13 +29,13 @@
 > **energy, environment, technical utilization, and finance**, source-aware, down to the GPU.
 > Layers 2 (Optimize) and 3 (Operate, live) reuse the same core and come later.
 >
-> **Status:** Architecture locked (3 layers). Layer 1 requirements below (16 ground rules +
-> areas A–G). Ready to build.
-> **Maintained by:** Raj Anandakumar · **Updated:** 2026-07-15 · **Product:** *The Clean Compute Engine* (a personal project)
+> **Historical status (2026-07-15):** Architecture described as locked (3 layers).
+> Layer 1 requirements below (16 ground rules + areas A–G) were marked ready to build.
+> **Original author:** Raj Anandakumar · **Original update:** 2026-07-15 · **Product:** *The Clean Compute Engine* (a personal project)
 
 ---
 
-## The three layers (read this first)
+## The three layers (historical proposal)
 
 The product is one **3D digital twin** (a data-center model plus a KPI engine) exposed through
 three layers. Each layer reuses the layer below, so the core is **built once and enriched**,
@@ -38,10 +53,14 @@ with synthetic inputs swapped for real feeds. So the build order is forced and d
 (predictive, then prescriptive, then real-time): cheapest and most buildable first, the hard
 real-data integration last.
 
-**What "negate the impact" means (honest scope).** The engine can drive **net** external impact
+**Original "negate the impact" aspiration (not demonstrated).** The proposed engine would seek to drive **net** external impact
 (emissions, water, contribution to the grid peak) toward zero or even negative, so the data
 center helps the grid. It cannot zero the **energy consumed**; that is thermodynamics. The
 promise is "clean, self-sufficient, grid-friendly," never "free."
+
+This aspiration is not evidence of net-zero or net-positive performance.
+The current evaluator does not establish community benefits, a full water
+footprint, or certified carbon accounting.
 
 ---
 
@@ -53,7 +72,10 @@ promise is "clean, self-sufficient, grid-friendly," never "free."
 > electricity bills for nearby communities. As builders of this technology, closing that
 > gap is our responsibility.
 
-**Verified context** *(see ../README.md and DC research notes for full citations)*
+**Historical market context — not refreshed or adopted as model evidence.**
+The figures below are preserved from the original exploration. Any external
+reuse requires primary-source review; do not treat a reference to local
+research notes as an available public citation.
 
 | Claim | Figure | Source |
 |---|---|---|
@@ -70,7 +92,7 @@ promise is "clean, self-sufficient, grid-friendly," never "free."
 > works from the same lifecycle record through their own lens — turning sustainability
 > from an after-the-fact report into a **decision they can all act on**.
 
-**What v1 (Layer 1) proves (hero goal):** that one 3D twin lets a user **design** a data center
+**Original v1 demonstration goal (not proof of accuracy):** that one 3D twin lets a user **design** a data center
 (its infrastructure and its energy sources) and instantly **see the predicted outcome** across
 four dimensions: energy, environment, utilization, and finance, source-aware and down to the
 GPU. Sustainability and cost stop being after-the-fact reports and become a design decision you
@@ -78,7 +100,7 @@ watch change as you build.
 
 ---
 
-## 2. Ground rules (locked)
+## 2. Original ground rules (archived, not current constraints)
 
 | # | Category | Rule | Decision |
 |---|---|---|---|

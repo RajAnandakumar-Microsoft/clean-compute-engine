@@ -48,6 +48,14 @@ h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: 
   border: 1px solid rgba(55,182,255,0.35); border-radius: 8px; text-decoration: none;
   font-size: 8px; font-weight: 600; vertical-align: 2px; letter-spacing: 0.03em;
 }
+.energy-entry {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 44px; min-width: 44px; margin-left: 8px; padding: 8px 10px;
+  border: 1px solid #29785f; border-radius: 8px; color: #83ebc4;
+  background: #132923; text-decoration: none; font-size: 11px; font-weight: 600;
+}
+.energy-entry:hover { background: #1b3b32; color: #c0ffe8; }
+.energy-entry:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .sub { color: var(--muted); font-size: 11px; }
 .clock { display: flex; flex-direction: column; align-items: center; gap: 3px; }
 .clock-time { font-variant-numeric: tabular-nums; font-size: 20px; font-weight: 700; color: var(--accent); }

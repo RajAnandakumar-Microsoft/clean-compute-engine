@@ -1,6 +1,8 @@
 [run]
 branch = True
-source = app/forecast
+source =
+    app/forecast
+    app/energy
 
 [report]
 fail_under = 75

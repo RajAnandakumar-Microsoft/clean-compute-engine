@@ -9,7 +9,9 @@ const routePath = window.location.pathname.startsWith(basePath)
 const storyOnly = import.meta.env.VITE_STORY_ONLY === "true";
 const Experience = storyOnly || routePath.startsWith("/story")
   ? lazy(() => import("./story/StoryApp").then((module) => ({ default: module.StoryApp })))
-  : lazy(() => import("./App").then((module) => ({ default: module.App })));
+  : routePath === "/legacy" || routePath.startsWith("/legacy/")
+    ? lazy(() => import("./App").then((module) => ({ default: module.App })))
+    : lazy(() => import("./world/WorldApp").then((module) => ({ default: module.WorldApp })));
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

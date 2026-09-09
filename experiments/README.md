@@ -4,6 +4,11 @@ This directory is the entry point for reproducible model experiments. The
 current repository contains only a synthetic contract smoke test; it contains
 no empirical accuracy result.
 
+The coupled energy evaluator also has software tests for chronological
+electricity balance, storage origin/losses, hydro budgets, bounded work
+deferral, water boundaries, and shortfall handling. Those are not an empirical
+renewable-optimization experiment or proof of real-world savings.
+
 ## Required workflow
 
 1. Create and validate dataset manifests.

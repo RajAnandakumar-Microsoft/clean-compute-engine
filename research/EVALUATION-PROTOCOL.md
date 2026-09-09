@@ -93,6 +93,20 @@ At minimum, each candidate is compared with:
 Additional domain or published baselines may be added when their data,
 implementation, and licensing are compatible.
 
+### Energy-strategy comparisons
+
+Coupling evaluation must additionally freeze the demand, computing-service
+boundary, grid connection, source availability, storage initial/terminal
+conditions, and accounting basis. Compare a grid-only case, a specified
+renewable portfolio with fixed demand, and the same portfolio with permitted
+flexibility. Annual matching can be an analytical comparator but cannot be
+treated as proof of hourly delivery.
+
+The present implementation provides synthetic grid-only and specified-
+portfolio cases. It is not an empirical benchmark suite or an optimizer.
+Neither case may claim savings from losing load. A comparison that fails to
+serve required demand must report infeasibility/shortfall separately.
+
 ## 5. Candidate models
 
 The initial comparison should include:
@@ -140,6 +154,17 @@ not a useful calibrated forecast.
 - dimensional-unit checks; and
 - monotonicity tests for controlled counterfactuals where physically expected.
 
+For physical energy coupling, also require:
+
+- source delivery, charging, exports, losses, and curtailment to reconcile;
+- generation and grid power limits to hold at every interval;
+- storage continuity across days, months, and horizon boundaries;
+- an explicit initial and terminal storage boundary;
+- renewable-origin accounting without charging/discharging double counting;
+- hydro output within the declared flow or energy-budget constraints;
+- separate unknown versus zero water quantities; and
+- computing-work conservation, capacity limits, and original deferral deadlines.
+
 ### Decision usefulness
 
 When valid counterfactual evidence exists, measure:
@@ -169,6 +194,26 @@ Water evaluation requires:
 
 Until those conditions are met, water remains exploratory.
 
+Hydro turbine flow is not water consumption. Net reservoir or other hydro
+consumption requires an explicit allocation and system boundary; it must not
+be added to cooling withdrawal as if it were the same quantity. Heat rejection
+and internal liquid/air cooling must remain separate.
+
+Exports are not automatically avoided emissions. Any marginal-emissions or
+grid-benefit claim requires a separate counterfactual and factor definition.
+Variable-energy cost excludes capex, financing, and tariff elements that have
+not been modeled; do not present it as project economics.
+
+## Optimization evidence boundary
+
+A future optimizer must declare decision variables, objective, environmental
+and service caps, feasible baselines, solver/version, optimality gap, and
+infeasibility handling. Perfect-foresight results are bounds or scenario
+experiments, not operational predictions. Out-of-sample demand and generation
+conditions must be evaluated before claiming robust recommendations.
+
+The current dispatch and work-deferral heuristics make no optimality claim.
+
 ## 8. Ablations
 
 Pre-registered ablations should remove one information family at a time:
@@ -181,6 +226,10 @@ Pre-registered ablations should remove one information family at a time:
 - site identity;
 - grid pathway; and
 - learned residual.
+
+Coupled-system ablations should separately remove storage, workload
+flexibility, hourly resource alignment, and hydro dispatchability while
+preserving computing service and the baseline accounting boundary.
 
 The purpose is to determine what creates predictive value, not merely which
 model has the lowest final error.

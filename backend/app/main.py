@@ -14,6 +14,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from .config import location_list
 from .curves import SCENARIOS
+from .energy.engine import run_coupling
+from .energy.models import CouplingRequest, CouplingResult
 from .forecast.assumptions import example_request, forecast_metadata
 from .forecast.engine import run_forecast
 from .forecast.models import (
@@ -121,6 +123,24 @@ async def post_forecast(request: ForecastRunRequest) -> ForecastResult:
 @app.get("/control", response_model=ControlState)
 def get_control() -> ControlState:
     return ENGINE.control
+
+
+@app.get("/coupling/example", response_model=CouplingRequest)
+async def get_coupling_example() -> CouplingRequest:
+    """Return synthetic assumptions for the physical energy-system workspace."""
+    return CouplingRequest()
+
+
+@app.post("/coupling/evaluate", response_model=CouplingResult)
+async def post_coupling(request: CouplingRequest) -> CouplingResult:
+    """Run one coupled comparison without changing the legacy simulator state."""
+    if FORECAST_LOCK.locked():
+        raise HTTPException(
+            status_code=429,
+            detail="An energy or forecast run is busy; retry after completion.",
+        )
+    async with FORECAST_LOCK:
+        return await asyncio.to_thread(run_coupling, request)
 
 
 @app.post("/config", response_model=BuildResponse)

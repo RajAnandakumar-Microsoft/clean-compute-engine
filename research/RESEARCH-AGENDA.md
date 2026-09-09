@@ -1,10 +1,15 @@
 # Research agenda
 
-The central research question is:
+This document owns the fields and unresolved evidence needs for the
+[pilot's two workstreams](DATA-PILOT-PROPOSAL.md): facility demand/cooling and
+energy supply/operating constraints. The
+[research contract](RESEARCH-CONTRACT.md) owns the questions and hypotheses;
+the [source register](DATA-SOURCE-REGISTER.md) owns candidate source identities
+and terms. Listing a field here is not permission to collect or publish it.
 
-> How much installed data-center compute will be active each hour, how much
-> electricity will that activity require, and how much operational carbon will
-> it produce over one to ten years?
+Identifiers and location context must be reduced according to the
+[governance policy](GOVERNANCE-AND-RELEASE.md). Owner-approved derived
+constraints may be more appropriate than sensitive source records.
 
 ## 1. Workload and effective utilization
 
@@ -95,7 +100,45 @@ Required evidence:
 - facility retrofits; and
 - grid and climate scenario evolution.
 
-## 7. Source qualification
+## 7. Renewable generation and storage
+
+Required evidence:
+
+- time-aligned solar irradiance, temperature, wind, and hydrological drivers;
+- equipment, capacity, conversion-model, commissioning, and degradation basis;
+- available generation versus dispatched/metered generation, with curtailment
+  and outage treatment;
+- hydro classification, inflow or energy budgets, release and power limits,
+  and documented operating/environmental constraints;
+- battery usable energy, charge/discharge power, state of charge,
+  efficiency, charging origin, losses, and availability; and
+- separate source-level water and carbon factors with explicit allocation,
+  system boundary, time period, and observed/modeled status.
+
+Chronology and shared weather conditions matter. A collection of unrelated
+typical profiles cannot establish observed joint system performance.
+Hydro turbine flow is not net water consumption, and pumped storage is not
+an additional primary energy source.
+
+## 8. Grid access, tariffs, and computing-service constraints
+
+Required evidence:
+
+- effective import/export limits, connection availability, and approved
+  operating constraints;
+- applicable tariff version and eligibility, energy/demand/export charges,
+  and the distinction between tariff assumptions and future market prices;
+- work arrival, original completion windows, and an agreed computing-service
+  or throughput measure;
+- explicit permission and capacity to defer work, including latency limits
+  and checkpoint/transfer overhead; and
+- definitions for unmet load, missed service, and infeasible plans.
+
+Do not infer site connection capacity from regional generation or real
+schedulability from a generic training/batch label. Contractual procurement,
+physical delivery, and emissions accounting require separate evidence.
+
+## 9. Source qualification
 
 For every dataset, record:
 
@@ -119,7 +162,7 @@ missing fields
 intended use: training, calibration, validation, or context
 ```
 
-Minimum preference:
+For facility calibration, prefer:
 
 - measured rather than purely synthetic;
 - hourly or finer resolution;
@@ -130,7 +173,13 @@ Minimum preference:
 - explicit reuse terms; and
 - multiple operating conditions.
 
-## 8. Validation questions
+For supply and strategy work, additionally qualify resource-year coverage,
+forecast vintages, temporal/geographic compatibility, operating constraints,
+and the information actually available when a decision would be made.
+Externally modeled data can support a declared scenario without becoming
+observed validation truth.
+
+## 10. Validation questions
 
 A calibrated release must answer:
 
@@ -141,3 +190,8 @@ A calibrated release must answer:
 - How does accuracy change by workload, hardware, climate, and horizon?
 - Which inputs dominate error?
 - Where should the model refuse to make a prediction?
+- Do the compared energy strategies deliver equivalent computing service?
+- Do apparent improvements survive storage losses, hydro/grid constraints,
+  seasonal variation, and realistic scheduling permissions?
+- Which claims concern conditional scenarios, and which have independent
+  empirical or causal support?
