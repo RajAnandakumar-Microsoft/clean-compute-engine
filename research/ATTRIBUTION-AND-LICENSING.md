@@ -9,6 +9,13 @@ implementation built with open-source libraries. The current model uses
 synthetic, versioned priors and no third-party operational datasets, copied
 research figures, or trained weights.
 
+"Original implementation" concerns source authorship, not invention of
+physics-based modeling, residual learning, chronology-aware energy design,
+or flexible computing. The [related-work review](MODEL-FOUNDATIONS.md#related-work-and-hypothesis-evidence)
+credits those established approaches and records unresolved comparisons.
+Citing a study or its implementation does not mean its code, data, or weights
+have been incorporated or licensed for our use.
+
 A concise hackathon disclosure is:
 
 > v0.1 is an uncalibrated scenario simulator. Its formulas and assumptions are

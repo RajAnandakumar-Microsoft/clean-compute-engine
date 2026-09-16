@@ -43,16 +43,22 @@ export function TopBar() {
         <div className="logo">◆</div>
         <div>
           <div className="title">
-            The Clean Compute Engine
+            Legacy 24-hour sandbox
             <a
               className="story-entry"
               href={`${import.meta.env.BASE_URL}story`}
             >
               Interactive story
             </a>
+            <a
+              className="energy-entry"
+              href={import.meta.env.BASE_URL}
+            >
+              Integrated Engine ↗
+            </a>
           </div>
           <div className="project-status">
-            Independent hackathon research · Not an official product
+            Separate synthetic model · Not the coupled scenario · Independent research
           </div>
           <div className="sub">{model.facility.name} · {model.facility.region} · {model.total_gpus} GPUs · {model.installed_it_mw} MW IT</div>
         </div>

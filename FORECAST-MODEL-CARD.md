@@ -4,14 +4,22 @@
 
 **Calibration status:** Uncalibrated
 
-v0.1 is a probabilistic scenario simulator. It calculates internally
-consistent consequences of user assumptions and synthetic priors. It does not
+v0.1 is a probabilistic scenario simulator using documented engineering
+relationships and synthetic priors. Correctness checks cover the stated
+invariants below, not every application display or legacy path. It does not
 claim validated site-level predictive accuracy.
 
 **Research stage:** R0 - synthetic prototype. The hypotheses and evidence
 required for promotion are defined in
 [`research/RESEARCH-CONTRACT.md`](research/RESEARCH-CONTRACT.md) and
 [`research/EVALUATION-PROTOCOL.md`](research/EVALUATION-PROTOCOL.md).
+
+This card describes the original `/forecast` engine. The separate
+`/coupling/evaluate` component reuses its hourly demand paths and adds physical
+generation, storage, grid constraints, and optional work deferral. Its scope
+and accounting are documented in
+[Renewable coupling and optimization](research/RENEWABLE-COUPLING.md).
+Neither component is calibrated, and the energy workspace is not an optimizer.
 
 ## Intended use
 
@@ -20,8 +28,8 @@ Use v0.1 to:
 - describe a phased U.S. data-center buildout;
 - explore plausible 1-10 year electricity and operational-carbon outcomes;
 - compare an efficient design with a user-defined baseline;
-- identify which uncertain assumptions have the greatest influence; and
-- establish the software and data contract that real datasets will calibrate.
+- inspect associations between sampled assumptions and modeled outcomes; and
+- establish software and data contracts for future fitting and evaluation.
 
 Do not use v0.1 for permitting, financial commitments, utility procurement,
 emissions reporting, or other decisions requiring validated forecasts.
@@ -80,6 +88,11 @@ P10, P50, and P90 are numerical quantiles across simulated paths:
 These ranges express assumption uncertainty. They are not confidence intervals
 for a calibrated predictor.
 
+P50 denotes a median, not generally an expected value. Statistical interval
+methods in the [related-work review](research/MODEL-FOUNDATIONS.md#h4---calibrated-and-useful-intervals)
+do not calibrate these synthetic quantiles. Real coverage, useful width and
+performance under shifts require independent evaluation.
+
 Scenario and baseline runs use the same seed and paired stochastic structure so
 their differences are less sensitive to unrelated random variation.
 
@@ -92,6 +105,14 @@ their differences are less sensitive to unrelated random variation.
 - Paired electricity and carbon deltas against the baseline
 - Correlation-ranked drivers of energy and carbon uncertainty
 - Model version, assumption-set version, seed, run fingerprint, and disclaimer
+
+Correlation-ranked drivers are associations within the sampled assumptions,
+not causal attribution or measured feature-group value. H3 requires the
+retrained ablations in the evaluation protocol. Comparisons that change
+multiple design assumptions must be described as bundled scenarios, not
+isolated cooling effects. The
+[story/forecast presentation corrections](BACKLOG.md#demonstration-and-claim-corrections)
+remain open; this model card does not correct UI labels.
 
 ## Synthetic priors
 
@@ -115,16 +136,26 @@ Automated tests verify:
 - API and browser workflow integration.
 
 These are correctness tests, not accuracy validation.
+Calibration alone will also not establish decision suitability: held-out
+performance, applicability and review are separate requirements.
 
-## Calibration path
+## Evidence required for a calibrated revision
 
-1. Fit workload-shape and volatility parameters from licensed utilization
-   traces.
-2. Calibrate utilization-to-power curves using measured hardware power data.
-3. Fit dynamic PUE against facility load and weather observations.
-4. Replace climate and grid priors with versioned NOAA/ERA5 and Cambium inputs.
-5. Backtest one, five, and ten-year forecast components where historical
-   horizons permit.
-6. Measure forecast error, bias, and empirical P10/P50/P90 coverage.
-7. Publish applicability bounds and keep the synthetic prior set as a fallback
-   only when no calibrated profile applies.
+Calibration needs qualified workload, measured power, facility-overhead, and
+exogenous-driver evidence. The [research agenda](research/RESEARCH-AGENDA.md)
+owns the field requirements, the [pilot](research/DATA-PILOT-PROPOSAL.md) owns
+the evidence workstreams, and the
+[evaluation protocol](research/EVALUATION-PROTOCOL.md) owns the tests and
+information boundaries. Do not infer ten-year accuracy from short historical
+coverage or treat future observed weather as a forecast input.
+
+A later model card must identify fitted-parameter lineage, held-out results,
+uncertainty coverage, failures, and applicability limits. The
+[research contract](research/RESEARCH-CONTRACT.md) controls any promotion
+from the current uncalibrated state.
+
+The supply extension has its own version and provenance. Its physical and
+water accounting belong in the
+[coupling specification](research/RENEWABLE-COUPLING.md), not in a second copy
+of those rules here. The existing `/forecast` contract remains a grid-based
+demand scenario calculation; source-specific results use `/coupling/evaluate`.

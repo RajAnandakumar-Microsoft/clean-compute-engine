@@ -17,6 +17,7 @@ export default defineConfig(({ mode }) => {
         "/finance": backend,
         "/lifetime": backend,
         "/forecast": backend,
+        "/coupling": backend,
         "/curves": backend,
         "/control": backend,
         "/scenarios": backend,

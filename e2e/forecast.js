@@ -3,6 +3,7 @@ const path = require("path");
 const puppeteer = require("puppeteer");
 
 const appUrl = process.env.APP_URL || "http://127.0.0.1:5173/";
+const legacyUrl = process.env.LEGACY_URL || new URL("legacy", appUrl).toString();
 const outputDir = process.env.SCREENSHOT_DIR || __dirname;
 
 (async () => {
@@ -25,7 +26,7 @@ const outputDir = process.env.SCREENSHOT_DIR || __dirname;
   });
   page.on("pageerror", (error) => errors.push(`pageerror: ${error.message}`));
 
-  await page.goto(appUrl, { waitUntil: "networkidle2", timeout: 30000 });
+  await page.goto(legacyUrl, { waitUntil: "networkidle2", timeout: 30000 });
   await page.waitForSelector(".center canvas", { timeout: 15000 });
   await page.waitForFunction(
     () => Boolean(window.useStore?.getState().forecastRequest),

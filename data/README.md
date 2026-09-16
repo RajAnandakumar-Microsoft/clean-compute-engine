@@ -56,3 +56,16 @@ The interface deliberately standardizes:
 
 Unknown fields are rejected. This prevents accidental passthrough of customer
 or facility-sensitive columns into the research pipeline.
+
+## Coverage of the two pilot workstreams
+
+These contracts cover facility intervals, site metadata, and dataset/experiment
+manifests. The [pilot's supply and operating-constraint workstream](../research/DATA-PILOT-PROPOSAL.md)
+also needs generation, storage, connection, tariff, and scheduling evidence.
+Those feeds do not yet have a complete versioned research-ingestion schema
+in this directory.
+
+The energy evaluator's request models are synthetic scenario configuration,
+not an ingestion contract for private telemetry. New feed contracts require
+field qualification and owner/governance review before data is ingested.
+Do not bypass the strict existing schemas to fit an unreviewed dataset.
