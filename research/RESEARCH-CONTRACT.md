@@ -1,10 +1,14 @@
 # Research contract
 
-**Protocol version:** 0.2
+**Protocol version:** 0.3
 
 **Status:** Pre-calibration research prototype
 
-**Last updated:** 2026-09-08
+**Last updated:** 2026-09-16
+
+Version 0.3 adds prior-evidence positioning and experimental clarifications.
+The H1-H7 statements are unchanged; no experiment is declared complete and
+the research stage remains R0.
 
 ## Objective
 
@@ -84,13 +88,43 @@ identified as assumptions or external scenarios.
 | H6 | Chronological supply coupling provides materially different feasible design rankings from annual energy matching. | Same-work, time-aligned portfolio comparisons with qualified generation and demand data |
 | H7 | Bounded workload flexibility improves the feasible supply/storage trade-off without losing computing service. | Fixed-demand versus flexible-demand ablation with capacity, completion, and delay constraints |
 
-These hypotheses are untested. The current software demonstrates calculation,
-uncertainty, and physical-coupling architecture, not empirical evidence for
-H1-H7. Promotion requires the declared experiment and its held-out evidence.
+These hypotheses are **not yet tested by this project**. Relevant external
+evidence exists; it does not validate our implementation. The current software
+demonstrates calculation, uncertainty, and physical-coupling architecture,
+not empirical evidence for H1-H7. Promotion requires the declared experiment
+and its held-out evidence.
+
+### Prior evidence and experiment boundaries
+
+The [evidence review](MODEL-FOUNDATIONS.md#related-work-and-hypothesis-evidence)
+links primary sources, their relevance, and their limits. Its conclusions are
+bounded by the reviewed sources; an unmatched experiment is not proof of novelty.
+
+| Hypothesis | Prior-evidence status | What this project must still test |
+|---|---|---|
+| H1 | Calibrated physical models exist; the exact facility-energy/static-PUE comparison is not established by the reviewed sources. | Held-out improvement for a defined target, horizon, calibration budget, and strong baselines |
+| H2 | Residual correction is established, with mixed results in adjacent applications. | Incremental benefit over calibrated physics and equally informed statistical models, including failures |
+| H3 | Workload, weather, and hardware have demonstrated predictive value; the complete controlled feature-group comparison remains open here. | Retraining-based information-value ablations, not correlations or causal claims |
+| H4 | Interval methods exist under assumptions; universal conditional-coverage guarantees are not available without restrictions. | Coverage and useful width for defined decisions, cohorts, horizons, and shifts |
+| H5 | Transfer and hierarchical energy models exist; hierarchical superiority in the proposed comparison is unestablished. | Separate zero-shot transfer and equal-local-data adaptation arms |
+| H6 | Annual/hourly energy-system studies substantially support the central mechanism. | Prior-work-informed replication and quantification of material feasibility/ranking changes under a frozen objective and candidate set |
+| H7 | Flexibility can improve supply/storage trade-offs under modeled conditions; real service preservation is conditional. | Benefits, failures, and enabling costs under explicit completion/delay constraints and information limits |
+
+For H5, an independently fitted target-site model requires target-site labels.
+It is therefore not a zero-shot comparator. The
+[evaluation protocol](EVALUATION-PROTOCOL.md#transfer-and-local-data-budgets)
+defines the separate adaptation comparison.
+
+H6-H7 are not claims that chronology or workload flexibility are new ideas.
+Any contribution claim must distinguish replication, a changed boundary or
+application, and a demonstrated methodological advance. A modeled benefit
+for one objective is not proof of lower harm across all objectives.
 
 ## Model strategy
 
-The intended model is hybrid rather than end-to-end black box:
+The intended hybrid candidate combines the following components rather than
+using an end-to-end black box. Simpler models remain valid outcomes if the
+additional complexity does not earn its place in the frozen comparison:
 
 1. **Engineering spine:** energy balance, IT-to-facility relationships, physical
    bounds, units, and cooling-system boundaries.
@@ -189,7 +223,12 @@ fitting. The initial targets are:
 - no material performance claim based only on a random row-level split; and
 - explicit refusal or an out-of-distribution warning outside validated bounds.
 
-These are research gates, not service-level commitments.
+These are provisional research gates, not achieved results, literature-derived
+guarantees, or service-level commitments. Before freezing an experiment, record
+the domain/decision rationale for each threshold, cohort sample requirements,
+uncertainty on the measured scores, and what would constitute non-inferiority.
+Coverage must also meet a preregistered width or decision-cost criterion;
+coverage alone is not success.
 
 ### Phase B - coupled-system gates
 
@@ -205,6 +244,13 @@ and thresholds independently of the demand-error targets above. At minimum:
   are reported separately; and
 - conclusions distinguish observed evidence, conditional model comparisons,
   causal avoided-impact claims, and any future solver optimality claims.
+
+For H6, freeze the common candidate portfolios, objective, reference
+evaluation, and thresholds for material ranking/feasibility changes.
+For H7, distinguish aggregate work conservation from completed-service
+evidence, and installed storage MW/MWh from discharge throughput.
+Temporal shifting, spatial routing, and their combined effects require
+separate labels and comparisons.
 
 Passing demand gates alone does not establish H6-H7. A synthetic strategy
 comparison can support method development without qualifying as empirical

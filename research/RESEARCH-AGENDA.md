@@ -11,6 +11,26 @@ Identifiers and location context must be reduced according to the
 [governance policy](GOVERNANCE-AND-RELEASE.md). Owner-approved derived
 constraints may be more appropriate than sensitive source records.
 
+## Evidence gaps after the literature review
+
+The [related-work review](MODEL-FOUNDATIONS.md#related-work-and-hypothesis-evidence)
+shows established methods and substantial chronology/flexibility results,
+not validated results for this project. Evidence collection should resolve:
+
+| Hypothesis | Remaining evidence need |
+|---|---|
+| H1-H2 | Matched facility-energy targets, calibration budgets and held-out periods for physics, residual and statistical comparisons |
+| H3 | Approved input groups of known quality and availability, sufficient for retraining ablations rather than correlation-only explanations |
+| H4 | Independent blocks and meaningful failure regimes, plus a decision-specific width/cost tolerance |
+| H5 | Whole-facility holdouts and separately budgeted local adaptation data; a PDU holdout is not sufficient evidence of site transfer |
+| H6 | Coincident resource/demand evidence or explicitly conditional scenarios, fixed candidate portfolios and a justified ranking reference |
+| H7 | Permission, completion/deadline measures and enabling costs; aggregate work conservation alone cannot verify actual service |
+
+The [protocol](EVALUATION-PROTOCOL.md) owns experimental rules and the
+[pilot](DATA-PILOT-PROPOSAL.md) owns collection scope. Do not collect an extra
+field simply because a published model used it; justify its necessity and
+permitted use. None of this literature qualifies our synthetic water factors.
+
 ## 1. Workload and effective utilization
 
 Required fields:
@@ -190,8 +210,14 @@ A calibrated release must answer:
 - How does accuracy change by workload, hardware, climate, and horizon?
 - Which inputs dominate error?
 - Where should the model refuse to make a prediction?
+- Does residual learning improve on equally informed, comparably tuned
+  baselines, and do retrained ablations support the input-value claims?
+- What target-site data was used, and are zero-shot and equal-budget
+  adaptation results reported separately?
 - Do the compared energy strategies deliver equivalent computing service?
 - Do apparent improvements survive storage losses, hydro/grid constraints,
   seasonal variation, and realistic scheduling permissions?
 - Which claims concern conditional scenarios, and which have independent
   empirical or causal support?
+- Which prior result is replicated, what boundary changes, and what evidence
+  supports any claimed advance beyond that prior work?

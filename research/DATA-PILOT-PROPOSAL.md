@@ -3,7 +3,7 @@
 > **Independent proposal:** No organization has reviewed, sponsored, endorsed,
 > approved, or committed data or funding to this pilot.
 
-**Last aligned:** 2026-09-08
+**Last aligned:** 2026-09-16
 
 ## Purpose
 
@@ -18,6 +18,11 @@ telemetry or permission to operate a facility. The
 [research contract](RESEARCH-CONTRACT.md) owns the formal questions and gates;
 the [evaluation protocol](EVALUATION-PROTOCOL.md) owns experiment design.
 This document owns the proposed evidence collection and delivery plan.
+
+The [related-work review](MODEL-FOUNDATIONS.md#related-work-and-hypothesis-evidence)
+supports a bounded validation effort, not an unrestricted data request.
+Existing studies neither validate this model nor guarantee that the proposed
+facilities, duration, funding or staffing will answer all seven hypotheses.
 
 ## Research ask
 
@@ -78,6 +83,22 @@ balance does not establish demand accuracy.
 The pilot does not require a full optimizer or live control. Any later solver
 experiment needs a separately frozen formulation and evidence boundary.
 
+### Evidence requests tied to unanswered tests
+
+| Hypothesis | Bounded evidence need | What the evidence must resolve |
+|---|---|---|
+| H1-H2 | Reconciled IT/facility energy, cooling and approved drivers, with separated fitting and later test periods | Calibration and residual value for our target, not transfer of another paper's temperature or GPU accuracy |
+| H3 | Comparable feature availability and quality across the same evaluation blocks | Which approved inputs earn their collection cost in retrained ablations |
+| H4 | Enough independent time/site blocks and relevant regimes to assess coverage and width; a defined decision use | Whether intervals are useful and which cohorts or shifts fail |
+| H5 | Entire held-out facilities plus an explicitly budgeted adaptation window, when permitted | Zero-shot transfer separately from equal-local-data adaptation |
+| H6 | Qualified time-aligned demand/resources, constraints and a common candidate set/reference | Material changes to feasible rankings, not mere differences in simulated totals |
+| H7 | Approved aggregate service/completion measures, original deadlines, scheduling permission and enabling overheads | Supply/storage benefits without missing or displaced service |
+
+These are qualification questions for owners, not authorization to export
+job identifiers or operational records. If only aggregate work is available,
+report a proxy-based scenario and do not claim real job-SLA preservation.
+Water remains separately gated by its own meter and system-boundary evidence.
+
 ## Staged scope
 
 ### Phase A - feasibility
@@ -113,6 +134,12 @@ adequacy or ten-year forecast accuracy.
 These are preferred research conditions, not a demand that all data be
 available before feasibility work begins. Missing seasonal coverage,
 operating constraints, or counterfactual evidence narrows the claim.
+
+The proposed site counts and durations are scoping assumptions, not
+literature-established sample-size guarantees. After Phase A, justify the
+independent-site/time sample size, cohort coverage and detectable effect for
+each admitted test before fitting. Narrow or defer tests that lack sufficient
+evidence rather than treating 90 days or 12 months as automatic qualification.
 
 ## Minimum data domains
 
@@ -200,7 +227,7 @@ still require review; aggregation alone does not establish release safety.
 |---|---|---|
 | 1-2 | Confirm owner, approved fields, questions, and scope | Confirm source rights, domain reviewers, accounting boundaries, and which questions can be joined |
 | 3-4 | Audit approved intervals, capacity denominators, meters, and cooling | Qualify resource vintages, storage/hydro limits, tariffs, scheduling permission, and temporal/geographic joins |
-| 5-6 | Freeze baselines, partitions, metrics, and thresholds before fitting | Freeze comparison portfolios, shared computing service, information boundaries, and physical constraints |
+| 5-6 | Freeze baselines, partitions, feature/tuning/local-data budgets and justified coverage/width/error thresholds | Freeze common portfolios, objectives, materiality thresholds, shared computing service, information boundaries, and constraints |
 | 7-8 | Calibrate selected demand/PUE components | Reproduce qualified resource/storage behavior and reconcile energy and water boundaries |
 | 9-10 | Evaluate held-out demand and any preregistered hybrid/transfer models | Evaluate supported fixed/flexible portfolio cases, including unmet load and declared counterfactual limitations |
 | 11 | Report subgroup errors and uncertainty | Report seasonal/stress cases, infeasibility, leakage checks, and sensitivity to missing evidence |
@@ -210,11 +237,15 @@ This is a proposed sequence, not a commitment that every question will be
 answered in twelve weeks. Water and flexibility enter the evaluation only
 after their meter/system and service-permission gates pass. The current
 synthetic deferral heuristic is not evidence of real job schedulability.
+The schedule is not a finding from the literature. Each workstream may stop
+at feasibility, and no result or publication is promised in advance.
 
 ## Pilot outputs
 
 - approved dataset and field manifests;
 - a data-quality and answerability report for each workstream and its joins;
+- a prior-work comparison specifying what is replicated, changed or still
+  unanswered, with matched target and accounting boundaries;
 - reproducible demand and energy-strategy baseline results where supported;
 - calibrated component models only where fitting is justified;
 - frozen held-out evaluation and conditional-scenario results clearly separated;

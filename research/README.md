@@ -1,6 +1,6 @@
 # Research guide
 
-**Last aligned:** 2026-09-08
+**Last aligned:** 2026-09-16
 
 The Clean Compute Engine studies data centers and their energy supply as one
 connected system. The aim is to understand how buildout, computing, cooling,
@@ -53,6 +53,13 @@ The sources listed here fall into three different categories:
 
 Those categories must not be presented as interchangeable.
 
+The [hypothesis-specific related-work review](MODEL-FOUNDATIONS.md#related-work-and-hypothesis-evidence)
+records what primary sources support, already answer, or leave unresolved.
+H6-H7 build on substantial chronology/flexibility evidence; H1-H5 test the
+value and limits of established modeling methods in our proposed setting.
+None has been empirically established by this project. A literature citation
+does not promote the research stage or qualify an input dataset.
+
 ## Document ownership and reading order
 
 | Document | Owns | Does not establish |
@@ -62,7 +69,7 @@ Those categories must not be presented as interchangeable.
 | [Evaluation protocol](EVALUATION-PROTOCOL.md) | Splits, baselines, metrics, information boundaries, and experiment rules | Completed experiments or achieved thresholds |
 | [Forecast model card](../FORECAST-MODEL-CARD.md) | Current demand-model inputs, calculations, outputs, and limitations | Coupled supply behavior or calibrated accuracy |
 | [Renewable coupling specification](RENEWABLE-COUPLING.md) | Current physical evaluator, dispatch, scheduling, accounting, and inspection | An optimizer, certified accounting, or proven real-world benefit |
-| [Model foundations](MODEL-FOUNDATIONS.md) | Conceptual and standards references | Certification or a replacement implementation contract |
+| [Model foundations](MODEL-FOUNDATIONS.md) | Standards, linked primary related work, and hypothesis-specific evidence limits | Certification, novelty proof, or a replacement implementation contract |
 | [Assumption provenance](ASSUMPTION-PROVENANCE.md) | Parameter origins and links to code | Calibration by citation alone |
 | [Source register](DATA-SOURCE-REGISTER.md) | Candidate sources, evidence type, intended role, terms notes, and limitations | Dataset adoption, permission, or validation by inclusion |
 | [Research agenda](RESEARCH-AGENDA.md) | Fields and unresolved evidence needs | An approved data extract or duplicate source catalog |
@@ -72,9 +79,9 @@ Those categories must not be presented as interchangeable.
 | [Governance and release](GOVERNANCE-AND-RELEASE.md) | Data handling and artifact-release requirements | Permission in place of a data owner's approval |
 | [Roadmap](../BACKLOG.md) | Priorities and remaining implementation work | A change to the charter or evidence gates |
 
-For a first research review, read the overview, charter, then the evaluation
-protocol. For implementation work, read the relevant model specification and
-provenance. For a proposed dataset, read the source register, pilot, data
+For a first research review, read the overview, charter, related work, then the
+evaluation protocol. For implementation work, read the relevant model
+specification and provenance. For a proposed dataset, read the source register, pilot, data
 contracts, and governance policy.
 
 Keep formal questions in the charter and calculations in the model documents.

@@ -15,10 +15,19 @@ environmental harm.
 > We can grow AI infrastructure with less environmental harm by designing
 > data centers and their energy supply as one connected system.
 
-This is the thesis to investigate, not an established result. The goal is to
-create a **world prediction model** that helps us understand how location,
-computing, cooling, and energy choices shape a data center's impact over
-time, so we can explore better decisions before we build.
+This is the thesis to investigate, not a result established by this project.
+The goal is to create a **world prediction model** that helps us understand
+how location, computing, cooling, and energy choices shape a data center's
+impact over time, so we can explore better decisions before we build.
+
+Prior work, including Carbon Explorer and studies of hourly clean-energy
+procurement and flexible computing, already demonstrates related benefits
+under defined conditions. The research task is to reproduce and quantify
+those trade-offs within explicit service, uncertainty, and accounting
+boundaries, not to claim invention of connected energy-system modeling.
+See the [hypothesis-specific evidence review](research/MODEL-FOUNDATIONS.md#related-work-and-hypothesis-evidence).
+That literature does not validate this prototype's parameters or outputs,
+or establish improvement across every environmental dimension.
 
 ## The world model we want to create
 
@@ -70,13 +79,21 @@ baseline. `/energy` is a deep link into this same Engine.
 
 The evaluator connects phased demand with solar, wind, hydro, optional
 nuclear/gas, storage, and bounded work deferral. It exposes shortages rather
-than counting unserved computing as carbon savings. Cooling-water
+than counting unserved computing as carbon savings. Deferral conserves a
+synthetic aggregate-work proxy, not verified real job completion. Cooling-water
 requirements and hydro net consumption are separate synthetic quantities,
 not a complete or validated water footprint.
 
 Compute geometry is schematic: the coupled model produces facility-level
 values, not per-GPU telemetry. The original 24-hour equipment sandbox remains
 available at `/legacy` as a separately labeled experience.
+
+The legacy experience has unresolved accounting defects affecting served load,
+storage, scheduling benefits, finance, and water metrics. Do not use its
+benefit displays as evidence or in the submission walkthrough until corrected.
+These defects are separate from the coupled evaluator; the
+[open claim-correction backlog](BACKLOG.md#demonstration-and-claim-corrections)
+records their scope.
 
 Implementation, dispatch, accounting, and UI details live in the
 [coupling specification](research/RENEWABLE-COUPLING.md), rather than in this
@@ -94,6 +111,13 @@ The story illustrates buildout, workload, cooling, time, uncertainty, and
 baseline comparison. It does not expose the full renewable-portfolio
 evaluator. Its later chapters use 60 precomputed synthetic outcomes, not a
 hosted forecast API. It supports phones and includes no operational data.
+
+Some story labels still require correction: P50 is a synthetic median, not an
+expected value or calibrated prediction. The comparison changes multiple
+assumptions, not cooling alone, and calibration alone will not validate it.
+The [correction backlog](BACKLOG.md#demonstration-and-claim-corrections) tracks
+these unresolved interface issues; this documentation does not change the
+deployed story.
 
 ## Research still required
 
@@ -119,6 +143,7 @@ methodology, and release-approved artifacts.
 |---|---|
 | How does the research fit together? | [Research index and document map](research/README.md) |
 | What are the hypotheses and evidence gates? | [Research contract](research/RESEARCH-CONTRACT.md) |
+| What does prior research already establish? | [Related work and hypothesis evidence](research/MODEL-FOUNDATIONS.md#related-work-and-hypothesis-evidence) |
 | What does the current demand model do? | [Forecast model card](FORECAST-MODEL-CARD.md) |
 | How does the energy-system evaluator work? | [Coupling specification](research/RENEWABLE-COUPLING.md) |
 | What can I contribute safely? | [Contribution guide](CONTRIBUTING.md) |
@@ -156,8 +181,8 @@ proxies REST + WebSocket to the backend.
 - `GET /forecast/example` - complete scenario and baseline request
 - `POST /forecast` - run a reproducible forecast
 
-The default paired 10-year run uses 250 paths and usually completes in several
-seconds on a development laptop.
+The default paired 10-year run uses 250 paths. Runtime depends on the request
+and hardware; no reproducible laptop-performance benchmark is published here.
 
 ### Energy coupling API
 

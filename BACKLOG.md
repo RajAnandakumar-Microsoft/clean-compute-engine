@@ -18,21 +18,50 @@ history remains in a separate private archive.
 Completed:
 
 - transparent hourly calculation and Monte Carlo architecture;
-- working full simulator and interactive story;
+- runnable simulator and interactive story, with open corrections below;
 - mobile-friendly static story on GitHub Pages;
 - synthetic `/energy` physical-portfolio comparison with chronological storage,
   finite hydro budgets, bounded work deferral, and explicit shortfalls;
 - separate cooling-water requirements and optional hydro net consumption;
 - explicit uncalibrated model card and assumption provenance;
 - research question, hypotheses, success criteria, and stop conditions;
-- frozen evaluation design and baseline requirements;
+- evaluation protocol and baseline requirements; empirical experiment freezes
+  remain pending;
 - governed telemetry and experiment contracts;
 - synthetic contract fixtures and schema tests;
 - proposed governed data pilot, data exclusions, and release controls.
 
+The [related-work review](research/MODEL-FOUNDATIONS.md#related-work-and-hypothesis-evidence)
+now positions H1-H7 against primary evidence. This is documentation progress,
+not an empirical result or a promotion beyond R0.
+
 The next meaningful milestone is evidence that demand estimates and coupled
 energy strategies are useful under explicit system boundaries, not simply
 more detailed visualization.
+
+## Demonstration and claim corrections
+
+**Open as of 2026-09-16.** Documentation now records these limitations; the
+application fixes have not been applied. Resolve or exclude affected surfaces
+from the submission path before using them in a release or recorded demo.
+Uncalibrated does not mean that broken accounting is acceptable.
+
+| Priority | Surface and correction | Acceptance boundary |
+|---|---|---|
+| P0 | Legacy served load and initial battery energy (`backend/app/sim/dispatch.py`) | No-source cases report unmet load, not invented delivery; charging origin and repeated-day initial/terminal storage are explicit |
+| P0 | Legacy work redistribution and scheduling-benefit prose (`backend/app/sim/physics.py`, `backend/app/sim/engine.py`) | Conserve requested work throughout UI/API-valid ranges, report service failure, use direction-aware deltas and label battery throughput rather than implied capacity savings |
+| P0 | Legacy finance and lifetime benefit claims (`backend/app/sim/finance.py`, Finance/Lifetime panels) | Do not subtract capital twice; disclose repeated-day and partial embodied boundaries; withhold invalid service comparisons and invalidate stale results after scheduling changes |
+| P0 | Legacy water and clean-energy labels (`backend/app/sim/physics.py`, `backend/app/sim/engine.py`, Finance panel) | WUE uses the declared IT-energy basis; aggregate energy share is not "24/7 clean match"; distinguish nuclear clean energy from renewable accounting |
+| P0 | Story statistics and baseline comparison (`frontend/src/story/StoryApp.tsx`, `VoxelWorld.tsx`, forecast response descriptions) | P50 is labeled a synthetic median; paired-delta convention is explained; both PUE values use the same statistic; refresh/PUE changes are disclosed rather than attributed to cooling alone |
+| P0 | Story execution and validation language (`StoryApp.tsx`) | Static mode says precomputed, API mode says run; remove calibration-as-sufficient wording and require held-out evidence |
+| P0 | Integrated Engine and forecast-panel claim visibility (`WorldApp`, `WorldInspector`, `ForecastPanel`) | Mounted result surfaces disclose synthetic/uncalibrated/non-optimizer status; equal period work is not equal hourly load; correlation bars do not imply causality or completed H3 ablations |
+| P1 | Legacy GPU/lifetime and visual encoding | Do not imply an instantaneous-rate lifetime extrapolation is a time-resolved forecast; legends and intensity labels match the actual quantities/scales |
+
+Legacy findings apply to the preserved `backend/app/sim/` path, not the new
+`backend/app/energy/` evaluator. Repairs need regression cases for the exact
+accounting defect, not only a general build or an additional disclaimer.
+If story data assumptions change, regenerate the catalog with the existing
+exporter; do not edit its outcomes by hand.
 
 ## Priority roadmap
 
@@ -41,16 +70,16 @@ more detailed visualization.
 | P0 | Secure sponsor and data owner | Named sponsor, telemetry owner, domain reviewers, and approved feasibility scope |
 | P0 | Complete governance intake | Privacy, security, legal, responsible-AI, retention, and publication paths documented |
 | P0 | Run data feasibility audit | Meter boundaries, units, completeness, joins, and safe identifiers are answerable for a bounded extract |
-| P0 | Freeze first empirical experiment | Dataset manifests, hypotheses, splits, baselines, metrics, and thresholds signed off before fitting |
+| P0 | Freeze first empirical experiment | Dataset manifests, hypotheses, splits, matched feature/tuning budgets, metrics and justified thresholds signed off before fitting |
 | P0 | Implement research baselines | Seasonal naive, static-PUE, regularized regression, and v0.1 physics baselines reproduce from manifests |
-| P0 | Freeze coupled-system experiment | Same requested work, temporal alignment, source rights, grid limits, storage boundary, and no-shortfall comparison rules are explicit |
+| P0 | Freeze coupled-system experiment | Common candidates, objective, material ranking thresholds, reference evidence, same requested work, temporal alignment, source rights, grid/storage limits and no-shortfall rules are explicit |
 | P1 | Calibrate physics components | Utilization, power, and dynamic-PUE parameters fitted with complete lineage |
 | P1 | Evaluate hybrid residual | Forward-time and site-held-out comparison against every frozen baseline |
-| P1 | Test hierarchical transfer | Applicability to unseen facilities measured without pooled-row leakage |
-| P1 | Establish uncertainty calibration | Interval coverage and width reported by horizon and cohort |
+| P1 | Test hierarchical transfer | Zero-shot and equal-local-data adaptation reported separately on whole-facility/time holdouts |
+| P1 | Establish uncertainty calibration | Coverage, useful width/decision-cost thresholds, cohort evidence and shift failures reported |
 | P1 | Qualify water as a target | Cooling loop, heat rejection, withdrawal, consumption, and meter boundaries pass the quality gate |
 | P1 | Qualify renewable and storage inputs | Versioned generation/availability data, hydro constraints, battery behavior, and shared weather drivers replace synthetic profiles |
-| P1 | Evaluate energy-strategy usefulness | Grid-only, fixed renewable portfolio, bounded-flexibility, and annual-matching baselines are compared without workload loss |
+| P1 | Evaluate energy-strategy usefulness | Prior-work-informed grid-only, fixed/flexible and annual/hourly comparisons report service completion, enabling costs and storage-capacity versus throughput effects within the available evidence |
 | P1 | Specify constrained co-optimization | Capacity, dispatch, scheduling, cost, carbon, water, and service requirements are frozen; infeasibility and optimality reporting are defined |
 | P1 | Publish governed pilot findings | Reviewed report includes negative results, failures, and continuation decision |
 | P2 | Calibrate with licensed public traces | Component-level evidence added where source terms and system boundaries permit |
@@ -84,5 +113,7 @@ itself is not built. The current work-deferral and dispatch heuristics must not
 be labeled optimal. The full `/energy` workspace remains local/API-backed;
 Pages continues to host only the static story.
 
-The existing frontend bundle warning and legacy `/lifetime` extrapolation remain
-known software debt, but neither should displace the first empirical experiment.
+The existing frontend bundle warning remains software debt. Legacy accounting
+and misleading benefit claims are not merely optional polish: their correction
+or exclusion from demonstrations is a release prerequisite, separate from the
+first empirical experiment.

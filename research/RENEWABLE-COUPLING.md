@@ -16,6 +16,14 @@ energy-system, and optimization questions. The
 support conclusions. Annual renewable production alone does not describe
 how a portfolio serves a growing campus hour by hour.
 
+This premise has substantial prior evidence in annual/hourly procurement
+studies and Carbon Explorer; flexibility studies likewise establish
+conditional supply/storage benefits. The
+[H6-H7 evidence review](MODEL-FOUNDATIONS.md#h6---chronology-and-design-rankings)
+records the overlap and limits. The current evaluator is not a replication
+result or a novel validated method merely because it implements chronology.
+Those studies do not fit its synthetic inputs or validate its heuristic.
+
 ## Predict, Optimize, and Operate
 
 | Layer | Decision | Status |
@@ -93,6 +101,9 @@ enabled in this version.
 
 The original 24-hour dispatcher remains a historical demonstration. Its
 representative-day assumptions are not copied into the multi-year evaluator.
+Known legacy service, storage and benefit-accounting defects remain open in
+the [correction backlog](../BACKLOG.md#demonstration-and-claim-corrections).
+Do not use that path as evidence for the coupled evaluator or vice versa.
 
 ## Flexible computing without hiding lost work
 
@@ -112,10 +123,19 @@ operational forecast. It does not model checkpoint costs, job dependencies,
 latency objectives, network transfer, or measured application throughput.
 Moving work is not guaranteed to reduce carbon, cost, or cooling water.
 
+Conservation of this aggregate proxy is not proof of real completed jobs or
+SLA compliance. Published temporal, spatial and combined flexibility results
+have different service boundaries; none supplies that missing evidence for
+this heuristic. Lower battery throughput also does not demonstrate lower
+required installed battery capacity.
+
 ## Comparisons and accounting
 
 Both cases use the same requested computing work, buildout, weather, cooling
 assumptions, grid-carbon realization, and physical grid connection.
+Equal requested work applies over the modeled comparison period, not
+necessarily to the load at the same hour after deferral. Selecting the same
+timestamp aligns the comparison; it does not imply equal instantaneous demand.
 
 If either case has a shortfall in any sampled hour, the UI withholds headline
 savings percentages. Lower emissions caused by failing to serve demand are
@@ -225,3 +245,6 @@ The [source register](DATA-SOURCE-REGISTER.md) identifies candidates and their
 limits; the [governance policy](GOVERNANCE-AND-RELEASE.md) controls access and
 release. The current evaluator uses no operational data from those workstreams.
 Its physical invariants establish software consistency, not real-world accuracy.
+Neither a favorable synthetic delta nor a literature citation satisfies H6-H7.
+The protocol requires frozen objectives, feasible service comparisons and
+qualified reference evidence before claiming decision usefulness.

@@ -10,8 +10,15 @@ The distinction is:
 - **Formulas:** transparent engineering and accounting relationships.
 - **Parameters:** hand-authored synthetic priors chosen to produce plausible
   prototype behavior.
-- **Results:** internally consistent scenario outputs, not observed or
-  validated predictions.
+- **Results:** synthetic scenario outputs, not observed or validated
+  predictions. Correctness claims are limited to inspected calculations
+  and tested invariants, not every display or legacy path.
+
+The [related-work review](MODEL-FOUNDATIONS.md#related-work-and-hypothesis-evidence)
+explains methodological precedents. Its citations are not the source of the
+existing parameter values and do not constitute fitting or empirical
+validation. Known legacy accounting defects are listed below and in the
+[correction backlog](../BACKLOG.md#demonstration-and-claim-corrections).
 
 ## v0.1 forecast
 
@@ -34,10 +41,21 @@ manufacturer-certified performance profiles.
 
 ## Interactive story
 
-The `/story` experience uses illustrative calculations before the forecast is
-run. These values are deliberately marked **ILLUSTRATIVE**. The story converts
-the user's choices into a real v0.1 forecast request; returned results are
-marked **SIMULATED**.
+The `/story` experience uses illustrative calculations before a result is
+loaded. These values are marked **ILLUSTRATIVE**. In local/API-backed mode,
+the user's choices become a v0.1 forecast request. In static GitHub Pages
+mode, they select from 60 precomputed synthetic outcomes (three workloads,
+two cooling choices, ten horizons; seed 73 and 96 paths per outcome).
+The result presentation is marked **SIMULATED** in either mode; Pages does
+not run a hosted forecast API.
+
+P50 is a median across synthetic paths, not an expected value or calibrated
+probability. Existing "EXPECTED" labels remain an open interface correction.
+The story's proposed/baseline pair changes cooling/PUE and hardware-refresh
+assumptions; it is not an isolated cooling experiment. The baseline design PUE
+label is not directly comparable to the proposed modeled-average PUE.
+Calibration alone would not make the comparison validated: qualified inputs,
+held-out evaluation and use-boundary review are still required.
 
 Story-only calculations live in `frontend/src/story/model.ts` and must not be
 treated as a separate validated model.
@@ -79,7 +97,18 @@ The legacy simulator contains order-of-magnitude assumptions for:
 The relevant files are `backend/app/config.py`,
 `backend/app/sim/physics.py`, and `backend/app/sim/finance.py`.
 
-These values support interface and systems-behavior demonstrations only.
+These values are historical interface assumptions, not reliable benefit
+estimates. Known legacy defects include counting unmet demand as served,
+crediting an initially charged representative-day battery without charging
+provenance, losing work in scheduling redistribution, double-counting capital
+in finance, and using the wrong energy denominator for WUE. Its aggregate
+clean-energy share is not an every-hour matching guarantee.
+
+Do not use affected legacy savings, finance or lifetime outputs as research
+evidence. These are unresolved implementation defects, not merely missing
+calibration, and citations cannot repair them. They do not describe the
+separate `backend/app/energy/` evaluator. Fixes and scope-specific acceptance
+checks remain open in the [backlog](../BACKLOG.md#demonstration-and-claim-corrections).
 
 ## Required record for future fitted parameters
 

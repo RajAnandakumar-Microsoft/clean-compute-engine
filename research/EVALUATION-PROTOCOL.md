@@ -4,6 +4,12 @@ This protocol defines how future calibrated versions of the Clean Compute
 Engine will be evaluated. It prevents convenient data splits or metrics from
 turning a prototype into an unsupported accuracy claim.
 
+The [related-work review](MODEL-FOUNDATIONS.md#related-work-and-hypothesis-evidence)
+provides evidence and limitations for the hypotheses. Published results
+motivate comparators, not substitute measurements for this project. A study
+with a different target, meter boundary, split, service definition or cost/
+carbon scope cannot supply an interchangeable benchmark score.
+
 ## 1. Preregistration and dataset freeze
 
 Before fitting begins, an experiment must freeze:
@@ -15,12 +21,18 @@ Before fitting begins, an experiment must freeze:
 - train, calibration, validation, and test partitions;
 - baseline implementations;
 - candidate model configuration;
-- metrics and provisional success thresholds; and
+- feature availability, training/tuning budgets, and any target-site data budget;
+- metrics, acceptance thresholds, their decision rationale, and minimum
+  cohort evidence requirements; and
 - subgroup and ablation analyses.
 
 The held-out test set must remain unavailable to iterative feature and
 hyperparameter decisions. Any post-test change creates a new experiment and a
 new test boundary.
+
+The charter's initial numerical gates are provisional until this freeze.
+Record related-work versions and whether an experiment replicates a published
+comparison, adapts one to a new boundary, or tests a proposed new method.
 
 ## 2. Data-quality gate
 
@@ -93,6 +105,14 @@ At minimum, each candidate is compared with:
 Additional domain or published baselines may be added when their data,
 implementation, and licensing are compatible.
 
+For H1-H3, specify the static-PUE calibration rule and give learned comparators
+access to the same eligible inputs and training observations, except in
+preregistered information ablations. Include an appropriately feature-rich
+global/statistical comparator rather than assuming such models lack hardware
+or workload information. Record tuning effort and any unavoidable input
+differences; gains from extra information are not isolated architecture gains.
+See [H1-H3 prior evidence](MODEL-FOUNDATIONS.md#h1---calibrated-physics).
+
 ### Energy-strategy comparisons
 
 Coupling evaluation must additionally freeze the demand, computing-service
@@ -107,6 +127,26 @@ portfolio cases. It is not an empirical benchmark suite or an optimizer.
 Neither case may claim savings from losing load. A comparison that fails to
 serve required demand must report infeasibility/shortfall separately.
 
+For H6, preregister a common candidate portfolio set and objective/accounting
+basis for annual and chronological assessments. Record initial/terminal
+storage treatment, the independent reference used to assess feasibility and
+ranking, and thresholds for a material difference. Label conditional ranking
+changes separately from empirically demonstrated ranking accuracy. The
+[annual/hourly and Carbon Explorer studies](MODEL-FOUNDATIONS.md#h6---chronology-and-design-rankings)
+motivate this comparison but do not validate our candidate rankings.
+
+For H7, hold computing service fixed while testing temporal flexibility.
+Define completed work, original deadlines, allowed delay, capacity and
+permitted overheads. Measure missed, dropped or displaced work explicitly.
+Report spatial-only and combined spatial/temporal variants separately if
+introduced. Vary installed storage MW/MWh under the same service criterion
+before claiming lower required storage; a reduction in discharge throughput
+alone is not that result. Include enabling capacity, checkpoint/transfer and
+other costs relevant to the claim, or explicitly limit the claim when they
+cannot be qualified. The
+[flexibility literature](MODEL-FOUNDATIONS.md#h7---flexibility-and-service)
+does not establish service preservation for our aggregate-work heuristic.
+
 ## 5. Candidate models
 
 The initial comparison should include:
@@ -120,6 +160,27 @@ The initial comparison should include:
 
 Model capacity and tuning budgets must be comparable enough that the
 architecture comparison is meaningful.
+
+### Transfer and local-data budgets
+
+H5 needs two separately reported arms:
+
+- **Zero-shot:** the target facility contributes no outcome labels to fitting,
+  preprocessing, tuning or interval calibration. Compare global and
+  hierarchical models using the same permitted metadata and input boundary.
+  An independently fitted target-site model is not a zero-shot comparator.
+- **Limited-data adaptation:** freeze identical target-site observations and
+  tuning budgets for adapted global, hierarchical and local-only models.
+  Evaluate later held-out target-site observations. Report the adaptation
+  window and learning curve over preregistered data budgets separately from
+  zero-shot performance.
+
+Define which contemporaneous or historical meter inputs would actually be
+available to each method at prediction time. No target leakage is allowed.
+Fit all learned transformations inside the corresponding training boundary;
+do not use a held-out PDU as evidence of a wholly unseen facility. These
+distinctions follow the limits of the
+[transfer and pooling evidence](MODEL-FOUNDATIONS.md#h5---hierarchical-transfer).
 
 ## 6. Metrics
 
@@ -144,6 +205,19 @@ MAPE is not a primary metric because near-zero targets can make it unstable.
 
 Coverage must be reported with interval width. A trivially broad interval is
 not a useful calibrated forecast.
+
+For H4, freeze a decision-relevant width or interval-induced decision-cost
+criterion, nominal coverage, scoring horizon, cohort definitions and minimum
+sample requirements. Estimate uncertainty on reported coverage with a
+procedure appropriate to site/time dependence; sparse cohorts cannot be
+declared calibrated on a pooled score alone.
+
+Report overall and site/regime coverage separately, including defined
+distribution shifts. A conformal or other calibration method must state its
+exchangeability, dependence or shift assumptions and how calibration data
+are kept separate from testing. Do not promise arbitrary-shift or exact
+conditional coverage from a marginal guarantee. See the
+[interval-method evidence and limitations](MODEL-FOUNDATIONS.md#h4---calibrated-and-useful-intervals).
 
 ### Physical consistency
 
@@ -208,9 +282,11 @@ not been modeled; do not present it as project economics.
 
 A future optimizer must declare decision variables, objective, environmental
 and service caps, feasible baselines, solver/version, optimality gap, and
-infeasibility handling. Perfect-foresight results are bounds or scenario
-experiments, not operational predictions. Out-of-sample demand and generation
-conditions must be evaluated before claiming robust recommendations.
+infeasibility handling. Perfect-foresight results are scenario experiments,
+not operational predictions. A heuristic with future information is not an
+optimal bound; any bound requires a justified formulation and solver evidence.
+Out-of-sample demand and generation conditions, including forecast error, must
+be evaluated before claiming robust recommendations.
 
 The current dispatch and work-deferral heuristics make no optimality claim.
 
@@ -233,6 +309,12 @@ preserving computing service and the baseline accounting boundary.
 
 The purpose is to determine what creates predictive value, not merely which
 model has the lowest final error.
+
+Retrain after removing a feature family, keeping partitions, model-selection
+rules and budgets comparable. Preregister important interactions rather than
+attributing their combined effect to a single feature. Input sensitivity,
+correlation rankings and feature importance alone do not establish
+incremental predictive value or causality.
 
 ## 9. Statistical reporting
 
